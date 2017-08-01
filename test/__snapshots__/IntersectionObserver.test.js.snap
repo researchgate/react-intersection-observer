@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`throws when the property children is not an only child 1`] = `"React.Children.only expected to receive a single React element child."`;

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#findElement given an entry without target property throws 1`] = `"Cannot read property 'observe' of undefined"`;

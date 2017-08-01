@@ -1,0 +1,7 @@
+.DS_store
+node_modules
+npm-debug.log
+lib
+es
+examples
+coverage
