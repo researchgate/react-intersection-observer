@@ -9,7 +9,7 @@
 ReactIntersectionObserver is good at:
 
 * **reusing instances**: comparing the passed options
-* **performance**: chooses smarly when to re-render and when to re-observe
+* **performance**: chooses smartly when to re-render and when to re-observe
 * **being unopinionated**: how to handle visibility changes is left entirely up to the developer
 * **being intuitive**: looks like the Native API
 
@@ -69,13 +69,13 @@ The purpose of ReactIntersectionObserver is to provide the easiest possible solu
 
 ### No bookkeeping
 
-It's build with compatibility in mind, adhering 100% to the [native API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Intersection_observer_options) implementation and DSL, but without any of the additional bookkeeping work.
+It's built with compatibility in mind, adhering 100% to the [native API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Intersection_observer_options) implementation and DSL, but without any of the additional bookkeeping work.
 
-Instances and nodes are managed internally so that any changes to the passed options or tree root reconcilliation cleans up and re-observes nodes on-demand to avoid any unexpected memory leaks.
+Instances and nodes are managed internally so that any changes to the passed options or tree root reconciliation cleans up and re-observes nodes on-demand to avoid any unexpected memory leaks.
 
 ### No extra markup
 
-ReactIntersectionObserver does not create any extra elements, it attaches to the only child you'll provide to it. Internally it warns you if attaching a `ref` to it fails - common mistake when using a stateless component - and will invoke any exisiting `ref` callback upon the passed child element.
+ReactIntersectionObserver does not create any extra elements, it attaches to the only child you'll provide to it. Internally it warns you if attaching a `ref` to it fails - common mistake when using a stateless component - and will invoke any existing `ref` callback upon the passed child element.
 
 ### Easy to adopt
 
@@ -153,7 +153,7 @@ Earlier preview versions of [Edge](https://developer.microsoft.com/en-us/microso
 
 #### Performance issues
 
-Insofar the abovementioned polyfill doesn't perform callback invokation [asynchoronously](https://github.com/WICG/IntersectionObserver/issues/225), you might want to decorate your `onChange` callback with a `requestIdleCallback` or `setTimeout` call to avoid a potential performance degradation:
+As the above-mentioned polyfill doesn't perform callback invocation [asynchronously](https://github.com/WICG/IntersectionObserver/issues/225), you might want to decorate your `onChange` callback with a `requestIdleCallback` or `setTimeout` call to avoid a potential performance degradation:
 
 ```js
 onChange = (entry) => requestIdleCallback(() => this.handleChange(entry));
