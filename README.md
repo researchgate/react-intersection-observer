@@ -32,7 +32,7 @@ npm install --save intersection-observer
 #### Inside your codebase
 ```jsx
 import 'intersection-observer'; // adding optional polyfill
-import Observer from '@rg/react-Intersection-observer';
+import Observer from '@researchgate/react-intersection-observer';
 
 class Component extends React.Component {
     handleIntersection = (event) => {
@@ -69,7 +69,7 @@ The purpose of ReactIntersectionObserver is to provide the easiest possible solu
 
 ### No bookkeeping
 
-It's built with compatibility in mind, adhering 100% to the [native API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Intersection_observer_options) implementation and DSL, but without any of the additional bookkeeping work.
+It's built with compatibility in mind, adhering 100% to the [native API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Intersection_observer_options) implementation and DSL, but takes care of all the bookkeeping work for you.
 
 Instances and nodes are managed internally so that any changes to the passed options or tree root reconciliation cleans up and re-observes nodes on-demand to avoid any unexpected memory leaks.
 
@@ -116,7 +116,7 @@ Indicates at what percentage of the target's visibility the observer's callback 
 Type: `boolean`
 Default: `false`
 
-When true indicate that events fire only until the element is intersecting. Requires IntersectionObserverEntry's object to contain `isIntersecting` in its prototype.
+When true indicate that events fire only until the element is intersecting. Requires `IntersectionObserverEntry`'s object to contain `isIntersecting` in its prototype.
 
 ### disable
 
@@ -149,7 +149,9 @@ When needing the full spec's support, we highly recommend using the [Intersectio
 
 #### Ealier Spec
 
-Earlier preview versions of [Edge](https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/12156111/) and prior to version 58 of [Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=713819#c8), the support for `isIntersecting` was lacking. This property was added to the spec later and both teams where unable to implement it earlier. If you are using the prop `onlyOnce` or you need this field within your IntersectionObserverEntry instances, you'll want to do some feature detection or follow some of the recipes provided in [this thread](https://github.com/WICG/IntersectionObserver/issues/211) beforehand.
+Earlier preview versions of [Edge](https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/12156111/) and prior to version 58 of [Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=713819#c8), the support for `isIntersecting` was lacking. This property was added to the spec later and both teams where unable to implement it earlier.
+
+If you are using the prop `onlyOnce` or you need this field within your `IntersectionObserverEntry` instances, make sure to [require the version ^0.4.0](https://github.com/WICG/IntersectionObserver/commit/d4a699cc7a2d12e4e67cd6d1e748bed8bb6e3d8c).
 
 #### Performance issues
 

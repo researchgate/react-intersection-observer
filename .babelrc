@@ -1,4 +1,17 @@
 {
-  "presets": ["es2015", "react"],
-  "plugins": ["transform-class-properties", "transform-object-rest-spread"]
+  "presets": ["env", "react", "stage-2"],
+  "env": {
+    "esnext": {
+      "presets": [
+        [
+          "env",
+          {
+            "modules": false
+          }
+        ],
+        "react",
+        "stage-2"
+      ]
+    }
+  }
 }
