@@ -49,7 +49,7 @@ export const storage = new Map();
  */
 export default class IntersectionObserverContainer {
   static create(callback, options) {
-    return getPooled(options) || new global.IntersectionObserver(callback, options);
+    return getPooled(options) || new IntersectionObserver(callback, options);
   }
 
   static findElement(entry, observer) {

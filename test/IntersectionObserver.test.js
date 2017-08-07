@@ -281,12 +281,12 @@ describe('callback', () => {
 
     const boundingClientRect = {};
     const intersectionRect = {};
-    const entry1 = new global.IntersectionObserverEntry({
+    const entry1 = new IntersectionObserverEntry({
       target: target1,
       boundingClientRect,
       intersectionRect,
     });
-    const entry2 = new global.IntersectionObserverEntry({
+    const entry2 = new IntersectionObserverEntry({
       target: target2,
       boundingClientRect,
       intersectionRect,
@@ -309,7 +309,7 @@ describe('handleChange', () => {
     const instance = renderer.create(component, { createNodeMock: () => target }).getInstance();
     const boundingClientRect = {};
     const intersectionRect = {};
-    const entry = new global.IntersectionObserverEntry({
+    const entry = new IntersectionObserverEntry({
       target,
       boundingClientRect,
       intersectionRect,
@@ -331,7 +331,7 @@ describe('handleChange', () => {
     const spy = jest.spyOn(instance, 'unobserve');
     const boundingClientRect = {};
     const intersectionRect = {};
-    const entry = new global.IntersectionObserverEntry({
+    const entry = new IntersectionObserverEntry({
       target,
       boundingClientRect,
       intersectionRect,
@@ -353,7 +353,7 @@ describe('handleChange', () => {
     const spy = jest.spyOn(instance, 'unobserve');
     const boundingClientRect = {};
     const intersectionRect = {};
-    const entry = new global.IntersectionObserverEntry({
+    const entry = new IntersectionObserverEntry({
       target,
       boundingClientRect,
       intersectionRect,

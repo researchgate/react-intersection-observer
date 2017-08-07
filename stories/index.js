@@ -15,17 +15,11 @@ storiesOf('IntersectionObserver', module)
   .add('with rootMargin', () => <WithRootMargin />)
   .add('with onlyOnce', () => <OnlyOnce />);
 
-storiesOf('Ad Impressions', module).add('with threshold 0.5 and 1s', () => (
+storiesOf('Ad Impressions', module).add('with threshold 0.5 and 1s', () =>
   <div className="body body--center">
     <ImpressionTracking />
     <ImpressionTracking />
     <ImpressionTracking />
     <ImpressionTracking />
   </div>
-));
-
-storiesOf('Occlusion culling', module).add('todo', () => <WithinWindow />);
-
-storiesOf('Infinite scrolling', module).add('todo', () => <WithinWindow />);
-
-storiesOf('Lazy loading', module).add('todo', () => <WithinWindow />);
+);

@@ -13,24 +13,18 @@ const getPrintableThreshold = (ratio, range) =>
   range.reduce((prev, curr) => (Math.abs(curr - ratio) < Math.abs(prev - ratio) ? curr : prev));
 
 class WithThresholds extends React.Component {
-  constructor(...args) {
-    super(...args);
+  state = {
+    visibility: 'hidden',
+    threshold: 0,
+  };
 
-    this.state = {
-      visibility: 'hidden',
-      threshold: 0,
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event) {
+  handleChange = event => {
     storyBookAction(event);
     this.setState({
       visibility: event.isIntersecting ? 'visible' : 'invisible',
       threshold: getPrintableThreshold(event.intersectionRatio.toFixed(2), [0, 0.25, 0.5, 0.75, 1]),
     });
-  }
+  };
 
   render() {
     return (

@@ -7,22 +7,16 @@ const storyBookAction = decorateAction([
 ])('onChange');
 
 class OnlyOnce extends React.Component {
-  constructor(...args) {
-    super(...args);
+  state = {
+    visibility: 'hidden',
+  };
 
-    this.state = {
-      visibility: 'hidden',
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event) {
+  handleChange = event => {
     storyBookAction(event);
     this.setState({
       visibility: event.isIntersecting ? 'visible' : 'invisible',
     });
-  }
+  };
 
   render() {
     return (

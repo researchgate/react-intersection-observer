@@ -2,7 +2,7 @@
 import 'intersection-observer';
 import IntersectionObserverContainer, { storage, getPooled } from '../src/IntersectionObserverContainer';
 
-const IntersectionObserver = global.IntersectionObserver;
+const IntersectionObserver = window.IntersectionObserver;
 const defaultOptions = { rootMargin: '-10% 0%', threshold: [0, 0.5, 1] };
 const noop = () => {};
 
@@ -11,12 +11,12 @@ afterEach(() => {
 });
 
 test('IntersectionObserverContainer creates a new IntersectionObserver instance', () => {
-  global.IntersectionObserver = jest.fn();
+  window.IntersectionObserver = jest.fn();
   const observer = IntersectionObserverContainer.create(noop, defaultOptions);
-  const mockInstance = global.IntersectionObserver.mock.instances[0];
-  expect(mockInstance).toBeInstanceOf(global.IntersectionObserver);
+  const mockInstance = window.IntersectionObserver.mock.instances[0];
+  expect(mockInstance).toBeInstanceOf(window.IntersectionObserver);
   expect(observer).toEqual(mockInstance);
-  global.IntersectionObserver = IntersectionObserver;
+  window.IntersectionObserver = IntersectionObserver;
 });
 
 test('clear removes all pooled objects from storage', () => {

@@ -2,31 +2,31 @@ import React from 'react';
 import IntersectionObserver from '../../../src/IntersectionObserver';
 
 class ImpressionTracking extends React.Component {
-  constructor(...args) {
-    super(...args);
+  state = {
+    tracked: '',
+  };
 
-    this.state = {
-      tracked: '',
-    };
-    this.lastRecodedTime = 0;
-
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event) {
+  handleChange = event => {
     if (event.isIntersecting) {
       if (event.intersectionRatio >= 0.5) {
-        this.lastRecodedTime += event.time;
-        if (this.lastRecodedTime > 1000) {
+        this.recordedTimeout = setTimeout(() => {
           this.setState({ tracked: 'ad--tracked' });
-        }
+        }, 1000);
+        return;
       }
     }
-  }
+    clearTimeout(this.recordedTimeout);
+  };
 
   render() {
+    const options = {
+      onChange: this.handleChange,
+      threshold: 0.5,
+      disabled: !!this.state.tracked,
+    };
+
     return (
-      <IntersectionObserver onChange={this.handleChange} threshold={[0, 0.5, 0.9]}>
+      <IntersectionObserver {...options}>
         <div className={`ad ${this.state.tracked}`} />
       </IntersectionObserver>
     );

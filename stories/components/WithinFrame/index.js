@@ -7,22 +7,16 @@ const storyBookAction = decorateAction([
 ])('onChange');
 
 class WithinFrame extends React.Component {
-  constructor(...args) {
-    super(...args);
+  state = {
+    visibility: 'hidden',
+  };
 
-    this.state = {
-      visibility: 'hidden',
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event) {
+  handleChange = event => {
     storyBookAction(event);
     this.setState({
       visibility: event.isIntersecting ? 'visible' : 'invisible',
     });
-  }
+  };
 
   render() {
     return (
@@ -33,7 +27,6 @@ class WithinFrame extends React.Component {
         <div className="body body--frame">
           <div className="scroller">
             <div className="frame">
-              <div className="box-inner">scroll here</div>
               <IntersectionObserver onChange={this.handleChange}>
                 <div className={`box ${this.state.visibility}`} />
               </IntersectionObserver>

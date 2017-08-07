@@ -34,23 +34,10 @@
   },
   "homepage": "https://github.com/researchgate/react-intesection-observer#readme",
   "jsnext:main": "src/index.js",
-  "keywords": [
-    "Intersection",
-    "Observer",
-    "react",
-    "component",
-    "viewport",
-    "visible",
-    "invisible",
-    "researchgate"
-  ],
+  "keywords": ["Intersection", "Observer", "react", "component", "viewport", "visible", "invisible", "researchgate"],
   "license": "MIT",
   "lint-staged": {
-    "*.js": [
-      "prettier --print-width 120 --trailing-comma es5 --single-quote --write",
-      "eslint --fix",
-      "git add"
-    ]
+    "*.js": ["prettier --print-width 120 --trailing-comma es5 --single-quote --write", "eslint --fix", "git add"]
   },
   "main": "lib/index.js",
   "module": "src/index.js",

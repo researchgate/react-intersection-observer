@@ -8,23 +8,17 @@ const storyBookAction = decorateAction([
 ])('onChange');
 
 class WithRootMargin extends React.Component {
-  constructor(...args) {
-    super(...args);
+  state = {
+    visibility: 'invisible',
+    scroller: null,
+  };
 
-    this.state = {
-      visibility: 'invisible',
-      scroller: null,
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event) {
+  handleChange = event => {
     storyBookAction(event);
     this.setState({
       visibility: event.isIntersecting ? 'visible' : 'invisible',
     });
-  }
+  };
 
   render() {
     return (
