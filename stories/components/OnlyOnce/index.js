@@ -25,7 +25,7 @@ class OnlyOnce extends React.Component {
           {this.state.visibility}
         </div>
         <div className="body">
-          <IntersectionObserver onChange={this.handleChange} onlyOnce={true}>
+          <IntersectionObserver onChange={this.handleChange} onlyOnce>
             <div className={`box ${this.state.visibility}`} />
           </IntersectionObserver>
         </div>

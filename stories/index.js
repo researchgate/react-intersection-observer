@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
 import IntersectionObserver from '../src/IntersectionObserver';
 import WithinWindow from './components/WithinWindow';
 import WithinFrame from './components/WithinFrame';
@@ -9,26 +10,11 @@ import OnlyOnce from './components/OnlyOnce';
 import ImpressionTracking from './components/ImpressionTracking';
 import './components/style.css';
 
-const infoOptions = {
-  source: false,
-  propTables: null,
-  // propTablesExclude: [WithinWindow, WithinFrame, WithThresholds, WithRootMargin, OnlyOnce],
-  styles: stylesheet => ({
-    ...stylesheet,
-    infoBody: {
-      ...stylesheet.infoBody,
-      background: '#fafafa',
-      color: '#444',
-      boxShadow: 'rgba(0,0,0,.18) 0 0 2px 0, rgba(0,0,0,.12) 0 1px 3px 0',
-      border: 0,
-    },
-  }),
-};
-
 storiesOf('IntersectionObserver', module)
-  .addWithInfo(
+  .add(
     'WithinWindow',
-    `Basic usage of **IntersectionObserver** that changes the className of the observed **<div />** element when the visibility changes:
+    withInfo(
+      `Basic usage of **IntersectionObserver** that changes the className of the observed **<div />** element when the visibility changes:
 ~~~js
 class WithinWindow extends React.Component {
   state = {
@@ -42,30 +28,27 @@ class WithinWindow extends React.Component {
   };
 
   render() {
-    return React.createElement(
-      IntersectionObserver,
-      { onChange: this.handleChange },
-      React.createElement('div', { className: 'box ' + this.state.visibility })
+    return (
+      &lt;IntersectionObserver onChange={this.handleChange}&gt;
+        &lt;div className={\`box \${this.state.visibility}\`} /&gt;
+      &lt;IntersectionObserver /&gt;
     );
   }
 }
-~~~`,
-    () => <WithinWindow />,
-    { ...infoOptions, propTables: [IntersectionObserver] }
+~~~`
+    )(() => <WithinWindow />)
   )
-  .addWithInfo(
+  .add(
     'WithinFrame',
-    `
+    withInfo(`
 Usage within a scrollable frame that changes the className of the observed **<div />** element when the visibility changes.
     
 For more see **<WithinWindow>** example.
-`,
-    () => <WithinFrame />,
-    infoOptions
+`)(() => <WithinFrame />)
   )
-  .addWithInfo(
+  .add(
     'WithThresholds',
-    `Usage of **IntersectionObserver** with tresholds, triggering an event for each defined points in the array:
+    withInfo(`Usage of **IntersectionObserver** with tresholds, triggering an event for each defined points in the array:
 ~~~js
 class WithinWindow extends React.Component {
   state = {
@@ -85,23 +68,18 @@ class WithinWindow extends React.Component {
     // in the example we print out the threshold value, but here we simplify:
     console.log(this.state.threshold * 100 + '%');
 
-    return React.createElement(
-      IntersectionObserver,
-      {
-        onChange: this.handleChange,
-        threshold: this.thresholds,
-      },
-      React.createElement('div', { className: 'box ' + this.state.visibility })
+    return (
+      &lt;IntersectionObserver onChange={this.handleChange} threshold={this.thresholds}&gt;
+        &lt;div className={\`box \${this.state.visibility}\`} /&gt;
+      &lt;IntersectionObserver /&gt;
     );
   }
 }
-~~~`,
-    () => <WithThresholds />,
-    infoOptions
+~~~`)(() => <WithThresholds />)
   )
-  .addWithInfo(
+  .add(
     'WithRootMargin',
-    `Usage of **IntersectionObserver** with negative bottom rootMargin:
+    withInfo(`Usage of **IntersectionObserver** with negative bottom rootMargin:
 ~~~js
 class WithinWindow extends React.Component {
   state = {
@@ -115,26 +93,24 @@ class WithinWindow extends React.Component {
   };
 
   render() {
-    const ObservableElement = React.createElement(
-      IntersectionObserver,
-      {
-        onChange: this.handleChange,
-        root: '#scrollable-container,
-        rootMargin: '0% 0% -25% 0%'
-      },
-      React.createElement('div', { className: 'box ' + this.state.visibility })
+    return (
+      &lt;div id="scrollable-container"&gt;
+        &lt;IntersectionObserver
+          onChange={this.handleChange}
+          root="scrollable-container"
+          rootMargin="0% 0% -25% 0%"
+        &gt;
+          &lt;div className={\`box \${this.state.visibility}\`} /&gt;
+        &lt;IntersectionObserver /&gt;
+      &lt;/div&gt;
     );
-
-    return React.createElement('div', { id: 'scrollable-container' }, ObservableElement);
   }
 }
-~~~`,
-    () => <WithRootMargin />,
-    infoOptions
+~~~`)(() => <WithRootMargin />)
   )
-  .addWithInfo(
+  .add(
     'OnlyOnce',
-    `Basic usage of **IntersectionObserver** with **onlyOnce** that will only trigger an event once as soon as **isIntersecting** is true:
+    withInfo(`Basic usage of **IntersectionObserver** with **onlyOnce** that will only trigger an event once as soon as **isIntersecting** is true:
 ~~~js
 class WithinWindow extends React.Component {
   state = {
@@ -148,24 +124,19 @@ class WithinWindow extends React.Component {
   };
 
   render() {
-    return React.createElement(
-      IntersectionObserver,
-      {
-        onChange: this.handleChange,
-        onlyOnce: true,
-      },
-      React.createElement('div', { className: 'box ' + this.state.visibility })
+    return (
+      &lt;IntersectionObserver onChange={this.handleChange} onlyOnce&gt;
+        &lt;div className={\`box \${this.state.visibility}\`} /&gt;
+      &lt;IntersectionObserver /&gt;
     );
   }
 }
-~~~`,
-    () => <OnlyOnce />,
-    infoOptions
+~~~`)(() => <OnlyOnce />)
   );
 
-storiesOf('Ad Impressions', module).addWithInfo(
+storiesOf('Ad Impressions', module).add(
   'ImpressionTracking',
-  `The requirements for **Viewable Display Ad Impressions** should be counted follow certain criteria and according to the industry standards:
+  withInfo(`The requirements for **Viewable Display Ad Impressions** should be counted follow certain criteria and according to the industry standards:
 
 * Pixel Requirement: Greater than or equal to 50% of the pixels in the
 advertisement were on an in-focus browser tab on the viewable space of
@@ -205,7 +176,5 @@ class AdImpression extends React.Component {
     );
   }
 }
-~~~`,
-  () => <ImpressionTracking />,
-  infoOptions
+~~~`)(() => <ImpressionTracking />)
 );
