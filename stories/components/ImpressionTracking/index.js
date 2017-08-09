@@ -1,36 +1,14 @@
 import React from 'react';
-import IntersectionObserver from '../../../src/IntersectionObserver';
+import AdImpression from './AdImpression';
 
-class ImpressionTracking extends React.Component {
-  state = {
-    tracked: '',
-  };
-
-  handleChange = event => {
-    if (event.isIntersecting) {
-      if (event.intersectionRatio >= 0.5) {
-        this.recordedTimeout = setTimeout(() => {
-          this.setState({ tracked: 'ad--tracked' });
-        }, 1000);
-        return;
-      }
-    }
-    clearTimeout(this.recordedTimeout);
-  };
-
-  render() {
-    const options = {
-      onChange: this.handleChange,
-      threshold: 0.5,
-      disabled: !!this.state.tracked,
-    };
-
-    return (
-      <IntersectionObserver {...options}>
-        <div className={`ad ${this.state.tracked}`} />
-      </IntersectionObserver>
-    );
-  }
-}
+const ImpressionTracking = () =>
+  <div>
+    <div className="header visible">Criteria: 50% visible pixels + 1 continuous sec</div>
+    <div className="body body--center">
+      <AdImpression index={1} />
+      <AdImpression index={2} />
+      <AdImpression index={3} />
+    </div>
+  </div>;
 
 export default ImpressionTracking;

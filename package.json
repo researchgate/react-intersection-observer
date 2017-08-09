@@ -1,14 +1,15 @@
 {
-  "name": "@researchgate/react-intersection-observable",
+  "name": "@researchgate/react-intersection-observer",
   "description": "React Component for the Intersection Observer API",
   "version": "0.1.0",
   "author": "Luis Merino <mail@luismerino.name>",
   "bugs": {
-    "url": "https://github.com/researchgate/react-intersection-observable/issues"
+    "url": "https://github.com/researchgate/react-intersection-observer/issues"
   },
   "dependencies": {},
   "devDependencies": {
     "@storybook/addon-actions": "^3.1.9",
+    "@storybook/addon-info": "^3.2.0",
     "@storybook/addon-options": "^3.1.6",
     "@storybook/react": "^3.1.9",
     "babel-cli": "^6.24.1",
@@ -32,7 +33,7 @@
     "regenerator-runtime": "^0.10.5",
     "style-loader": "^0.18.2"
   },
-  "homepage": "https://github.com/researchgate/react-intesection-observer#readme",
+  "homepage": "https://github.com/researchgate/react-intersection-observer#readme",
   "jsnext:main": "src/index.js",
   "keywords": ["Intersection", "Observer", "react", "component", "viewport", "visible", "invisible", "researchgate"],
   "license": "MIT",

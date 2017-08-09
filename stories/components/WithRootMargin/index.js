@@ -36,9 +36,6 @@ class WithRootMargin extends React.Component {
             }}
           >
             <div className="frame">
-              <div className="box-inner">
-                <i>root</i>: &lt;div&gt;, <i>rootMargin:</i> 0% 0% -25% 0%
-              </div>
               <IntersectionObserver
                 onChange={this.handleChange}
                 disabled={!this.state.scroller}

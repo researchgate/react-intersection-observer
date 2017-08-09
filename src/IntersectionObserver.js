@@ -34,13 +34,6 @@ export function shallowCompareOptions(next, prev) {
 const observerOptions = ['root', 'rootMargin', 'threshold'];
 const objectProto = Object.prototype;
 
-/**
- * IntersectionObserver
- * This HOC provides a way to asynchronously observe changes in the intersection
- * of a target element with an ancestor element or with a top-level document's viewport.
- * Native API @see <https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API>
- * Polyfill @see <https://github.com/WICG/IntersectionObserver>.
- */
 export default class IntersectionObserver extends React.Component {
   static displayName = 'IntersectionObserver';
 

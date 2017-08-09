@@ -1,4 +1,4 @@
-# [React Intersection Observer](https://Rendez.github.io/react-intersection-observer/) &middot; [![Build Status](https://travis-ci.org/researchgate/react-intersection-observable.svg?branch=master)](https://travis-ci.org/researchgate/react-intersection-observable) [![NPM version](https://img.shields.io/npm/v/@researchgate/react-intersection-observer.svg)](https://www.npmjs.com/package/@researchgate/react-intersection-observer) [![Downloads](https://img.shields.io/npm/dw/@researchgate/react-intersection-observer.svg)]() [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![License](https://img.shields.io/npm/l/express.svg)](LICENSE)
+# [React Intersection Observer](https://researchgate.github.io/react-intersection-observer/) [![Build Status](https://travis-ci.org/researchgate/react-intersection-observer.svg?branch=master)](https://travis-ci.org/researchgate/react-intersection-observer) [![NPM version](https://img.shields.io/npm/v/@researchgate/react-intersection-observer.svg)](https://www.npmjs.com/package/@researchgate/react-intersection-observer) [![Downloads](https://img.shields.io/npm/dw/@researchgate/react-intersection-observer.svg)]() [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![License](https://img.shields.io/npm/l/express.svg)](LICENSE)
 
 > Bring ReactIntersectionObserver over today, your React children will love it!
 
@@ -139,7 +139,7 @@ Single React component or element that is used as the target to observe.
 
 ## Demo
 
-Find full demos in: [https://Rendez.github.io/react-intersection-observer/](https://Rendez.github.io/react-intersection-observer/).
+Find full demos in: [https://Rendez.github.io/react-intersection-observer/](https://researchgate.github.io/react-intersection-observer/).
 
 ## Polyfill
 
