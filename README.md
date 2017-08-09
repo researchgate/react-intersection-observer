@@ -139,7 +139,7 @@ Single React component or element that is used as the target to observe.
 
 ## Demo
 
-Find full demos in: [https://Rendez.github.io/react-intersection-observer/](https://researchgate.github.io/react-intersection-observer/).
+Find multiple examples and usage guidelines in: [https://researchgate.github.io/react-intersection-observer/](https://researchgate.github.io/react-intersection-observer/).
 
 ## Polyfill
 
