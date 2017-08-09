@@ -27,9 +27,10 @@
     "jest": "^20.0.4",
     "lint-staged": "^4.0.2",
     "prettier": "^1.5.3",
-    "prop-types": "^15.5.0",
-    "react": "^15.4.0",
-    "react-test-renderer": "^15.4.0",
+    "prop-types": "^15.5.10 || ^16.0.0",
+    "react": "^15.4.0 || ^16.0.0",
+    "react-dom": "^15.4.0 || ^16.0.0",
+    "react-test-renderer": "^15.6.1",
     "regenerator-runtime": "^0.10.5",
     "style-loader": "^0.18.2"
   },
