@@ -13,6 +13,37 @@ ReactIntersectionObserver is good at:
 * **being unopinionated**: how to handle visibility changes is left entirely up to the developer
 * **being intuitive**: looks like the Native API
 
+<br>
+
+<details>
+<summary><strong>Table of Contents</strong></summary>
+
+* [What does IntersectionObserver do?](#what-does-intersectionobserver-do)
+* [Getting started](#getting-started)
+  + [Installation](#installation)
+  + [Inside your codebase](#inside-your-codebase)
+* [Why ReactIntersectionObserver?](#why-reactintersectionobserver)
+  + [No bookkeeping](#no-bookkeeping)
+  + [No extra markup](#no-extra-markup)
+  + [Easy to adopt](#easy-to-adopt)
+* [Options](#options)
+* [Demo](#demo)
+* [Polyfill](#polyfill)
+* [IntersectionObserver's Browser Support](#intersectionobservers-browser-support)
+* [Contributing](#contributing)
+* [License](#license)
+</details>
+
+---
+
+## What does IntersectionObserver do?
+
+> IntersectionObservers calculate how much of a target element overlaps (or "intersects with") the visible portion of a page, also known as the browser's "viewport":
+>
+> \- [Dan Callahan](https://hacks.mozilla.org/2017/08/intersection-observer-comes-to-firefox/)
+
+![Graphic example](https://hacks.mozilla.org/files/2017/08/Blank-Diagram-Page-1.png)
+
 ## Getting started
 
 #### Installation
