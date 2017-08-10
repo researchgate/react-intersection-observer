@@ -1,7 +1,7 @@
 .DS_store
 .vscode
 node_modules
-npm-debug.log
+npm-debug.log*
 lib
-examples
+docs
 coverage
