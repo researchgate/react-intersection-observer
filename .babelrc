@@ -1,4 +1,3 @@
 {
-  "presets": ["es2015", "react"],
-  "plugins": ["transform-class-properties", "transform-object-rest-spread"]
+  "presets": ["@researchgate/babel-preset-rg"]
 }
