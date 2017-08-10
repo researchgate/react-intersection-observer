@@ -35,7 +35,7 @@
     "style-loader": "^0.18.2"
   },
   "files": [
-    "lib",
+    "lib"
   ],
   "homepage": "https://github.com/researchgate/react-intersection-observer#readme",
   "jsnext:main": "src/index.js",
