@@ -34,6 +34,9 @@
     "regenerator-runtime": "^0.10.5",
     "style-loader": "^0.18.2"
   },
+  "files": [
+    "lib",
+  ],
   "homepage": "https://github.com/researchgate/react-intersection-observer#readme",
   "jsnext:main": "src/index.js",
   "keywords": ["Intersection", "Observer", "react", "component", "viewport", "visible", "invisible", "researchgate"],
