@@ -3,8 +3,8 @@
 
 
 "@researchgate/babel-preset-rg@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@researchgate/babel-preset-rg/-/babel-preset-rg-1.0.0.tgz#2eaf967af071adf737f7c3084ca76c3855eaddb6"
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@researchgate/babel-preset-rg/-/babel-preset-rg-1.0.1.tgz#434386d8056405375c64325369a24219fd7445c2"
   dependencies:
     babel-plugin-lodash "^3.2.11"
     babel-plugin-transform-class-properties "^6.24.1"
