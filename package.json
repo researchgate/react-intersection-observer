@@ -8,7 +8,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@researchgate/babel-preset-rg": "https://github.com/researchgate/babel-preset-rg.git",
+    "@researchgate/babel-preset-rg": "^1.0.0",
     "@storybook/addon-actions": "^3.1.9",
     "@storybook/addon-info": "^3.2.0",
     "@storybook/addon-options": "^3.1.6",
@@ -34,12 +34,27 @@
     "regenerator-runtime": "^0.10.5",
     "style-loader": "^0.18.2"
   },
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "homepage": "https://github.com/researchgate/react-intersection-observer#readme",
-  "keywords": ["Intersection", "Observer", "react", "component", "viewport", "visible", "invisible", "researchgate"],
+  "keywords": [
+    "Intersection",
+    "Observer",
+    "react",
+    "component",
+    "viewport",
+    "visible",
+    "invisible",
+    "researchgate"
+  ],
   "license": "MIT",
   "lint-staged": {
-    "*.js": ["prettier --print-width 120 --trailing-comma es5 --single-quote --write", "eslint --fix", "git add"]
+    "*.js": [
+      "prettier --print-width 120 --trailing-comma es5 --single-quote --write",
+      "eslint --fix",
+      "git add"
+    ]
   },
   "main": "lib/js/index.js",
   "module": "lib/es/index.js",
