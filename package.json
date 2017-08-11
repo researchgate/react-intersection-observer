@@ -75,7 +75,6 @@
     "format": "prettier '{src,stories,test}/**/*.js' --single-quote --trailing-comma es5 --print-width 120",
     "lint": "eslint {src,stories,test}/.",
     "precommit": "lint-staged",
-    "postcommit": "git reset",
     "prepublish": "npm run build",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "test": "jest"
