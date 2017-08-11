@@ -40,7 +40,8 @@ ReactIntersectionObserver is good at:
 
 > IntersectionObservers calculate how much of a target element overlaps (or "intersects with") the visible portion of a page, also known as the browser's "viewport":
 >
-> \- [Dan Callahan](https://hacks.mozilla.org/2017/08/intersection-observer-comes-to-firefox/)
+> \- [Dan Callahan](https://hacks.mozilla.org/2017/08/intersection-observer-comes-to-firefox/)&nbsp;&middot;&nbsp;<a href="https://creativecommons.org/licenses/by-sa/3.0/">
+<img id="licensebutton_slim" alt="Creative Commons License" src="https://i.creativecommons.org/l/by-sa/3.0/80x15.png" style="margin-right:10px;margin-bottom:4px; border: 0;"></a>
 
 ![Graphic example](https://hacks.mozilla.org/files/2017/08/Blank-Diagram-Page-1.png)
 
