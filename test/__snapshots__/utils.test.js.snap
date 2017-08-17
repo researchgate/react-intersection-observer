@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parseRootMargin throws when using wrong units 1`] = `"rootMargin must be specified in pixels or percent"`;
+
+exports[`parseRootMargin throws when using wrong units 2`] = `"rootMargin must be specified in pixels or percent"`;

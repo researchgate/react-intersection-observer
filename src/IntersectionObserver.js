@@ -3,7 +3,7 @@ import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import invariant from 'invariant';
 import IntersectionObserverContainer from './IntersectionObserverContainer';
-import isDOMTypeElement from './isDOMTypeElement';
+import { isDOMTypeElement } from './utils';
 
 /**
  * The Intersection Observer API callback that is called whenever one element,

@@ -5,7 +5,17 @@ import renderer from 'react-test-renderer';
 import IntersectionObserver, { callback, shallowCompareOptions } from '../src/IntersectionObserver';
 import IntersectionObserverContainer from '../src/IntersectionObserverContainer';
 
-jest.mock('../src/isDOMTypeElement', () => () => true);
+function mockUtilsFunctions() {
+  const utils = require.requireActual('../src/utils');
+  return {
+    ...utils,
+    isDOMTypeElement() {
+      return true;
+    },
+  };
+}
+
+jest.mock('../src/utils', () => mockUtilsFunctions());
 
 const noop = () => {};
 const target = { nodeType: 1 };
