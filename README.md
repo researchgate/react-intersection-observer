@@ -26,8 +26,9 @@ ReactIntersectionObserver is good at:
   + [No bookkeeping](#no-bookkeeping)
   + [No extra markup](#no-extra-markup)
   + [Easy to adopt](#easy-to-adopt)
-* [Options](#options)
 * [Demo](#demo)
+* [Options](#options)
+* [Methods](#methods)
 * [Polyfill](#polyfill)
 * [IntersectionObserver's Browser Support](#intersectionobservers-browser-support)
 * [Contributing](#contributing)
@@ -122,7 +123,9 @@ Some of the things you may want to use ReactIntersectionObserver for:
 
 ## Demo
 
-Find multiple examples and usage guidelines in: [https://researchgate.github.io/react-intersection-observer/](https://researchgate.github.io/react-intersection-observer/).
+Find multiple examples and usage guidelines in: [https://researchgate.github.io/react-intersection-observer/](https://researchgate.github.io/react-intersection-observer/)
+
+[![demo](https://github.com/researchgate/react-intersection-observer/blob/master/.github/demo.gif?raw=true)](https://researchgate.github.io/react-intersection-observer/)
 
 ## Options
 
