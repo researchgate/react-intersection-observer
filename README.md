@@ -120,6 +120,10 @@ Some of the things you may want to use ReactIntersectionObserver for:
 * Occlusion culling - Don't render an object until is close to the viewport edges
 * Sentinel Scrolling - Infinite scroller with a recycled Sentinel
 
+## Demo
+
+Find multiple examples and usage guidelines in: [https://researchgate.github.io/react-intersection-observer/](https://researchgate.github.io/react-intersection-observer/).
+
 ## Options
 
 ### root
@@ -169,9 +173,28 @@ Type: `element|component`
 
 Single React component or element that is used as the target to observe.
 
-## Demo
+## Methods
 
-Find multiple examples and usage guidelines in: [https://researchgate.github.io/react-intersection-observer/](https://researchgate.github.io/react-intersection-observer/).
+### takeRecords(options?: IntersectionObserverOptions)
+
+Calls all the observer instance's `takeRecords()` methods if no options are passed, and if options are passed triggers only those matching all of the options.
+
+> The `IntersectionObserver` method `takeRecords()` returns an array of `IntersectionObserverEntry` objects, one for each targeted element which has experienced an intersection change since the last time the intersections were checked, either explicitly through a call to this method or implicitly by an automatic call to the observer's callback.
+>
+> – [MDN: IntersectionObserver.takeRecords()](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/takeRecords)
+
+#### [What are the use cases of `takeRecords`?](https://github.com/WICG/IntersectionObserver/issues/133#issuecomment-224368861)
+In cases where you need to synchronously get any `IntersectionObserverEntry` objects that have been generated but not yet delivered.
+
+#### Usage
+```js
+import { takeRecords } from '@researchgate/react-intersection-observer';
+
+takeRecords({
+    root: document.getElementById('#scrolling-container'),
+    rootMargin: '0% 0% -25% 0%',
+});
+```
 
 ## Polyfill
 
