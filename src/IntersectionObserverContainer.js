@@ -1,7 +1,6 @@
-import { parseRootMargin } from './utils';
+import { parseRootMargin, shallowCompareOptions } from './utils';
 
 export function getPooled(options = {}) {
-  let matchCount = 0;
   const root = options.root || null;
   const rootMargin = parseRootMargin(options.rootMargin);
   const threshold = Array.isArray(options.threshold)
@@ -9,16 +8,13 @@ export function getPooled(options = {}) {
     : [typeof options.threshold !== 'undefined' ? options.threshold : 0];
   // eslint-disable-next-line no-restricted-syntax
   for (const observer of storage.keys()) {
-    let thresholdMatches = threshold;
-    let thresholds = observer.thresholds;
-    if (threshold.length > observer.thresholds) {
-      thresholdMatches = observer.thresholds;
-      thresholds = threshold;
-    }
-    matchCount += thresholds.every(v => v === thresholdMatches[thresholdMatches.indexOf(v)]);
-    matchCount += root === observer.root;
-    matchCount += rootMargin === observer.rootMargin;
-    if (matchCount === 3) {
+    const unmatched = [
+      [root, observer.root],
+      [rootMargin, observer.rootMargin],
+      [threshold, observer.thresholds],
+    ].some(option => shallowCompareOptions(...option));
+
+    if (!unmatched) {
       return observer;
     }
   }

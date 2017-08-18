@@ -21,3 +21,12 @@ export function parseRootMargin(rootMargin) {
 
   return margins.join(' ');
 }
+
+export function shallowCompareOptions(next, prev) {
+  if (Array.isArray(next) && Array.isArray(prev)) {
+    if (next.length === prev.length) {
+      return next.some((_, index) => shallowCompareOptions(next[index], prev[index]));
+    }
+  }
+  return next !== prev;
+}

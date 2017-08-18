@@ -47,6 +47,11 @@ describe('#getPooled', () => {
     expect(getPooled({ threshold: 0.5 })).toBeNull();
   });
 
+  test('returns nothing given threshold did not match', () => {
+    expect(getPooled({ rootMargin: '-10% 0%', threshold: [0, 0.5, 1, 0.25] })).toBeNull();
+    expect(getPooled({ rootMargin: '-10% 0%', threshold: [1, 0.5, 0] })).toBeNull();
+  });
+
   test('throws if rootMargin cannot be parsed', () => {
     expect(() => getPooled({ rootMargin: '-10% 0', threshold: 0 })).toThrow(
       'rootMargin must be specified in pixels or percent'

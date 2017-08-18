@@ -3,7 +3,7 @@ import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import invariant from 'invariant';
 import IntersectionObserverContainer from './IntersectionObserverContainer';
-import { isDOMTypeElement } from './utils';
+import { isDOMTypeElement, shallowCompareOptions } from './utils';
 
 /**
  * The Intersection Observer API callback that is called whenever one element,
@@ -20,15 +20,6 @@ export function callback(changes, observer) {
       instance.handleChange(entry);
     }
   });
-}
-
-export function shallowCompareOptions(next, prev) {
-  if (Array.isArray(next) && Array.isArray(prev)) {
-    if (next.length === prev.length) {
-      return next.some((_, index) => shallowCompareOptions(next[index], prev[index]));
-    }
-  }
-  return next !== prev;
 }
 
 const observerOptions = ['root', 'rootMargin', 'threshold'];
