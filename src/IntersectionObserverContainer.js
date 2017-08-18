@@ -45,20 +45,6 @@ export default class IntersectionObserverContainer {
     return null;
   }
 
-  static takeRecords(options) {
-    if (options) {
-      const observer = getPooled(options);
-      if (observer) {
-        observer.takeRecords();
-      }
-    } else {
-      // eslint-disable-next-line no-restricted-syntax
-      for (const observer of storage.keys()) {
-        observer.takeRecords();
-      }
-    }
-  }
-
   static observe(element) {
     let targets;
     if (storage.has(element.observer)) {

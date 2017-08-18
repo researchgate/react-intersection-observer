@@ -64,10 +64,11 @@ npm install --save intersection-observer
 
 #### Inside your codebase
 ```jsx
+import React, { Component } from 'react';
 import 'intersection-observer'; // adding optional polyfill
 import Observer from '@researchgate/react-intersection-observer';
 
-class Component extends React.Component {
+class TargetComponent extends Component {
     handleIntersection = (event) => {
         if (event.isIntersecting) {
             console.log('I am intersecting ');
@@ -80,7 +81,7 @@ class Component extends React.Component {
         const options = {
             onChange: this.handleIntersection
             root: "#scrolling-container"
-            rootMargin: "0% 0% -25% 0%"
+            rootMargin: "0% 0% -25%"
         };
 
         return (
@@ -175,29 +176,6 @@ Function that will be invoked whenever the intersection value for this element c
 Type: `element|component`
 
 Single React component or element that is used as the target to observe.
-
-## Methods
-
-### takeRecords(options?: IntersectionObserverOptions)
-
-Calls all the observer instance's `takeRecords()` methods if no options are passed, and if options are passed triggers only those matching all of the options.
-
-> The `IntersectionObserver` method `takeRecords()` returns an array of `IntersectionObserverEntry` objects, one for each targeted element which has experienced an intersection change since the last time the intersections were checked, either explicitly through a call to this method or implicitly by an automatic call to the observer's callback.
->
-> – [MDN: IntersectionObserver.takeRecords()](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/takeRecords)
-
-#### [What are the use cases of `takeRecords`?](https://github.com/WICG/IntersectionObserver/issues/133#issuecomment-224368861)
-In cases where you need to synchronously get any `IntersectionObserverEntry` objects that have been generated but not yet delivered.
-
-#### Usage
-```js
-import { takeRecords } from '@researchgate/react-intersection-observer';
-
-takeRecords({
-    root: document.getElementById('#scrolling-container'),
-    rootMargin: '0% 0% -25% 0%',
-});
-```
 
 ## Polyfill
 
