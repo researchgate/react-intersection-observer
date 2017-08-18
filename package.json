@@ -1,7 +1,7 @@
 {
   "name": "@researchgate/react-intersection-observer",
   "description": "React Component for the Intersection Observer API",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "Luis Merino <mail@luismerino.name>",
   "bugs": {
     "url": "https://github.com/researchgate/react-intersection-observer/issues"
