@@ -1,5 +1,20 @@
 /* eslint-env jest */
-import { parseRootMargin, shallowCompareOptions } from '../src/utils';
+import React from 'react';
+import { isDOMTypeElement, parseRootMargin, shallowCompareOptions } from '../src/utils';
+
+describe('isDOMTypeElement', () => {
+  test('returns false when is not a valid React element', () => {
+    const node = document.createElement('div');
+    expect(isDOMTypeElement(node)).toBe(false);
+  });
+  test('returns false if it is a React element but not a DOM node type', () => {
+    const Element = () => <div />;
+    expect(isDOMTypeElement(<Element />)).toBe(false);
+  });
+  test('returns true if it is a React element and DOM node type', () => {
+    expect(isDOMTypeElement(<div />)).toBe(true);
+  });
+});
 
 describe('parseRootMargin', () => {
   test('throws when using wrong units', () => {
