@@ -1,7 +1,7 @@
 {
   "name": "@researchgate/react-intersection-observer",
   "description": "React Component for the Intersection Observer API",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Luis Merino <mail@luismerino.name>",
   "bugs": {
     "url": "https://github.com/researchgate/react-intersection-observer/issues"
@@ -34,12 +34,27 @@
     "regenerator-runtime": "^0.10.5",
     "style-loader": "^0.18.2"
   },
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "homepage": "https://github.com/researchgate/react-intersection-observer#readme",
-  "keywords": ["Intersection", "Observer", "react", "component", "viewport", "visible", "invisible", "researchgate"],
+  "keywords": [
+    "Intersection",
+    "Observer",
+    "react",
+    "component",
+    "viewport",
+    "visible",
+    "invisible",
+    "researchgate"
+  ],
   "license": "MIT",
   "lint-staged": {
-    "*.js": ["prettier --print-width 120 --trailing-comma es5 --single-quote --write", "eslint --fix", "git add"]
+    "*.js": [
+      "prettier --print-width 120 --trailing-comma es5 --single-quote --write",
+      "eslint --fix",
+      "git add"
+    ]
   },
   "main": "lib/js/index.js",
   "module": "lib/es/index.js",
