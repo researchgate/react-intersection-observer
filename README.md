@@ -4,7 +4,7 @@
 
 <br>
 
-**React** component for the **IntersectionObserver API**.
+ReactIntersectionObserver is a **React** component, acting as a wrapper for the **IntersectionObserver API**. It is fully declarative and takes care of all the imperative parts for you.
 
 ReactIntersectionObserver is good at:
 
@@ -28,7 +28,6 @@ ReactIntersectionObserver is good at:
   + [Easy to adopt](#easy-to-adopt)
 * [Demo](#demo)
 * [Options](#options)
-* [Methods](#methods)
 * [Polyfill](#polyfill)
 * [IntersectionObserver's Browser Support](#intersectionobservers-browser-support)
 * [Contributing](#contributing)
@@ -99,7 +98,7 @@ class TargetComponent extends Component {
 
 ## Why ReactIntersectionObserver?
 
-The purpose of ReactIntersectionObserver is to provide the easiest possible solution for observing elements that enter the viewport on your **React** codebase. It's fully declarative and all complexity is abstracted away, focusing on reusability, and low memory consumption.
+The motivation is to provide the easiest possible solution for observing elements that enter the viewport on your **React** codebase. It's fully declarative and all complexity is abstracted away, focusing on reusability, and low memory consumption.
 
 ### No bookkeeping
 
@@ -109,7 +108,7 @@ Instances and nodes are managed internally so that any changes to the passed opt
 
 ### No extra markup
 
-ReactIntersectionObserver does not create any extra elements, it attaches to the only child you'll provide to it. Internally it warns you if attaching a `ref` to it fails - common mistake when using a stateless component - and will invoke any existing `ref` callback upon the passed child element.
+ReactIntersectionObserver does not create any extra DOM elements, it attaches to the only child you'll provide to it. Internally it warns you if attaching a `ref` to it fails - common mistake when using a stateless component in React 15 - and will invoke any existing `ref` callback upon the passed child element.
 
 ### Easy to adopt
 
