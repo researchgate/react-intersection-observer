@@ -28,6 +28,7 @@ ReactIntersectionObserver is good at:
   + [Easy to adopt](#easy-to-adopt)
 * [Demo](#demo)
 * [Options](#options)
+* [Notes](#notes)
 * [Polyfill](#polyfill)
 * [IntersectionObserver's Browser Support](#intersectionobservers-browser-support)
 * [Contributing](#contributing)
@@ -175,6 +176,12 @@ Function that will be invoked whenever the intersection value for this element c
 Type: `element|component`
 
 Single React component or element that is used as the target to observe.
+
+## Notes
+
+* According to the spec, a first callback invocation occurs when the target is first attached to the observer.
+* Changes happen asynchronously, similar to the way `requestIdleCallback` works.
+* Although you can consider callbacks immediate - always below 1 second - you can also get an immediate response on an element's visibility with `observer.takeRecords()`.
 
 ## Polyfill
 
