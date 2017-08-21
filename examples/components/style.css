@@ -5,6 +5,7 @@ body {
   padding: 0;
   color: #444;
   -webkit-font-smoothing: antialiased;
+  min-height: 100%;
 }
 
 .header {
@@ -49,7 +50,7 @@ body {
 }
 
 .body--frame::after {
-  top: 50%;
+  top: 200px;
 }
 
 .scroller {
@@ -66,8 +67,8 @@ body {
 .scroller--gradient::after {
   position: absolute;
   left: 50%;
-  bottom: 12px;
-  transform: translate(-50%, -50%);
+  top: 300px;
+  transform: translateX(-50%);
   content: '-25% bottom rootMargin';
   font-size: 20px;
   color: #ff8142;
@@ -85,13 +86,24 @@ body {
 .box {
   width: 120px;
   height: 120px;
+  text-align: center;
+  line-height: 120px;
+}
+
+.box + .box {
+  margin-top: 15px;
 }
 
 .invisible {
   background: #f50;
+  color: #fff;
 }
 .visible {
   background: #00a39e;
+  color: #fff;
+}
+.transparent {
+  outline: 2px dashed #00a39e;
 }
 
 .ad {
@@ -101,6 +113,9 @@ body {
   border-radius: 2px;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.025);
   margin-bottom: 15px;
+}
+
+.ad {
   background-size: cover;
   background-position: center;
   position: relative;

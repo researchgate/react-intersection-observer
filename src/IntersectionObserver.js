@@ -87,7 +87,7 @@ export default class IntersectionObserver extends React.Component {
       if (objectProto.hasOwnProperty.call(this.props, key)) {
         let value = this.props[key];
         if (key === 'root' && objectProto.toString.call(this.props[key]) === '[object String]') {
-          value = global.document.querySelector(value);
+          value = document.querySelector(value);
         }
         return {
           ...prev,

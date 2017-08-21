@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { decorateAction } from '@storybook/addon-actions';
-import IntersectionObserver from '../../../src/IntersectionObserver';
+import Observer from '../../../src/IntersectionObserver';
 
 const storyBookAction = decorateAction([
   args => ['isIntersecting', 'intersectionRatio'].map(key => `${key}: ${args[0][key]}`),
 ])('onChange');
 
-class OnlyOnce extends React.Component {
+export default class WindowFrame extends Component {
   state = {
     visibility: 'hidden',
   };
@@ -24,14 +24,16 @@ class OnlyOnce extends React.Component {
         <div className={`header ${this.state.visibility}`}>
           {this.state.visibility}
         </div>
-        <div className="body">
-          <IntersectionObserver onChange={this.handleChange} onlyOnce>
-            <div className={`box ${this.state.visibility}`} />
-          </IntersectionObserver>
+        <div className="body body--frame">
+          <div className="scroller">
+            <div className="frame">
+              <Observer onChange={this.handleChange}>
+                <div className={`box ${this.state.visibility}`} />
+              </Observer>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 }
-
-export default OnlyOnce;

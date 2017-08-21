@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { decorateAction } from '@storybook/addon-actions';
-import IntersectionObserver from '../../../src/IntersectionObserver';
+import Observer from '../../../src/IntersectionObserver';
 
 const storyBookAction = decorateAction([
   args =>
@@ -12,7 +12,7 @@ const storyBookAction = decorateAction([
 const getPrintableThreshold = (ratio, range) =>
   range.reduce((prev, curr) => (Math.abs(curr - ratio) < Math.abs(prev - ratio) ? curr : prev));
 
-class WithThresholds extends React.Component {
+export default class WithThresholds extends Component {
   state = {
     visibility: 'hidden',
     threshold: 0,
@@ -34,14 +34,12 @@ class WithThresholds extends React.Component {
         </div>
         <div className="body">
           <div className={this.state.visibility}>
-            <IntersectionObserver onChange={this.handleChange} threshold={[0, 0.25, 0.5, 0.75, 1]}>
+            <Observer onChange={this.handleChange} threshold={[0, 0.25, 0.5, 0.75, 1]}>
               <div className={`box ${this.state.visibility}`} />
-            </IntersectionObserver>
+            </Observer>
           </div>
         </div>
       </div>
     );
   }
 }
-
-export default WithThresholds;

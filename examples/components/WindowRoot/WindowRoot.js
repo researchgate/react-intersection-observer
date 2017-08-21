@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { decorateAction } from '@storybook/addon-actions';
-import IntersectionObserver from '../../../src/IntersectionObserver';
+import Observer from '../../../src/IntersectionObserver';
 
 const storyBookAction = decorateAction([
   args => ['isIntersecting', 'intersectionRatio'].map(key => `${key}: ${args[0][key]}`),
 ])('onChange');
 
-class WithinFrame extends React.Component {
+export default class WindowRoot extends Component {
   state = {
     visibility: 'hidden',
   };
@@ -24,18 +24,12 @@ class WithinFrame extends React.Component {
         <div className={`header ${this.state.visibility}`}>
           {this.state.visibility}
         </div>
-        <div className="body body--frame">
-          <div className="scroller">
-            <div className="frame">
-              <IntersectionObserver onChange={this.handleChange}>
-                <div className={`box ${this.state.visibility}`} />
-              </IntersectionObserver>
-            </div>
-          </div>
+        <div className="body">
+          <Observer onChange={this.handleChange}>
+            <div className={`box ${this.state.visibility}`} />
+          </Observer>
         </div>
       </div>
     );
   }
 }
-
-export default WithinFrame;

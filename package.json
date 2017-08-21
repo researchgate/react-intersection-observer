@@ -8,11 +8,10 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@researchgate/babel-preset-rg": "^1.0.0",
-    "@storybook/addon-actions": "^3.1.9",
-    "@storybook/addon-info": "^3.2.0",
-    "@storybook/addon-options": "^3.1.6",
-    "@storybook/react": "^3.1.9",
+    "@researchgate/babel-preset-rg": "^1.0.1",
+    "@storybook/addon-actions": "^3.2.0",
+    "@storybook/addon-options": "^3.2.4",
+    "@storybook/react": "^3.2.5",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
@@ -28,18 +27,35 @@
     "lint-staged": "^4.0.2",
     "prettier": "^1.5.3",
     "prop-types": "^15.5.10 || ^16.0.0",
+    "raw-loader": "^0.5.1",
     "react": "^15.4.0 || ^16.0.0",
     "react-dom": "^15.4.0 || ^16.0.0",
     "react-test-renderer": "^15.6.1",
     "regenerator-runtime": "^0.10.5",
+    "storybook-readme": "^3.0.6",
     "style-loader": "^0.18.2"
   },
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "homepage": "https://github.com/researchgate/react-intersection-observer#readme",
-  "keywords": ["Intersection", "Observer", "react", "component", "viewport", "visible", "invisible", "researchgate"],
+  "keywords": [
+    "Intersection",
+    "Observer",
+    "react",
+    "component",
+    "viewport",
+    "visible",
+    "invisible",
+    "researchgate"
+  ],
   "license": "MIT",
   "lint-staged": {
-    "*.js": ["prettier --print-width 120 --trailing-comma es5 --single-quote --write", "eslint --fix", "git add"]
+    "*.js": [
+      "prettier --print-width 120 --trailing-comma es5 --single-quote --write",
+      "eslint --fix",
+      "git add"
+    ]
   },
   "main": "lib/js/index.js",
   "module": "lib/es/index.js",
@@ -57,8 +73,8 @@
     "build:js": "cross-env BABEL_ENV=production BABEL_OUTPUT=cjs babel src --out-dir lib/js",
     "build:es": "cross-env BABEL_ENV=production BABEL_OUTPUT=esm babel src --out-dir lib/es",
     "build:storybook": "build-storybook --output-dir docs",
-    "format": "prettier '{src,stories,test}/**/*.js' --single-quote --trailing-comma es5 --print-width 120",
-    "lint": "eslint {src,stories,test}/.",
+    "format": "prettier '{src,examples,test}/**/*.js' --single-quote --trailing-comma es5 --print-width 120",
+    "lint": "eslint {src,examples,test}/.",
     "precommit": "lint-staged",
     "prepublish": "npm run build",
     "storybook": "start-storybook -p 9001 -c .storybook",

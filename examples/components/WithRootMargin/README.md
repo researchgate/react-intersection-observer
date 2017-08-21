@@ -1,20 +1,16 @@
-import React from 'react';
-import { decorateAction } from '@storybook/addon-actions';
-import IntersectionObserver from '../../../src/IntersectionObserver';
+Usage of **IntersectionObserver** with negative bottom rootMargin:
 
-const storyBookAction = decorateAction([
-  args =>
-    ['isIntersecting', 'intersectionRatio'].map(key => `${key}: ${args[0][key]}`).concat(['rootMargin: 0% 0% -25% 0%']),
-])('onChange');
+```jsx
+import React, { Component } from 'react';
+import Observer from '@researchgate/react-intersection-observer';
 
-class WithRootMargin extends React.Component {
+export default class WithRootMargin extends Component {
   state = {
     visibility: 'invisible',
     scroller: null,
   };
 
   handleChange = event => {
-    storyBookAction(event);
     this.setState({
       visibility: event.isIntersecting ? 'visible' : 'invisible',
     });
@@ -36,14 +32,14 @@ class WithRootMargin extends React.Component {
             }}
           >
             <div className="frame">
-              <IntersectionObserver
+              <Observer
                 onChange={this.handleChange}
                 disabled={!this.state.scroller}
                 root={this.state.scroller}
-                rootMargin="0% 0% -25% 0%"
+                rootMargin="0% 0% -25%"
               >
                 <div className={`box ${this.state.visibility}`} />
-              </IntersectionObserver>
+              </Observer>
             </div>
           </div>
         </div>
@@ -51,5 +47,4 @@ class WithRootMargin extends React.Component {
     );
   }
 }
-
-export default WithRootMargin;
+```

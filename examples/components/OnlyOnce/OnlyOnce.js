@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { decorateAction } from '@storybook/addon-actions';
-import IntersectionObserver from '../../../src/IntersectionObserver';
+import Observer from '../../../src/IntersectionObserver';
 
 const storyBookAction = decorateAction([
   args => ['isIntersecting', 'intersectionRatio'].map(key => `${key}: ${args[0][key]}`),
 ])('onChange');
 
-class WithinWindow extends React.Component {
+export default class OnlyOnce extends Component {
   state = {
     visibility: 'hidden',
   };
@@ -25,13 +25,11 @@ class WithinWindow extends React.Component {
           {this.state.visibility}
         </div>
         <div className="body">
-          <IntersectionObserver onChange={this.handleChange}>
+          <Observer onChange={this.handleChange} onlyOnce>
             <div className={`box ${this.state.visibility}`} />
-          </IntersectionObserver>
+          </Observer>
         </div>
       </div>
     );
   }
 }
-
-export default WithinWindow;

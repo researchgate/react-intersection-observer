@@ -8,6 +8,10 @@ module.exports = {
         loaders: ['style-loader', 'css-loader'],
         include: path.resolve(__dirname, '../'),
       },
+      {
+        test: /\.md$/,
+        loaders: ['raw-loader'],
+      },
     ],
   },
 };
