@@ -26,7 +26,7 @@ ReactIntersectionObserver is good at:
   + [No bookkeeping](#no-bookkeeping)
   + [No extra markup](#no-extra-markup)
   + [Easy to adopt](#easy-to-adopt)
-* [Demo](#demo)
+* [Examples](#examples)
 * [Options](#options)
 * [Notes](#notes)
 * [Polyfill](#polyfill)
@@ -122,11 +122,19 @@ Some of the things you may want to use ReactIntersectionObserver for:
 * Occlusion culling - Don't render an object until is close to the viewport edges
 * Sentinel Scrolling - Infinite scroller with a recycled Sentinel
 
-## Demo
+## Examples
 
-Find multiple examples and usage guidelines in: [https://researchgate.github.io/react-intersection-observer/](https://researchgate.github.io/react-intersection-observer/)
+### Demos
+
+Find multiple examples and usage guidelines under: [https://researchgate.github.io/react-intersection-observer/](https://researchgate.github.io/react-intersection-observer/)
 
 [![demo](https://github.com/researchgate/react-intersection-observer/blob/master/.github/demo.gif?raw=true)](https://researchgate.github.io/react-intersection-observer/)
+
+### Recipes
+
+Recipes are useful code snippets solutions to common problems, for example, how to use ReactIntersectionObserver within a [Higher Order Component](https://researchgate.github.io/react-intersection-observer/?selectedKind=Recipes&selectedStory=Higher%20Order%20Component).
+
+Discover more recipes in our [examples section](examples/README.md).
 
 ## Options
 

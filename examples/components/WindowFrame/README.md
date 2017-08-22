@@ -1,3 +1,3 @@
-Usage within a scrollable frame that changes the className of the observed **<div />** element when the visibility changes.
-    
-For more see the **<Window />** example.
+Usage within a scrollable frame or even iframes should behave as expected. Note that in the example we're using Window as the root, which indicates the observed target triggers changes when intersecting with the viewport, in this case Window.
+
+However, we can always use a different root. Check out the [rootMargin example](https://researchgate.github.io/react-intersection-observer/?selectedKind=Examples&selectedStory=Margin), where we use a different approach to set the `root` option.

@@ -1,5 +1,9 @@
 ## Higher order component
 
+A common way to avoid repetiton and dynamic option setting is to use _HOC_. Since our component reuses instances based on **all** the options, you don't have to worry about bookkeeping of instances. Create as many HOC as you need; they can be as flexible as you need them to be.
+
+The next example illustrates in a simple way how a _HOC_ is used to wrap target elements for occlusion culling:
+
 ### withIntersectionObserver.js
 ```jsx
 import React, { Component } from 'react';

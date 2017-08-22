@@ -1,4 +1,4 @@
-Basic usage of **IntersectionObserver** with **onlyOnce** that will only trigger an event once as soon as **isIntersecting** is true:
+The option `onlyOnce` applied to the component will only trigger an event once, when the target detects `isIntersecting` is truthy. This is specially useful when you need a disposable observer, and you want to prevent re-rendering the element after that:
 
 ```jsx
 import React, { Component } from 'react';
