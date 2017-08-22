@@ -16,6 +16,7 @@ Here you [will find useful code snippets](https://researchgate.github.io/react-i
 
 * [Higher Order Component](https://researchgate.github.io/react-intersection-observer/?selectedKind=Recipes&selectedStory=Higher%20Order%20Component)
 * [Tracking Ad Impressions](https://researchgate.github.io/react-intersection-observer/?selectedKind=Recipes&selectedStory=Ad%20Impressions)
+* [Viewable Monitor](components/ViewableMonitor/README.md)
 
 ### Can I submit a new recipe?
 
