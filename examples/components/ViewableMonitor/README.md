@@ -7,7 +7,7 @@ Component accepting a function as children prop that will re-render the children
 ```jsx
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Observer from '@reearchgate/react-intersection-observer';
+import Observer from '@researchgate/react-intersection-observer';
 
 export default class ViewableMonitor extends Component {
     static propTypes = {
