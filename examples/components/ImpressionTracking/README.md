@@ -2,10 +2,10 @@
 
 The requirements for **Viewable Ad Impressions** should generally follow certain guidelines, industry-related standards, some of which are:
 
-* __Pixel Requirement__: Greater than or equal to 50% of the pixels in the
+* __Viewable pixels__: Greater than or equal to 50% of the pixels in the
 advertisement were on an in-focus browser tab on the viewable space of
-the browser page, and
-* __Time Requirement__: The time the pixel requirement is met was greater
+the browser page.
+* __Viewing time__: The time the pixel requirement is met was greater
 than or equal to one continuous second, post ad render.
 
 ```jsx

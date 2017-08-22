@@ -1,9 +1,9 @@
-The option `threshold` is either a single number or an array of numbers which indicate at what percentage of the target's visibility the observer's callback should be executed. If you only want to detect when visibility passes the 50% mark, you can use a value of 0.5. If you want the callback run every time visibility passes another 25%, you would specify the array [0, 0.25, 0.5, 0.75, 1].
+The option `threshold` is either a single number or an array of numbers which indicate at what percentage of the target's visibility the observer's callback should be executed. If you only want to detect when visibility passes the 50% mark, you can use a value of 0.5. If you want the callback run every time visibility passes another 25%, you would specify the array `[0, 0.25, 0.5, 0.75, 1]`.
 
-The default is 0 (meaning as soon as even one pixel is visible, the callback will be run).
-A value of 1.0 means that the threshold isn't considered passed until every pixel is visible.
+The default is `0` (meaning as soon as even one pixel is visible, the callback will be run).
+A value of `1.0` means that the threshold isn't considered passed until every pixel is visible.
 
-Note that when comparing old and new props, our component compares the value of the `treshold` array for convenience, so you don't have to necessarily keep a reference to it. This is specially useful when using within a functional component.
+Note that when comparing old and new props, the component will compare the values within the `treshold` array in the same order, so you don't necessarily have to keep a reference to it. This is specially useful when using within a functional component.
 
 ```jsx
 import React, { Component } from 'react';

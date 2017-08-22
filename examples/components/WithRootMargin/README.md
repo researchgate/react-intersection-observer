@@ -1,6 +1,8 @@
-The option `rootMargin`'s syntax follows that of the `margin` CSS property. The unit(s) however **must** be provided in either `px` or `%` or both. It can also contain _negative values_, which are very useful to shrink the viewport size. Interestingly a percentage value works great to determine if an item is visible on very different screen sizes, e.g.: mobile vs desktop screens.
+The option `rootMargin`'s syntax follows that of the `margin` CSS property. The unit(s) however **must** be provided in either `px` or `%` or both. It can also contain _negative values_, which are very useful to shrink the available viewport of the `IntersectionObserver`.
 
-Note that in the example below, we conciously show how to set a root to DOM reference using the `disable` option. This option accepts types `Element` and `String`. A more effective way is then to pass a valid `querySelector` string instead.
+Interestingly a percentage value works great to determine if an item is visible on very different screen sizes, e.g.: mobile vs desktop screens.
+
+Note that in the example below, we conciously show how to set a root to a DOM element, making use of the `disable` option. Since both `Element` and `String` can be used, a more effective way would be to pass a valid `querySelector` string instead.
 
 ```jsx
 import React, { Component } from 'react';
