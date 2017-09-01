@@ -9,6 +9,7 @@ script:
 branches:
   only:
     - master
+    - /^greenkeeper/.*$/
 deploy:
   local_dir: docs
   provider: pages

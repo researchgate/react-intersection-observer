@@ -1,6 +1,6 @@
 # [React Intersection Observer](https://researchgate.github.io/react-intersection-observer/)
 
-[![Build Status](https://travis-ci.org/researchgate/react-intersection-observer.svg?branch=master)](https://travis-ci.org/researchgate/react-intersection-observer) [![Dependency Status](https://dependencyci.com/github/researchgate/react-intersection-observer/badge)](https://dependencyci.com/github/researchgate/react-intersection-observer) [![Codecov](https://img.shields.io/codecov/c/github/researchgate/react-intersection-observer.svg)](https://codecov.io/gh/researchgate/react-intersection-observer) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Build Status](https://travis-ci.org/researchgate/react-intersection-observer.svg?branch=master)](https://travis-ci.org/researchgate/react-intersection-observer) [![Dependency Status](https://dependencyci.com/github/researchgate/react-intersection-observer/badge)](https://dependencyci.com/github/researchgate/react-intersection-observer) [![Codecov](https://img.shields.io/codecov/c/github/researchgate/react-intersection-observer.svg)](https://codecov.io/gh/researchgate/react-intersection-observer) [![Greenkeeper badge](https://badges.greenkeeper.io/researchgate/react-intersection-observer.svg)](https://greenkeeper.io/) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 > Bring ReactIntersectionObserver over today, your React children will love it!
 

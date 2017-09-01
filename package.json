@@ -17,7 +17,7 @@
     "babel-jest": "^20.0.3",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.4",
-    "eslint": "^3.19.0",
+    "eslint": "^4.5.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.3.0",
     "husky": "^0.14.3",
@@ -31,7 +31,7 @@
     "react": "^15.4.0 || ^16.0.0",
     "react-dom": "^15.4.0 || ^16.0.0",
     "react-test-renderer": "^15.6.1",
-    "regenerator-runtime": "^0.10.5",
+    "regenerator-runtime": "^0.11.0",
     "storybook-readme": "^3.0.6",
     "style-loader": "^0.18.2"
   },
