@@ -21,7 +21,7 @@
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.3.0",
     "husky": "^0.14.3",
-    "intersection-observer": "^0.4.0",
+    "intersection-observer": "^0.4.2",
     "invariant": "^2.2.2",
     "jest": "^20.0.4",
     "lint-staged": "^4.0.2",
@@ -35,12 +35,27 @@
     "storybook-readme": "^3.0.6",
     "style-loader": "^0.18.2"
   },
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "homepage": "https://github.com/researchgate/react-intersection-observer#readme",
-  "keywords": ["Intersection", "Observer", "react", "component", "viewport", "visible", "invisible", "researchgate"],
+  "keywords": [
+    "Intersection",
+    "Observer",
+    "react",
+    "component",
+    "viewport",
+    "visible",
+    "invisible",
+    "researchgate"
+  ],
   "license": "MIT",
   "lint-staged": {
-    "*.js": ["prettier --print-width 120 --trailing-comma es5 --single-quote --write", "eslint --fix", "git add"]
+    "*.js": [
+      "prettier --print-width 120 --trailing-comma es5 --single-quote --write",
+      "eslint --fix",
+      "git add"
+    ]
   },
   "main": "lib/js/index.js",
   "module": "lib/es/index.js",
