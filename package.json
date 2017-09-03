@@ -18,7 +18,7 @@
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.4",
     "eslint": "^4.5.0",
-    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-config-airbnb-base": "^12.0.0",
     "eslint-plugin-import": "^2.3.0",
     "husky": "^0.14.3",
     "intersection-observer": "^0.4.2",
