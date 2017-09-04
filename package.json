@@ -14,7 +14,7 @@
     "@storybook/react": "^3.2.5",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
-    "babel-jest": "^20.0.3",
+    "babel-jest": "^21.0.0",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.4",
     "eslint": "^4.5.0",
