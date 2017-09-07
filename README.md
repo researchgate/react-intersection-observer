@@ -6,9 +6,9 @@
 
 <br>
 
-ReactIntersectionObserver is a **React** component, acting as a wrapper for the **IntersectionObserver API**. It is fully declarative and takes care of all the imperative parts for you.
+**React Intersection Observer** is a **React** component, acting as a wrapper for the **IntersectionObserver API**. It is fully declarative and takes care of all the imperative parts for you.
 
-ReactIntersectionObserver is good at:
+**React Intersection Observer** is good at:
 
 * **reusing instances**: comparing the passed options
 * **performance**: chooses smartly when to re-render and when to re-observe
@@ -50,8 +50,6 @@ ReactIntersectionObserver is good at:
 
 ## Getting started
 
-#### Installation
-
 Add this repository to your dependencies:
 
 ```bash
@@ -64,7 +62,8 @@ Optionally add the polyfill and make sure it's required on your dependendencies 
 npm install --save intersection-observer
 ```
 
-#### Inside your codebase
+Usage:
+
 ```jsx
 import React, { Component } from 'react';
 import 'intersection-observer'; // adding optional polyfill
@@ -122,7 +121,7 @@ Some of the things you may want to use ReactIntersectionObserver for:
 * Determining advertisement impressions
 * Lazy loading - Images, or anything that will enter the viewport
 * Occlusion culling - Don't render an object until is close to the viewport edges
-* Sentinel Scrolling - Infinite scroller with a recycled Sentinel
+* [Sentinel Scrolling - Infinite scroller with a recycled Sentinel](https://github.com/researchgate/react-intersection-list)
 
 ## Examples
 
