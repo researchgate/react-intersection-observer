@@ -39,7 +39,9 @@ export default class IntersectionObserver extends React.Component {
      * Can be specified as string for selector matching within the document.
      * Defaults to the browser viewport if not specified or if null.
      */
-    root: PropTypes.oneOfType([PropTypes.instanceOf(global.Element), PropTypes.string]),
+    root: PropTypes.oneOfType(
+      [PropTypes.string].concat(typeof HTMLElement === 'undefined' ? [] : PropTypes.instanceOf(HTMLElement))
+    ),
 
     /**
      * Margin around the root. Can have values similar to the CSS margin property,
