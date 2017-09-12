@@ -39,9 +39,7 @@ export default class IntersectionObserver extends React.Component {
      * Can be specified as string for selector matching within the document.
      * Defaults to the browser viewport if not specified or if null.
      */
-    root: PropTypes.oneOfType(
-      [PropTypes.string].concat(typeof HTMLElement === 'undefined' ? [] : PropTypes.instanceOf(HTMLElement))
-    ),
+    root: PropTypes.oneOfType([PropTypes.string].concat(typeof HTMLElement === 'undefined' ? [] : PropTypes.instanceOf(HTMLElement))),
 
     /**
      * Margin around the root. Can have values similar to the CSS margin property,
@@ -167,9 +165,9 @@ export default class IntersectionObserver extends React.Component {
   }
 
   componentWillUpdate(nextProps) {
-    this.shouldResetObserver =
-      nextProps !== this.props &&
-      observerOptions.concat(['disabled']).some(option => shallowCompareOptions(nextProps[option], this.props[option]));
+    this.shouldResetObserver = observerOptions
+      .concat(['disabled'])
+      .some(option => shallowCompareOptions(nextProps[option], this.props[option]));
   }
 
   render() {
