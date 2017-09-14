@@ -3,5 +3,8 @@
 node_modules
 npm-debug.log*
 lib
-docs
 coverage
+docs/static
+docs/favicon*
+docs/*.html
+flow-typed

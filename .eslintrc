@@ -1,15 +1,12 @@
 {
-  "env": {
-    "browser": true
-  },
-  "extends": "airbnb-base",
+  "extends": ["@researchgate/rg-base", "@researchgate/rg-react"],
   "parser": "babel-eslint",
   "rules": {
-    "no-underscore-dangle": 0,
-    "arrow-parens": 0,
-    "comma-dangle": 0,
-    "no-unused-vars": 0,
-    "react/jsx-uses-react": 0,
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ]
   }
 }

@@ -14,8 +14,6 @@
 
 > Bring ReactIntersectionObserver over today, your React children will love it!
 
-<br>
-
 **React Intersection Observer** is a **React** component, acting as a wrapper for the **IntersectionObserver API**. It is fully declarative and takes care of all the imperative parts for you.
 
 **React Intersection Observer** is good at:
@@ -38,7 +36,7 @@
   + [No bookkeeping](#no-bookkeeping)
   + [No extra markup](#no-extra-markup)
   + [Easy to adopt](#easy-to-adopt)
-* [Examples](#examples)
+* [Documentation](#documentation)
 * [Options](#options)
 * [Notes](#notes)
 * [Polyfill](#polyfill)
@@ -60,33 +58,27 @@
 
 ## Getting started
 
-Add this repository to your dependencies:
-
-```bash
+```shell
 npm install --save @researchgate/react-intersection-observer
 ```
 
 Optionally add the polyfill and make sure it's required on your dependendencies for unsupporting browsers:
 
-```bash
+```shell
 npm install --save intersection-observer
 ```
 
 Usage:
 
 ```jsx
-import React, { Component } from 'react';
-import 'intersection-observer'; // adding optional polyfill
+import React from 'react';
+import 'intersection-observer'; // optional polyfill
 import Observer from '@researchgate/react-intersection-observer';
 
-class TargetComponent extends Component {
-    handleIntersection = (event) => {
-        if (event.isIntersecting) {
-            console.log('I am intersecting ');
-        } else {
-            console.log('I am NOT intersecting');
-        }
-    };
+class ExampleComponent extends React.Component {
+    handleIntersection(event) {
+        console.log(event.isIntersecting);
+    }
 
     render() {
         const options = {
@@ -99,7 +91,7 @@ class TargetComponent extends Component {
             <div id="scrolling-container" style={{ overflow: 'scroll', height: 100 }}>
                 <Observer {...options}>
                     <div>
-                        I should intersect with the viewport
+                        I am the target element
                     </div>
                 </Observer>
             </div>
@@ -133,7 +125,7 @@ Some of the things you may want to use ReactIntersectionObserver for:
 * Occlusion culling - Don't render an object until is close to the viewport edges
 * [Sentinel Scrolling - Infinite scroller with a recycled Sentinel](https://github.com/researchgate/react-intersection-list)
 
-## Examples
+## Documentation
 
 ### Demos
 
@@ -287,8 +279,10 @@ onChange = (entry) => requestIdleCallback(() => this.handleChange(entry));
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](.github/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+We'd love your help on creating React Intersection Observer!
 
-## License
+Before you do, please read our [Code of Conduct](.github/CODE_OF_CONDUCT.md) so you know what we expect when you contribute to our projects.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+Our [Contributing Guide](.github/CONTRIBUTING.md) tells you about our development process and what we're looking for, gives you instructions on how to issue bugs and suggest features, and explains how you can build and test your changes.
+
+**Haven't contributed to an open source project before?** No problem! [Contributing Guide](.github/CONTRIBUTING.md) has you covered as well.

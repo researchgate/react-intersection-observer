@@ -14,16 +14,16 @@ Here you'll find usage examples and recipes. For a full list of examples, take a
 
 Here you [will find useful code snippets](https://researchgate.github.io/react-intersection-observer/?selectedKind=Recipes) to common situations that can be approached with ReactIntersectionObserver:
 
-* [Higher Order Component](https://researchgate.github.io/react-intersection-observer/?selectedKind=Recipes&selectedStory=Higher%20Order%20Component)
-* [Tracking Ad Impressions](https://researchgate.github.io/react-intersection-observer/?selectedKind=Recipes&selectedStory=Ad%20Impressions)
-* [Viewable Monitor](components/ViewableMonitor/README.md)
+* [Higher Order Component](docs/components/HigherOrderComponent/)
+* [Tracking Ad Impressions](docs/components/ImpressionTracking/)
+* [Viewable Monitor](docs/components/ViewableMonitor/)
 
 ### Can I submit a new recipe?
 
 Yes, of course!
 
 1. Fork the code repo.
-2. Create your new recipe in the correct subfolder within `./examples/components/` (create a new folder if it doesn't already exist).
+2. Create your new recipe in the correct subfolder within `docs/docs/components/` (create a new folder if it doesn't already exist).
 3. Make sure you have included a README as well as your source file.
 4. Submit a PR.
 

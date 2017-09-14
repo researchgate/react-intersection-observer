@@ -1,29 +1,32 @@
 {
   "name": "@researchgate/react-intersection-observer",
-  "description": "React Component for the Intersection Observer API",
+  "description": "React component for the Intersection Observer API",
   "version": "0.2.0",
   "author": "Luis Merino <mail@luismerino.name>",
   "bugs": {
     "url": "https://github.com/researchgate/react-intersection-observer/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "prop-types": "^15.5.10 || ^16.0.0",
+    "rimraf": "^2.6.1"
+  },
   "devDependencies": {
     "@researchgate/babel-preset-rg": "^1.0.1",
+    "@researchgate/eslint-config-rg-base": "^0.3.0",
+    "@researchgate/eslint-config-rg-react": "^0.3.0",
     "@storybook/addon-actions": "^3.2.0",
     "@storybook/addon-options": "^3.2.4",
-    "@storybook/react": "^3.2.5",
+    "@storybook/react": "^3.2.8",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^8.0.0",
     "babel-jest": "^21.0.0",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.4",
-    "eslint": "^4.5.0",
-    "eslint-config-airbnb-base": "^12.0.0",
-    "eslint-plugin-import": "^2.3.0",
+    "eslint": "^4.6.1",
     "husky": "^0.14.3",
     "intersection-observer": "^0.4.2",
     "invariant": "^2.2.2",
-    "jest": "^21.0.0",
+    "jest": "^21.0.2",
     "lint-staged": "^4.0.2",
     "prettier": "^1.5.3",
     "prop-types": "^15.5.10 || ^16.0.0",
@@ -31,9 +34,10 @@
     "react": "^15.4.0 || ^16.0.0",
     "react-dom": "^15.4.0 || ^16.0.0",
     "react-test-renderer": "^15.6.1",
-    "regenerator-runtime": "^0.11.0",
+    "standard-version": "^4.2.0",
     "storybook-readme": "^3.0.6",
-    "style-loader": "^0.18.2"
+    "style-loader": "^0.18.2",
+    "validate-commit-msg": "^2.14.0"
   },
   "files": [
     "lib"
@@ -51,8 +55,7 @@
   ],
   "license": "MIT",
   "lint-staged": {
-    "*.js": [
-      "prettier --print-width 120 --trailing-comma es5 --single-quote --write",
+    "{src,docs/docs}/**/*.js": [
       "eslint --fix",
       "git add"
     ]
@@ -60,7 +63,6 @@
   "main": "lib/js/index.js",
   "module": "lib/es/index.js",
   "peerDependencies": {
-    "prop-types": "^15.5.10 || ^16.0.0",
     "react": "^15.4.0 || ^16.0.0",
     "react-dom": "^15.4.0 || ^16.0.0"
   },
@@ -68,15 +70,26 @@
     "type": "git",
     "url": "https://github.com/researchgate/react-intersection-observer"
   },
+  "jest": {
+    "rootDir": "src",
+    "testMatch": [
+      "**/__tests__/**/*.spec.js"
+    ]
+  },
   "scripts": {
-    "build": "rm -rf lib && npm run build:js && npm run build:es",
-    "build:js": "cross-env BABEL_ENV=production BABEL_OUTPUT=cjs babel src --out-dir lib/js",
-    "build:es": "cross-env BABEL_ENV=production BABEL_OUTPUT=esm babel src --out-dir lib/es",
+    "build": "yarn build:js && yarn build:es",
+    "build:js": "cross-env BABEL_ENV=production BABEL_OUTPUT=cjs babel src --out-dir lib/js --ignore __tests__ --copy-files",
+    "build:es": "cross-env BABEL_ENV=production BABEL_OUTPUT=esm babel src --out-dir lib/es --ignore __tests__ --copy-files",
     "build:storybook": "build-storybook --output-dir docs",
-    "format": "prettier '{src,examples,test}/**/*.js' --single-quote --trailing-comma es5 --print-width 120",
-    "lint": "eslint {src,examples,test}/.",
-    "precommit": "lint-staged",
-    "prepublish": "npm run build",
+    "clear": "rimraf ./lib",
+    "commitmsg": "validate-commit-msg",
+    "coverage": "yarn test -- --coverage",
+    "format": "eslint --fix {src,docs/docs}/**/*.js",
+    "lint": "eslint {src,docs/docs}/.",
+    "precommit": "yarn lint-staged && yarn test",
+    "prepare": "yarn clear && yarn build",
+    "prepublishOnly": "yarn test",
+    "release": "standard-version",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "test": "jest"
   }

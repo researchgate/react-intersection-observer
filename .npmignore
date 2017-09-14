@@ -17,7 +17,7 @@ npm-debug.log
 .tmp
 .eslintignore
 yarn.lock
-examples
 .storybook
-test
-example
+docs/static
+docs/favicon
+docs/*.html

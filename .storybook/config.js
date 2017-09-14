@@ -7,4 +7,4 @@ setOptions({
   downPanelInRight: true,
 });
 
-storybook.configure(() => require('../examples/index.js'), module);
+storybook.configure(() => require('../docs/docs/index.js'), module);
