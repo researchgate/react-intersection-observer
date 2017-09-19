@@ -1,12 +1,4 @@
 {
-  "extends": ["@researchgate/rg-base", "@researchgate/rg-react"],
-  "parser": "babel-eslint",
-  "rules": {
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": true
-      }
-    ]
-  }
+  "extends": ["@researchgate/rg-react"],
+  "parser": "babel-eslint"
 }

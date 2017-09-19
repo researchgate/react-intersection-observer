@@ -7,12 +7,11 @@
     "url": "https://github.com/researchgate/react-intersection-observer/issues"
   },
   "dependencies": {
-    "prop-types": "^15.5.10 || ^16.0.0",
-    "rimraf": "^2.6.1"
+    "invariant": "^2.2.2",
+    "prop-types": "^15.5.10"
   },
   "devDependencies": {
     "@researchgate/babel-preset-rg": "^1.0.1",
-    "@researchgate/eslint-config-rg-base": "^0.3.0",
     "@researchgate/eslint-config-rg-react": "^0.3.0",
     "@storybook/addon-actions": "^3.2.0",
     "@storybook/addon-options": "^3.2.4",
@@ -23,17 +22,17 @@
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.4",
     "eslint": "^4.6.1",
+    "eslint-plugin-prettier": "^2.3.1",
     "husky": "^0.14.3",
     "intersection-observer": "^0.4.2",
-    "invariant": "^2.2.2",
     "jest": "^21.0.2",
     "lint-staged": "^4.0.2",
     "prettier": "^1.5.3",
-    "prop-types": "^15.5.10 || ^16.0.0",
     "raw-loader": "^0.5.1",
-    "react": "^15.4.0 || ^16.0.0",
-    "react-dom": "^15.4.0 || ^16.0.0",
+    "react": "^15.4.0",
+    "react-dom": "^15.4.0",
     "react-test-renderer": "^15.6.1",
+    "rimraf": "^2.6.1",
     "standard-version": "^4.2.0",
     "storybook-readme": "^3.0.6",
     "style-loader": "^0.18.2",
