@@ -1,4 +1,4 @@
 {
-  "extends": ["@researchgate/rg-react"],
+  "extends": "@researchgate/rg-react",
   "parser": "babel-eslint"
 }

@@ -24,7 +24,7 @@
     "eslint": "^4.6.1",
     "eslint-config-prettier": "^2.4.0",
     "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-prettier": "^2.2.0",
+    "eslint-plugin-prettier": "^2.3.0",
     "eslint-plugin-react": "^7.3.0",
     "husky": "^0.14.3",
     "intersection-observer": "^0.4.2",
