@@ -5,17 +5,22 @@ root = true
 [*]
 end_of_line = lf
 trim_trailing_whitespace = true
-insert_final_newline = true
+insert_final_newline = false
 
 [*.md]
-max_line_length = 0
 trim_trailing_whitespace = false
 
-[*.js]
+[*.{js,scss}]
 charset = utf-8
 indent_style = space
+insert_final_newline = true
+
+[*.js]
 indent_size = 4
 
-[{package.json,.babelrc,.eslintrc}]
+[*.scss]
+indent_size = 2
+
+[{*.json,.travis.yml,.*rc}]
 indent_style = space
 indent_size = 2
