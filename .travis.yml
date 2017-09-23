@@ -1,11 +1,8 @@
 language: node_js
 node_js:
-  - "7"
+  - "8"
+  - "6"
 cache: yarn
-script:
-  - yarn lint
-  - yarn test -- --coverage
-  - yarn build:storybook
 branches:
   only:
     - master
@@ -17,7 +14,13 @@ deploy:
   github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
   on:
    branch: master
-notifications:
-  email: false
+before_install: yarn global add greenkeeper-lockfile@1
+before_script:
+  - greenkeeper-lockfile-update
+script:
+  - yarn lint
+  - yarn test -- --coverage
+  - yarn build:storybook
+after_script: greenkeeper-lockfile-upload
 after_success:
   - bash <(curl -s https://codecov.io/bash)
