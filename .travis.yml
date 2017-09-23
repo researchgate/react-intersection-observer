@@ -3,10 +3,6 @@ node_js:
   - "8"
   - "6"
 cache: yarn
-branches:
-  only:
-    - master
-    - /^greenkeeper/.*$/
 deploy:
   local_dir: docs
   provider: pages
@@ -17,6 +13,8 @@ deploy:
 before_install: yarn global add greenkeeper-lockfile@1
 before_script:
   - greenkeeper-lockfile-update
+# true needs to be removed after https://github.com/conventional-changelog/conventional-github-releaser/pull/47 is fixed
+  - 'if [[ -n "$TRAVIS_TAG" ]] && [[ "$TRAVIS_JOB_NUMBER" == *.1 ]]; then yarn run create-github-release || true; fi'
 script:
   - yarn lint
   - yarn test -- --coverage
