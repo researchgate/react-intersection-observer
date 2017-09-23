@@ -10,6 +10,7 @@ deploy:
   github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
   on:
    branch: master
+   condition: '"$TRAVIS_JOB_NUMBER" == *.1'
 before_install: yarn global add greenkeeper-lockfile@1
 before_script:
   - greenkeeper-lockfile-update
