@@ -18,7 +18,7 @@ before_script:
   - 'if [[ -n "$TRAVIS_TAG" ]] && [[ "$TRAVIS_JOB_NUMBER" == *.1 ]]; then yarn run create-github-release || true; fi'
 script:
   - yarn run lint
-  - yarn test -- --coverage
+  - yarn test -- --ci --coverage
   - 'if [[ "$TRAVIS_JOB_NUMBER" == *.1 ]]; then yarn run build:storybook; fi'
 after_script: greenkeeper-lockfile-upload
 after_success:
