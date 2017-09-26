@@ -33,7 +33,7 @@
     "lint-staged": "^4.0.2",
     "prettier": "^1.6.1",
     "raw-loader": "^0.5.1",
-    "react": "^15.4.0",
+    "react": "^16.0.0",
     "react-dom": "^15.4.0",
     "react-test-renderer": "^15.6.1",
     "rimraf": "^2.6.1",
