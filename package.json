@@ -34,7 +34,7 @@
     "prettier": "^1.6.1",
     "raw-loader": "^0.5.1",
     "react": "^15.4.0",
-    "react-dom": "^15.4.0",
+    "react-dom": "^16.0.0",
     "react-test-renderer": "^15.6.1",
     "rimraf": "^2.6.1",
     "standard-version": "^4.2.0",
