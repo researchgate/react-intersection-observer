@@ -139,56 +139,37 @@ Recipes are useful code snippets solutions to common problems, for example, how 
 
 Discover more recipes in our [examples section](examples/README.md).
 
-## Options
+### Options
 
-### root
-
-Type: `Element|string`
-Default: `window object`
+**root**: `HTMLElement|string` | default `window object`
 
 The element or selector string that is used as the viewport for checking visibility of the target.
 
-### rootMargin
-
-Type: `string`
-Default: `0px 0px 0px 0px`
+**rootMargin**: `string` | default `0px 0px 0px 0px`
 
 Margin around the root. Specify using units _px_ or _%_ (top, right, bottom left). Can contain negative values.
 
-### threshold
-
-Type: `number|Array<number>`
-Default: `0`
+**threshold**: `number|Array<number>` | default: `0`
 
 Indicates at what percentage of the target's visibility the observer's callback should be executed. If you only want to detect when visibility passes the 50% mark, you can use a value of 0.5. If you want the callback run every time visibility passes another 25%, you would specify the array [0, 0.25, 0.5, 0.75, 1].
 
-### onlyOnce
-
-Type: `boolean`
-Default: `false`
+**onlyOnce**: `boolean` | default: `false`
 
 When true indicate that events fire only until the element is intersecting. Requires `IntersectionObserverEntry`'s object to contain `isIntersecting` in its prototype.
 
-### disable
-
-Type: `boolean`
-Default: `false`
+**disable**: `boolean` | default: `false`
 
 Controls whether the element should stop being observed by its IntersectionObserver instance. Useful for temporarily disabling the observing mechanism and restoring it later.
 
-### onChange : required
+**onChange** (required): `(entry: IntersectionObserverEntry) => void`
 
-Type: `Function`
+Function that will be invoked whenever an observer's callback contains this target in its changes.
 
-Function that will be invoked whenever the intersection value for this element changes.
+**children** (required): `React.Element<*>`
 
-### children : required
+Single React component or element that is used as the target (observable).
 
-Type: `element|component`
-
-Single React component or element that is used as the target to observe.
-
-## Notes
+### Notes
 
 * According to the spec, a first callback invocation occurs when the target is first attached to the observer.
 * Changes happen asynchronously, similar to the way `requestIdleCallback` works.
