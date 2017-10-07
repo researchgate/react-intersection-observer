@@ -157,7 +157,7 @@ Indicates at what percentage of the target's visibility the observer's callback 
 
 When true indicate that events fire only until the element is intersecting. Requires `IntersectionObserverEntry`'s object to contain `isIntersecting` in its prototype.
 
-**disable**: `boolean` | default: `false`
+**disabled**: `boolean` | default: `false`
 
 Controls whether the element should stop being observed by its IntersectionObserver instance. Useful for temporarily disabling the observing mechanism and restoring it later.
 
