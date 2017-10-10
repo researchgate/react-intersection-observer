@@ -137,7 +137,7 @@ Find multiple examples and usage guidelines under: [https://researchgate.github.
 
 Recipes are useful code snippets solutions to common problems, for example, how to use ReactIntersectionObserver within a [Higher Order Component](https://researchgate.github.io/react-intersection-observer/?selectedKind=Recipes&selectedStory=Higher%20Order%20Component).
 
-Discover more recipes in our [examples section](examples/README.md).
+Discover more recipes in our [examples section](docs/README.md).
 
 ### Options
 
