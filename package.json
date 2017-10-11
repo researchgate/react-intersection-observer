@@ -19,6 +19,7 @@
     "babel-cli": "^6.24.1",
     "babel-eslint": "^8.0.0",
     "babel-jest": "^21.0.0",
+    "babel-polyfill": "^6.26.0",
     "conventional-github-releaser": "^1.1.12",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.4",

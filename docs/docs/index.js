@@ -1,3 +1,5 @@
+import 'babel-polyfill';
+import 'intersection-observer';
 import { storiesOf } from '@storybook/react';
 import WindowRoot from './components/WindowRoot';
 import WindowFrame from './components/WindowFrame';

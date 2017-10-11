@@ -171,9 +171,11 @@ Single React component or element that is used as the target (observable).
 
 ### Notes
 
-* According to the spec, a first callback invocation occurs when the target is first attached to the observer.
+* According to the spec, an initial event is being fired when starting to observe a non-intersecting element as well.
+  * _Edge's implementation seems to [miss the initial event](https://github.com/w3c/IntersectionObserver/issues/222#issuecomment-311539591), although Edge 16 behavior aligns with the spec._
 * Changes happen asynchronously, similar to the way `requestIdleCallback` works.
 * Although you can consider callbacks immediate - always below 1 second - you can also get an immediate response on an element's visibility with `observer.takeRecords()`.
+* Support for _Map_, _Symbol_ and other native features and primitives is required. Consider using a polyfill for IE < 11 and older browsers. If you're using babel include `"babel-polyfill"` somewhere to your codebase.
 
 ## Polyfill
 
