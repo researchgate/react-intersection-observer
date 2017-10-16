@@ -175,7 +175,7 @@ Single React component or element that is used as the target (observable).
   * _Edge's implementation seems to [miss the initial event](https://github.com/w3c/IntersectionObserver/issues/222#issuecomment-311539591), although Edge 16 behavior aligns with the spec._
 * Changes happen asynchronously, similar to the way `requestIdleCallback` works.
 * Although you can consider callbacks immediate - always below 1 second - you can also get an immediate response on an element's visibility with `observer.takeRecords()`.
-* Support for _Map_, _Symbol_ and other native features and primitives is required. Consider using a polyfill for IE < 11 and older browsers. If you're using babel include `"babel-polyfill"` somewhere to your codebase.
+* The primitives _Map_, _Set_, and _Symbol_ are required and won't be transpiled by default. Consider using a polyfill for browsers lacking ES2015 support. If you're using babel, include `"babel-polyfill"` somewhere to your codebase.
 
 ## Polyfill
 
