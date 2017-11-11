@@ -31,7 +31,7 @@
     "husky": "^0.14.3",
     "intersection-observer": "^0.4.2",
     "jest": "^21.0.2",
-    "lint-staged": "^4.0.2",
+    "lint-staged": "^5.0.0",
     "prettier": "^1.6.1",
     "raw-loader": "^1.0.0-beta.0",
     "react": "^15.4.0",
