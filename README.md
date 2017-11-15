@@ -82,8 +82,8 @@ class ExampleComponent extends React.Component {
 
     render() {
         const options = {
-            onChange: this.handleIntersection
-            root: "#scrolling-container"
+            onChange: this.handleIntersection,
+            root: "#scrolling-container",
             rootMargin: "0% 0% -25%"
         };
 
