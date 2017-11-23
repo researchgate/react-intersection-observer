@@ -46,7 +46,7 @@ test('throws when the property children is not an only child', () => {
 
 test('throws on mount if children is StatelessComponent in React 15', () => {
     global.spyOn(console, 'error');
-    const { version } = React.version;
+    const { version } = React;
     const StatelessComponent = () => <span />;
     const component = (
         <IntersectionObserver onChange={noop}>
