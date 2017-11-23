@@ -108,7 +108,7 @@ export default class IntersectionObserver extends React.Component {
             if (process.env.NODE_ENV !== 'production') {
                 invariant(
                     'isIntersecting' in event,
-                    '`IntersectionObserverEntry` missing the property `isIntersecting`. When using the prop `onlyOnce` this needs to exists in IntersectionObserverEntry.',
+                    "onlyOnce requires isIntersecting to exists in IntersectionObserverEntry's prototype. Either your browser or your polyfill lacks support.",
                 );
             }
             if (event.isIntersecting) {
@@ -147,10 +147,10 @@ export default class IntersectionObserver extends React.Component {
 
     componentDidMount() {
         // eslint-disable-next-line no-undef
-        if (process.env.NODE_ENV !== 'production') {
+        if (process.env.NODE_ENV !== 'production' && parseInt(React.version, 10) < 16) {
             invariant(
                 this.target,
-                'Could not save a ref to the component. Make sure the provided children prop is not a StatelessComponent',
+                'Stateless function components cannot be given refs. Attempts to access this ref will fail.',
             );
         }
         if (!this.props.disabled) {

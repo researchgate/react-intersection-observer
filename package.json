@@ -8,67 +8,54 @@
   },
   "dependencies": {
     "invariant": "^2.2.2",
-    "prop-types": "^15.5.10"
+    "prop-types": "^15.6.0"
   },
   "devDependencies": {
     "@researchgate/babel-preset-rg": "^1.0.1",
-    "@researchgate/eslint-config-rg-react": "^1.0.0",
-    "@storybook/addon-actions": "^3.2.0",
-    "@storybook/addon-options": "^3.2.4",
-    "@storybook/react": "^3.2.8",
+    "@researchgate/eslint-config-rg-react": "^1.0.1",
+    "@storybook/addon-actions": "^3.2.16",
+    "@storybook/addon-options": "^3.2.16",
+    "@storybook/react": "^3.2.16",
     "babel-cli": "^6.24.1",
-    "babel-eslint": "^8.0.0",
-    "babel-jest": "^21.0.0",
+    "babel-eslint": "^8.0.2",
+    "babel-jest": "^21.2.0",
     "babel-polyfill": "^6.26.0",
     "conventional-github-releaser": "^2.0.0",
-    "cross-env": "^5.0.5",
+    "cross-env": "^5.1.1",
     "css-loader": "^0.28.4",
-    "eslint": "^4.6.1",
-    "eslint-config-prettier": "^2.4.0",
-    "eslint-plugin-import": "^2.7.0",
+    "eslint": "^4.11.0",
+    "eslint-config-prettier": "^2.8.0",
+    "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-prettier": "^2.3.0",
-    "eslint-plugin-react": "^7.3.0",
+    "eslint-plugin-react": "^7.5.1",
     "husky": "^0.14.3",
-    "intersection-observer": "^0.4.2",
-    "jest": "^21.0.2",
+    "intersection-observer": "^0.4.3",
+    "jest": "^21.2.1",
     "lint-staged": "^5.0.0",
-    "prettier": "^1.6.1",
+    "prettier": "^1.8.2",
+    "raf": "^3.4.0",
     "raw-loader": "^1.0.0-beta.0",
-    "react": "^15.4.0",
-    "react-dom": "^15.4.0",
-    "react-test-renderer": "^15.6.1",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "react-test-renderer": "^16.1.1",
     "rimraf": "^2.6.1",
     "standard-version": "^4.2.0",
-    "storybook-readme": "^3.0.6",
+    "storybook-readme": "^3.1.1",
     "style-loader": "^0.19.0",
     "validate-commit-msg": "^2.14.0"
   },
-  "files": [
-    "lib"
-  ],
+  "files": ["lib"],
   "homepage": "https://github.com/researchgate/react-intersection-observer#readme",
-  "keywords": [
-    "Intersection",
-    "Observer",
-    "react",
-    "component",
-    "viewport",
-    "visible",
-    "invisible",
-    "researchgate"
-  ],
+  "keywords": ["Intersection", "Observer", "react", "component", "viewport", "visible", "invisible", "researchgate"],
   "license": "MIT",
   "lint-staged": {
-    "{src,docs/docs}/**/*.js": [
-      "eslint --fix",
-      "git add"
-    ]
+    "{src,docs/docs}/**/*.js": ["eslint --fix", "git add"]
   },
   "main": "lib/js/index.js",
   "module": "lib/es/index.js",
   "peerDependencies": {
-    "react": "^15.4.0",
-    "react-dom": "^15.4.0"
+    "react": "^15.4.0 || ^16.0.0",
+    "react-dom": "^15.4.0 || ^16.0.0"
   },
   "repository": {
     "type": "git",
@@ -76,14 +63,15 @@
   },
   "jest": {
     "rootDir": "src",
-    "testMatch": [
-      "**/__tests__/**/*.spec.js"
-    ]
+    "testMatch": ["**/__tests__/**/*.spec.js"],
+    "setupFiles": ["raf/polyfill"]
   },
   "scripts": {
     "build": "yarn build:js && yarn build:es",
-    "build:js": "cross-env BABEL_ENV=production BABEL_OUTPUT=cjs babel src --out-dir lib/js --ignore __tests__ --copy-files",
-    "build:es": "cross-env BABEL_ENV=production BABEL_OUTPUT=esm babel src --out-dir lib/es --ignore __tests__ --copy-files",
+    "build:js":
+      "cross-env BABEL_ENV=production BABEL_OUTPUT=cjs babel src --out-dir lib/js --ignore __tests__ --copy-files",
+    "build:es":
+      "cross-env BABEL_ENV=production BABEL_OUTPUT=esm babel src --out-dir lib/es --ignore __tests__ --copy-files",
     "build:storybook": "build-storybook --output-dir docs",
     "clear": "rimraf ./lib",
     "commitmsg": "validate-commit-msg",

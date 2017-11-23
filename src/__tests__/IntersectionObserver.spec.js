@@ -34,6 +34,7 @@ afterEach(() => {
 });
 
 test('throws when the property children is not an only child', () => {
+    global.spyOn(console, 'error');
     const component = (
         <IntersectionObserver onChange={noop}>
             <span />
@@ -43,7 +44,9 @@ test('throws when the property children is not an only child', () => {
     expect(() => renderer.create(component)).toThrowErrorMatchingSnapshot();
 });
 
-test('throws on mount if children is StatelessComponent', () => {
+test('throws on mount if children is StatelessComponent in React 15', () => {
+    global.spyOn(console, 'error');
+    const { version } = React.version;
     const StatelessComponent = () => <span />;
     const component = (
         <IntersectionObserver onChange={noop}>
@@ -51,9 +54,9 @@ test('throws on mount if children is StatelessComponent', () => {
         </IntersectionObserver>
     );
 
-    expect(() => renderer.create(component)).toThrow(
-        'Could not save a ref to the component. Make sure the provided children prop is not a StatelessComponent',
-    );
+    React.version = '15.4.0';
+    expect(() => renderer.create(component)).toThrowErrorMatchingSnapshot();
+    React.version = version;
 });
 
 test('should call ref callback of children', () => {
@@ -287,9 +290,7 @@ describe('handleChange', () => {
         });
         delete entry.isIntersecting;
 
-        expect(() => instance.handleChange(entry)).toThrow(
-            '`IntersectionObserverEntry` missing the property `isIntersecting`. When using the prop `onlyOnce` this needs to exists in IntersectionObserverEntry.',
-        );
+        expect(() => instance.handleChange(entry)).toThrowErrorMatchingSnapshot();
     });
 
     test('should unobserve with `onlyOnce` if `isIntersecting` is true', () => {
