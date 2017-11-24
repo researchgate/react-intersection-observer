@@ -12,7 +12,7 @@ export function parseRootMargin(rootMargin = '0px') {
     }
     
     // Handles shorthand.
-    const [m0, m1 = m0, m2 = m0, m3 = m0] = marginString.trim().split(/\s+/).map(margin => {
+    const [m0 = '0px', m1 = m0, m2 = m0, m3 = m0] = marginString.trim().split(/\s+/).map(margin => {
         if (!marginRE.test(margin)) {
             throw new Error('rootMargin must be specified in pixels or percent');
         }
