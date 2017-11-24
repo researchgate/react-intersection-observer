@@ -10,14 +10,17 @@ export function parseRootMargin(rootMargin = '0px') {
     if (typeof rootMargin !== 'string') {
         throw new Error('rootMargin must be a String');
     }
-    
+
     // Handles shorthand.
-    const [m0 = '0px', m1 = m0, m2 = m0, m3 = m0] = rootMargin.trim().split(/\s+/).map(margin => {
-        if (!marginRE.test(margin)) {
-            throw new Error('rootMargin must be specified in pixels or percent');
-        }
-        return margin;
-    });
+    const [m0 = '0px', m1 = m0, m2 = m0, m3 = m1] = rootMargin
+        .trim()
+        .split(/\s+/)
+        .map(margin => {
+            if (!marginRE.test(margin)) {
+                throw new Error('rootMargin must be specified in pixels or percent');
+            }
+            return margin;
+        });
 
     return `${m0} ${m1} ${m2} ${m3}`;
 }
