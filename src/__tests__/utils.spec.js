@@ -24,8 +24,12 @@ describe('parseRootMargin', () => {
 
     test('returns rootMargins with all four values', () => {
         expect(parseRootMargin()).toBe('0px 0px 0px 0px');
+        expect(parseRootMargin(null)).toBe('0px 0px 0px 0px');
         expect(parseRootMargin('')).toBe('0px 0px 0px 0px');
         expect(parseRootMargin('10px 5px 0%')).toBe('10px 5px 0% 5px');
+        expect(parseRootMargin('10px  ')).toBe('10px 10px 10px 10px');
+        expect(parseRootMargin(' 10px 5px')).toBe('10px 5px 10px 5px');
+        expect(parseRootMargin('10px 5px  0% 1%')).toBe('10px 5px 0% 1%');
     });
 });
 

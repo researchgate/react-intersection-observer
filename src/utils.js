@@ -4,22 +4,18 @@ export function isDOMTypeElement(element) {
     return React.isValidElement(element) && typeof element.type === 'string';
 }
 
+const marginRE = /^-?\d*\.?\d+(px|%)$/;
+
 export function parseRootMargin(rootMargin) {
-    const marginString = rootMargin || '0px';
-    const re = /^-?\d*\.?\d+(px|%)$/;
-    const margins = marginString.split(/\s+/).map(margin => {
-        if (!re.test(margin)) {
-            throw new Error('rootMargin must be specified in pixels or percent');
+    const marginString = rootMargin ? rootMargin.trim() : '0px';
+    const [m0 = '0px', m1 = m0, m2 = m0, m3 = m1] = marginString.split(/\s+/).map(margin => {
+        if (!marginRE.test(margin)) {
+            throw new Error('rootMargin must be a string literal containing pixels and/or percent values');
         }
         return margin;
     });
 
-    // Handles shorthand.
-    margins[1] = margins[1] || margins[0];
-    margins[2] = margins[2] || margins[0];
-    margins[3] = margins[3] || margins[1];
-
-    return margins.join(' ');
+    return `${m0} ${m1} ${m2} ${m3}`;
 }
 
 export function shallowCompareOptions(next, prev) {

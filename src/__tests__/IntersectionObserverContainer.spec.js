@@ -53,9 +53,7 @@ describe('#getPooled', () => {
     });
 
     test('throws if rootMargin cannot be parsed', () => {
-        expect(() => getPooled({ rootMargin: '-10% 0', threshold: 0 })).toThrow(
-            'rootMargin must be specified in pixels or percent',
-        );
+        expect(() => getPooled({ rootMargin: '-10% 0', threshold: 0 })).toThrowErrorMatchingSnapshot();
     });
 
     test('retrieves an existing IntersectionObserver instance given all options match', () => {
