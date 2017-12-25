@@ -42,34 +42,22 @@
     "standard-version": "^4.2.0",
     "storybook-readme": "^3.1.1",
     "style-loader": "^0.19.0",
+    "typescript": "^2.6.2",
     "validate-commit-msg": "^2.14.0"
   },
-  "files": [
-    "lib"
-  ],
+  "files": ["lib", "types/index.d.ts"],
+  "types": "types/index.d.ts",
   "homepage": "https://github.com/researchgate/react-intersection-observer#readme",
-  "keywords": [
-    "Intersection",
-    "Observer",
-    "react",
-    "component",
-    "viewport",
-    "visible",
-    "invisible",
-    "researchgate"
-  ],
+  "keywords": ["Intersection", "Observer", "react", "component", "viewport", "visible", "invisible", "researchgate"],
   "license": "MIT",
   "lint-staged": {
-    "{src,docs/docs}/**/*.js": [
-      "eslint --fix",
-      "git add"
-    ]
+    "{src,docs/docs}/**/*.js": ["eslint --fix", "git add"]
   },
   "main": "lib/js/index.js",
   "module": "lib/es/index.js",
   "peerDependencies": {
-    "react": "^15.4.0 || ^16.0.0",
-    "react-dom": "^15.4.0 || ^16.0.0"
+    "react": ">=15",
+    "react-dom": ">=15"
   },
   "repository": {
     "type": "git",
@@ -77,24 +65,22 @@
   },
   "jest": {
     "rootDir": "src",
-    "testMatch": [
-      "**/__tests__/**/*.spec.js"
-    ],
-    "setupFiles": [
-      "raf/polyfill"
-    ]
+    "testMatch": ["**/__tests__/**/*.spec.js"],
+    "setupFiles": ["raf/polyfill"]
   },
   "scripts": {
     "build": "yarn build:js && yarn build:es",
-    "build:js": "cross-env BABEL_ENV=production BABEL_OUTPUT=cjs babel src --out-dir lib/js --ignore __tests__ --copy-files",
-    "build:es": "cross-env BABEL_ENV=production BABEL_OUTPUT=esm babel src --out-dir lib/es --ignore __tests__ --copy-files",
+    "build:js":
+      "cross-env BABEL_ENV=production BABEL_OUTPUT=cjs babel src --out-dir lib/js --ignore __tests__ --copy-files",
+    "build:es":
+      "cross-env BABEL_ENV=production BABEL_OUTPUT=esm babel src --out-dir lib/es --ignore __tests__ --copy-files",
     "build:storybook": "build-storybook --output-dir docs",
     "clear": "rimraf ./lib",
     "commitmsg": "validate-commit-msg",
     "coverage": "yarn test -- --coverage",
     "create-github-release": "conventional-github-releaser -p angular",
     "format": "eslint --fix {src,docs/docs}/**/*.js",
-    "lint": "eslint {src,docs/docs}/.",
+    "lint": "eslint {src,docs/docs}/. && tsc --project types",
     "precommit": "yarn lint-staged && yarn test",
     "prepare": "yarn clear && yarn build",
     "prepublishOnly": "yarn test",
