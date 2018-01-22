@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/researchgate/react-intersection-observer/compare/v0.5.0...v0.6.0) (2018-01-22)
+
+
+### Features
+
+* **TypeScript:** TS module defintions ([720254f](https://github.com/researchgate/react-intersection-observer/commit/720254f))
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/researchgate/react-intersection-observer/compare/v0.4.0...v0.5.0) (2017-11-23)
 
