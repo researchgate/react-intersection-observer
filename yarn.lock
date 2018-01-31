@@ -73,15 +73,15 @@
     babel-preset-react "^6.24.1"
     babel-preset-react-hmre "^1.1.1"
 
-"@researchgate/eslint-config-rg-base@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@researchgate/eslint-config-rg-base/-/eslint-config-rg-base-1.0.1.tgz#83af2278e4ad7fff7414ead4e2feaf3d1d9c2f24"
+"@researchgate/eslint-config-rg-base@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@researchgate/eslint-config-rg-base/-/eslint-config-rg-base-2.0.0.tgz#8736eb1974691e517909eb0224cd2a1ee634e21a"
 
-"@researchgate/eslint-config-rg-react@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@researchgate/eslint-config-rg-react/-/eslint-config-rg-react-1.0.1.tgz#62ab717f01879beb56ac3873d119bfe048864e64"
+"@researchgate/eslint-config-rg-react@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@researchgate/eslint-config-rg-react/-/eslint-config-rg-react-2.0.0.tgz#85fad07a0bb520a1abcfdef1c0e8312d14069ac3"
   dependencies:
-    "@researchgate/eslint-config-rg-base" "^1.0.1"
+    "@researchgate/eslint-config-rg-base" "^2.0.0"
 
 "@storybook/addon-actions@^3.2.16":
   version "3.2.16"

@@ -23,7 +23,7 @@ export default class OnlyOnce extends Component {
             <div>
                 <div className={`header ${this.state.visibility}`}>{this.state.visibility}</div>
                 <div className="body">
-                    <Observer onChange={this.handleChange} onlyOnce>
+                    <Observer onChange={this.handleChange} onlyOnce={true}>
                         <div className={`box ${this.state.visibility}`} />
                     </Observer>
                 </div>

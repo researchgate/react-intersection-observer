@@ -276,7 +276,7 @@ describe('callback', () => {
 describe('handleChange', () => {
     test('should throw with `onlyOnce` if entry lacks `isIntersecting`', () => {
         const component = (
-            <IntersectionObserver onChange={noop} onlyOnce>
+            <IntersectionObserver onChange={noop} onlyOnce={true}>
                 <span />
             </IntersectionObserver>
         );
@@ -295,7 +295,7 @@ describe('handleChange', () => {
 
     test('should unobserve with `onlyOnce` if `isIntersecting` is true', () => {
         const component = (
-            <IntersectionObserver onChange={noop} onlyOnce>
+            <IntersectionObserver onChange={noop} onlyOnce={true}>
                 <span />
             </IntersectionObserver>
         );
@@ -317,7 +317,7 @@ describe('handleChange', () => {
 
     test('should not unobserve with `onlyOnce` if `isIntersecting` is false', () => {
         const component = (
-            <IntersectionObserver onChange={noop} onlyOnce>
+            <IntersectionObserver onChange={noop} onlyOnce={true}>
                 <span />
             </IntersectionObserver>
         );
@@ -340,7 +340,7 @@ describe('handleChange', () => {
     describe('disabled', () => {
         test('should not observe if disabled', () => {
             const component = (
-                <IntersectionObserver onChange={noop} disabled>
+                <IntersectionObserver onChange={noop} disabled={true}>
                     <span />
                 </IntersectionObserver>
             );
@@ -364,7 +364,7 @@ describe('handleChange', () => {
 
         test('should observe if no longer disabled', () => {
             const component = (
-                <IntersectionObserver onChange={noop} disabled>
+                <IntersectionObserver onChange={noop} disabled={true}>
                     <span />
                 </IntersectionObserver>
             );
@@ -393,7 +393,7 @@ describe('handleChange', () => {
             const spy2 = jest.spyOn(instance, 'observe');
 
             tree.update(
-                <IntersectionObserver onChange={noop} disabled>
+                <IntersectionObserver onChange={noop} disabled={true}>
                     <span />
                 </IntersectionObserver>,
             );
