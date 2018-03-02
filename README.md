@@ -179,7 +179,7 @@ Single React component or element that is used as the target (observable).
 
 ## Polyfill
 
-When needing the full spec's support, we highly recommend using the [IntersectionObserver polyfill](https://github.com/WICG/IntersectionObserver/tree/gh-pages/polyfill).
+When needing the full spec's support, we highly recommend using the [IntersectionObserver polyfill](https://github.com/w3c/IntersectionObserver/tree/master/polyfill).
 
 ### Caveats
 
