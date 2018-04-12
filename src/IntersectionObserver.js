@@ -135,7 +135,9 @@ export default class IntersectionObserver extends React.Component {
     }
 
     unobserve() {
-        IntersectionObserverContainer.unobserve(this);
+        if (this.target != null) {
+            IntersectionObserverContainer.unobserve(this);
+        }
     }
 
     reobserve() {

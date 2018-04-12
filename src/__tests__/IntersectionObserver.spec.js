@@ -236,6 +236,22 @@ describe('update', () => {
         });
         expect(instance.shouldResetObserver).toBeTruthy();
     });
+
+    test('should be defensive against unobserving nullified nodes', () => {
+        const spy = jest.spyOn(IntersectionObserverContainer, 'unobserve');
+        const component = (
+            <IntersectionObserver onChange={noop}>
+                <span />
+            </IntersectionObserver>
+        );
+        const tree = renderer.create(component, {
+            createNodeMock: () => target,
+        });
+        tree.getInstance().target = null;
+        tree.getInstance().unobserve();
+
+        expect(spy).not.toBeCalled();
+    });
 });
 
 describe('callback', () => {
