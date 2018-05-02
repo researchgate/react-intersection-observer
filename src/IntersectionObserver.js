@@ -107,11 +107,11 @@ export default class IntersectionObserver extends React.Component {
             // eslint-disable-next-line no-undef
             if (process.env.NODE_ENV !== 'production') {
                 invariant(
-                    'isIntersecting' in event,
-                    "onlyOnce requires isIntersecting to exists in IntersectionObserverEntry's prototype. Either your browser or your polyfill lacks support.",
+                    'isIntersecting' in event && 'intersectionRatio' in event,
+                    "onlyOnce requires isIntersecting and intersectionRatio to exists in IntersectionObserverEntry's prototype. Either your browser or your polyfill lacks support.",
                 );
             }
-            if (event.isIntersecting) {
+            if (event.isIntersecting && event.intersectionRatio != 0) {
                 this.unobserve();
             }
         }
