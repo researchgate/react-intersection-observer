@@ -2,6 +2,7 @@ import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import invariant from 'invariant';
+import warning from 'warning';
 import IntersectionObserverContainer from './IntersectionObserverContainer';
 import { isDOMTypeElement, shallowCompareOptions } from './utils';
 
@@ -101,7 +102,7 @@ export default class IntersectionObserver extends React.Component {
     }
 
     handleChange = event => {
-        this.props.onChange(event);
+        this.props.onChange(event, this.unobserve);
 
         if (this.props.onlyOnce) {
             // eslint-disable-next-line no-undef
@@ -115,6 +116,10 @@ export default class IntersectionObserver extends React.Component {
                 this.unobserve();
             }
         }
+        warning(
+            !this.props.hasOwnProperty('onlyOnce'),
+            'ReactIntersectionObserver: [deprecation] Use the second argument of onChange to unobserve a target instead of onlyOnce. This prop will be removed in the next major version.',
+        );
     };
 
     handleNode = node => {
@@ -134,11 +139,11 @@ export default class IntersectionObserver extends React.Component {
         IntersectionObserverContainer.observe(this);
     }
 
-    unobserve() {
+    unobserve = () => {
         if (this.target != null) {
             IntersectionObserverContainer.unobserve(this);
         }
-    }
+    };
 
     reobserve() {
         this.unobserve();

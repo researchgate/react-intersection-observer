@@ -291,6 +291,7 @@ describe('callback', () => {
 
 describe('handleChange', () => {
     test('should throw with `onlyOnce` if entry lacks `isIntersecting`', () => {
+        global.spyOn(console, 'error'); // suppress deprecation warning
         const component = (
             <IntersectionObserver onChange={noop} onlyOnce={true}>
                 <span />
@@ -310,6 +311,7 @@ describe('handleChange', () => {
     });
 
     test('should unobserve with `onlyOnce` if `isIntersecting` is true', () => {
+        global.spyOn(console, 'error'); // suppress deprecation warning
         const component = (
             <IntersectionObserver onChange={noop} onlyOnce={true}>
                 <span />
@@ -332,6 +334,7 @@ describe('handleChange', () => {
     });
 
     test('should not unobserve with `onlyOnce` if `isIntersecting` is false', () => {
+        global.spyOn(console, 'error'); // suppress deprecation warning
         const component = (
             <IntersectionObserver onChange={noop} onlyOnce={true}>
                 <span />
@@ -351,6 +354,29 @@ describe('handleChange', () => {
         instance.handleChange(entry);
 
         expect(spy).not.toBeCalled();
+    });
+
+    test('should warn about the deprecation of `onlyOnce`', () => {
+        const component = (
+            <IntersectionObserver onChange={noop} onlyOnce={true}>
+                <span />
+            </IntersectionObserver>
+        );
+        const spy = global.spyOn(console, 'error');
+        const instance = renderer.create(component, { createNodeMock: () => target }).getInstance();
+        const boundingClientRect = {};
+        const intersectionRect = {};
+        const entry = new IntersectionObserverEntry({
+            target,
+            boundingClientRect,
+            intersectionRect,
+        });
+        entry.isIntersecting = true;
+
+        instance.handleChange(entry);
+
+        expect(spy).toBeCalled();
+        expect(spy.calls.first().args[0]).toContain('deprecation');
     });
 
     describe('disabled', () => {

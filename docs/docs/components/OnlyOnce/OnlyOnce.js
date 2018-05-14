@@ -11,7 +11,10 @@ export default class OnlyOnce extends Component {
         visibility: 'hidden',
     };
 
-    handleChange = event => {
+    handleChange = (event, unobserve) => {
+        if (event.isIntersecting) {
+            unobserve();
+        }
         storyBookAction(event);
         this.setState({
             visibility: event.isIntersecting ? 'visible' : 'invisible',
@@ -23,7 +26,7 @@ export default class OnlyOnce extends Component {
             <div>
                 <div className={`header ${this.state.visibility}`}>{this.state.visibility}</div>
                 <div className="body">
-                    <Observer onChange={this.handleChange} onlyOnce={true}>
+                    <Observer onChange={this.handleChange}>
                         <div className={`box ${this.state.visibility}`} />
                     </Observer>
                 </div>
