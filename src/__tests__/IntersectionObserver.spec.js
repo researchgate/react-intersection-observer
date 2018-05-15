@@ -114,7 +114,7 @@ test("should remove target from the observer targets' list on umount", () => {
 });
 
 describe('update', () => {
-    test('componentWillUpdate determines whether the observer should restart', () => {
+    test('componentDidUpdate reobserves the target with observer prop changes', () => {
         const component = (
             <IntersectionObserver onChange={noop}>
                 <span />
@@ -141,7 +141,7 @@ describe('update', () => {
         );
         let called = false;
         const tree = renderer.create(component, {
-            createNodeMock: () => {
+            createNodeMock() {
                 if (called) {
                     return target;
                 }
@@ -160,7 +160,7 @@ describe('update', () => {
         );
 
         tree.update(
-            <IntersectionObserver onChange={noop} rootMargin="1%">
+            <IntersectionObserver onChange={noop}>
                 <div />
             </IntersectionObserver>,
         );
@@ -171,70 +171,81 @@ describe('update', () => {
     });
 
     test('should reobserve with new root, rootMargin and/or threshold props', () => {
-        const winElement = Object.assign({ id: 'window' }, target);
-        const docElement = Object.assign({ id: 'document' }, target);
+        const root1 = Object.assign({ id: 'window' }, target);
+        const root2 = Object.assign({ id: 'document' }, target);
         const initialProps = {
             onChange: noop,
-            root: winElement,
+            root: root1,
             rootMargin: '10% 20%',
             threshold: 0.5,
         };
-        const children = <span />;
-        const component = <IntersectionObserver {...initialProps}>{children}</IntersectionObserver>;
-        const instance = renderer.create(component, { createNodeMock: () => target }).getInstance();
-        const nextProps = { ...initialProps, children };
+        const component = (
+            <IntersectionObserver {...initialProps}>
+                <span />
+            </IntersectionObserver>
+        );
+        const tree = renderer.create(component, { createNodeMock: () => target });
+        const instance = tree.getInstance();
+        const spy1 = jest.spyOn(instance, 'unobserve');
+        const spy2 = jest.spyOn(instance, 'observe');
 
-        instance.componentWillUpdate(nextProps);
-        expect(instance.shouldResetObserver).toBeFalsy();
+        // none of the props updating
+        tree.update(
+            <IntersectionObserver {...initialProps}>
+                <span />
+            </IntersectionObserver>,
+        );
+        // only children updating
+        tree.update(
+            <IntersectionObserver {...initialProps}>
+                <div />
+            </IntersectionObserver>,
+        );
+        // only root updating (document)
+        tree.update(
+            <IntersectionObserver {...initialProps} root={root2}>
+                <div />
+            </IntersectionObserver>,
+        );
+        // only root updating (window)
+        tree.update(
+            <IntersectionObserver {...initialProps} root={root1}>
+                <div />
+            </IntersectionObserver>,
+        );
+        // only rootMargin updating
+        tree.update(
+            <IntersectionObserver {...initialProps} root={root1} rootMargin="20% 10%">
+                <div />
+            </IntersectionObserver>,
+        );
+        // only root updating (null)
+        tree.update(
+            <IntersectionObserver {...initialProps} rootMargin="20% 10%">
+                <div />
+            </IntersectionObserver>,
+        );
+        // only threshold updating (non-scalar)
+        tree.update(
+            <IntersectionObserver {...initialProps} threshold={[0.5, 1]}>
+                <div />
+            </IntersectionObserver>,
+        );
+        // only threshold updating (length changed)
+        tree.update(
+            <IntersectionObserver {...initialProps} threshold={[0, 0.25, 0.5, 0.75, 1]}>
+                <div />
+            </IntersectionObserver>,
+        );
+        // only threshold updating (scalar)
+        tree.update(
+            <IntersectionObserver {...initialProps} threshold={1}>
+                <div />
+            </IntersectionObserver>,
+        );
 
-        instance.componentWillUpdate({
-            ...nextProps,
-            children: <div />,
-        });
-        expect(instance.shouldResetObserver).toBeFalsy();
-
-        instance.componentWillUpdate({
-            ...nextProps,
-            root: docElement,
-        });
-        expect(instance.shouldResetObserver).toBeTruthy();
-
-        instance.componentWillUpdate({
-            ...nextProps,
-            root: winElement,
-        });
-        expect(instance.shouldResetObserver).toBeFalsy();
-
-        instance.componentWillUpdate({
-            ...nextProps,
-            root: winElement,
-            rootMargin: '20% 10%',
-        });
-        expect(instance.shouldResetObserver).toBeTruthy();
-
-        instance.componentWillUpdate({
-            ...nextProps,
-            rootMargin: '20% 10%',
-        });
-        expect(instance.shouldResetObserver).toBeTruthy();
-
-        instance.componentWillUpdate({
-            ...nextProps,
-            threshold: [0.5, 1],
-        });
-        expect(instance.shouldResetObserver).toBeTruthy();
-
-        instance.componentWillUpdate({
-            ...nextProps,
-            threshold: [0, 0.25, 0.5, 0.75, 1],
-        });
-        expect(instance.shouldResetObserver).toBeTruthy();
-
-        instance.componentWillUpdate({
-            ...nextProps,
-            threshold: 1,
-        });
-        expect(instance.shouldResetObserver).toBeTruthy();
+        expect(spy1).toHaveBeenCalledTimes(6);
+        expect(spy2).toHaveBeenCalledTimes(6);
     });
 
     test('should be defensive against unobserving nullified nodes', () => {

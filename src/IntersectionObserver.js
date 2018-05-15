@@ -117,16 +117,22 @@ export default class IntersectionObserver extends React.Component {
         }
     };
 
-    handleNode = node => {
+    handleNode = target => {
         if (typeof this.props.children.ref === 'function') {
-            this.props.children.ref(node);
+            this.props.children.ref(target);
         }
-        if (this.currentTarget && node && this.currentTarget !== node) {
+        if (this.renderedTarget && target && this.renderedTarget !== target) {
             this.unobserve();
-            this.shouldResetObserver = true;
+            this.targetChanged = true;
         }
-        this.target = node;
+        this.target = target;
     };
+
+    compareObserverProps(prevProps) {
+        return observerOptions
+            .concat(['disabled'])
+            .some(option => shallowCompareOptions(this.props[option], prevProps[option]));
+    }
 
     observe() {
         this.target = isDOMTypeElement(this.target) ? this.target : findDOMNode(this.target);
@@ -160,24 +166,18 @@ export default class IntersectionObserver extends React.Component {
         }
     }
 
-    componentWillUnmount() {
-        this.unobserve();
-    }
-
-    componentDidUpdate() {
-        if (this.shouldResetObserver) {
+    componentDidUpdate(prevProps) {
+        if (this.targetChanged || this.compareObserverProps(prevProps)) {
             this.reobserve();
         }
     }
 
-    componentWillUpdate(nextProps) {
-        this.shouldResetObserver = observerOptions
-            .concat(['disabled'])
-            .some(option => shallowCompareOptions(nextProps[option], this.props[option]));
+    componentWillUnmount() {
+        this.unobserve();
     }
 
     render() {
-        this.currentTarget = this.target;
+        this.renderedTarget = this.target; // this value is null on the first render
 
         return React.cloneElement(React.Children.only(this.props.children), {
             ref: this.handleNode,
