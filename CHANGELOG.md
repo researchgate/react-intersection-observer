@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/researchgate/react-intersection-observer/compare/v0.6.1...v0.7.0) (2018-05-15)
+
+
+### Features
+
+* **React16.4:** Migrated codebase to stop using legacy lifecycles ([d43f5ef](https://github.com/researchgate/react-intersection-observer/commit/d43f5ef))
+
+
+
 <a name="0.6.1"></a>
 ## [0.6.1](https://github.com/researchgate/react-intersection-observer/compare/v0.6.0...v0.6.1) (2018-04-12)
 
