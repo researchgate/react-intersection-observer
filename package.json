@@ -7,6 +7,7 @@
     "url": "https://github.com/researchgate/react-intersection-observer/issues"
   },
   "dependencies": {
+    "@storybook/addon-knobs": "^3.4.4",
     "invariant": "^2.2.2",
     "prop-types": "^15.6.0"
   },
