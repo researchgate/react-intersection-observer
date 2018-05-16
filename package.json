@@ -9,7 +9,8 @@
   "dependencies": {
     "@storybook/addon-knobs": "^3.4.4",
     "invariant": "^2.2.2",
-    "prop-types": "^15.6.0"
+    "prop-types": "^15.6.0",
+    "warning": "^3.0.0"
   },
   "devDependencies": {
     "@researchgate/babel-preset-rg": "^1.0.1",

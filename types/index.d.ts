@@ -7,7 +7,6 @@ interface Props {
     root?: string | Element | null;
     rootMargin?: string;
     threshold?: number | number[];
-    onlyOnce?: boolean;
     disabled?: boolean;
-    onChange: (entry: IntersectionObserverEntry) => void;
+    onChange: (entry: IntersectionObserverEntry, unobserve: () => void) => void;
 }
