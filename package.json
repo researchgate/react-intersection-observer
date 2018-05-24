@@ -7,7 +7,6 @@
     "url": "https://github.com/researchgate/react-intersection-observer/issues"
   },
   "dependencies": {
-    "@storybook/addon-knobs": "^3.4.4",
     "invariant": "^2.2.2",
     "prop-types": "^15.6.0",
     "warning": "^3.0.0"
@@ -16,6 +15,7 @@
     "@researchgate/babel-preset-rg": "^1.0.1",
     "@researchgate/eslint-config-rg-react": "^2.0.0",
     "@storybook/addon-actions": "^3.2.16",
+    "@storybook/addon-knobs": "^3.4.4",
     "@storybook/addon-options": "^3.2.16",
     "@storybook/react": "^3.2.16",
     "babel-cli": "^6.24.1",
