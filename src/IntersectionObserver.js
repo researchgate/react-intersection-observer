@@ -129,6 +129,8 @@ export default class IntersectionObserver extends React.Component {
         if (this.renderedTarget && target && this.renderedTarget !== target) {
             this.unobserve();
             this.targetChanged = true;
+        } else {
+            this.targetChanged = false;
         }
         this.target = target;
     };

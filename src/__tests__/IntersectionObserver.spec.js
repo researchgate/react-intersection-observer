@@ -263,6 +263,40 @@ describe('update', () => {
 
         expect(spy).not.toBeCalled();
     });
+
+    test('should not reobserve on a second render after root changed the first time', () => {
+        const component = (
+            <IntersectionObserver onChange={noop}>
+                <span />
+            </IntersectionObserver>
+        );
+        let called = false;
+        const tree = renderer.create(component, {
+            createNodeMock() {
+                if (called) {
+                    return target;
+                }
+                called = true;
+                return Object.assign({ id: 2 }, target);
+            },
+        });
+        const instance = tree.getInstance();
+        const spy = jest.spyOn(instance, 'reobserve');
+
+        tree.update(
+            <IntersectionObserver onChange={noop}>
+                <div />
+            </IntersectionObserver>,
+        );
+
+        tree.update(
+            <IntersectionObserver onChange={noop}>
+                <div key="forcesRender" />
+            </IntersectionObserver>,
+        );
+
+        expect(spy).toHaveBeenCalledTimes(1);
+    });
 });
 
 describe('callback', () => {
