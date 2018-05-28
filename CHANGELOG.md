@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.7.1"></a>
+## [0.7.1](https://github.com/researchgate/react-intersection-observer/compare/v0.7.0...v0.7.1) (2018-05-28)
+
+
+### Bug Fixes
+
+* **reobserve:** Prevent unnecessary reobserve() calls when re-rendering ([b0c3b3b](https://github.com/researchgate/react-intersection-observer/commit/b0c3b3b))
+
+
+
 <a name="0.7.0"></a>
 # [0.7.0](https://github.com/researchgate/react-intersection-observer/compare/v0.6.1...v0.7.0) (2018-05-15)
 
