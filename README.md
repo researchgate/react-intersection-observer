@@ -5,7 +5,6 @@
 <p align="center">
   <a href="https://travis-ci.org/researchgate/react-intersection-observer"><img alt="Build Status" src="https://travis-ci.org/researchgate/react-intersection-observer.svg?branch=master"></a>
   <a href="https://codecov.io/gh/researchgate/react-intersection-observer"><img alt="Codecov" src="https://img.shields.io/codecov/c/github/researchgate/react-intersection-observer.svg"></a>
-  <a href="https://greenkeeper.io/"><img alt="Greenkeeper badge" src="https://badges.greenkeeper.io/researchgate/react-intersection-observer.svg"></a>
   <a href="https://www.npmjs.com/package/@researchgate/react-intersection-observer"><img alt="NPM version" src="https://img.shields.io/npm/v/@researchgate/react-intersection-observer.svg"></a>
   <a href="https://github.com/prettier/prettier"><img alt="styled with prettier" src="https://img.shields.io/badge/styled_with-prettier-ff69b4.svg"></a>
 </p>
