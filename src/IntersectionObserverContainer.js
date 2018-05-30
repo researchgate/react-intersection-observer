@@ -1,13 +1,16 @@
 import { parseRootMargin, shallowCompareOptions } from './utils';
 
+export const storage = new Map();
+
 export function getPooled(options = {}) {
     const root = options.root || null;
     const rootMargin = parseRootMargin(options.rootMargin);
     const threshold = Array.isArray(options.threshold)
         ? options.threshold
         : [typeof options.threshold !== 'undefined' ? options.threshold : 0];
-    // eslint-disable-next-line no-restricted-syntax
-    for (const observer of storage.keys()) {
+    const observers = storage.keys();
+    let observer;
+    while ((observer = observers.next().value)) {
         const unmatched = [
             [root, observer.root],
             [rootMargin, observer.rootMargin],
@@ -21,8 +24,6 @@ export function getPooled(options = {}) {
     return null;
 }
 
-export const storage = new Map();
-
 /**
  * If instances of a class can be reused because the options map,
  * we avoid creating instances of Intersection Observer by reusing them.
@@ -35,8 +36,9 @@ export default class IntersectionObserverContainer {
     static findElement(entry, observer) {
         const elements = storage.get(observer);
         if (elements) {
-            // eslint-disable-next-line no-restricted-syntax
-            for (const element of elements.values()) {
+            const values = elements.values();
+            let element;
+            while ((element = values.next().value)) {
                 if (element.target === entry.target) {
                     return element;
                 }

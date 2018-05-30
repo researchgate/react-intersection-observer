@@ -191,7 +191,7 @@ Single React component or element that is used as the target (observable).
 * Changes happen asynchronously, similar to the way `requestIdleCallback` works.
 * Although you can consider callbacks immediate - always below 1 second - you can also get an immediate response on an
   element's visibility with `observer.takeRecords()`.
-* The primitives _Map_, _Set_, and _Symbol_ are required and won't be transpiled by default. Consider using a polyfill
+* The primitives `Map` an `Set` are required. You may need to include a polyfill
   for browsers lacking ES2015 support. If you're using babel, include `"babel-polyfill"` somewhere to your codebase.
 
 ## Polyfill
