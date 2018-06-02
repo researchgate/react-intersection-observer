@@ -3,7 +3,7 @@ import 'intersection-observer';
 import React from 'react';
 import renderer from 'react-test-renderer';
 import IntersectionObserver, { callback } from '../IntersectionObserver';
-import IntersectionObserverContainer from '../IntersectionObserverContainer';
+import IntersectionObserverContainer, { observerElementsMap } from '../IntersectionObserverContainer';
 
 function mockUtilsFunctions() {
     const utils = require.requireActual('../utils');
@@ -30,7 +30,7 @@ afterAll(() => {
 });
 
 afterEach(() => {
-    IntersectionObserverContainer.clear();
+    observerElementsMap.clear();
 });
 
 test('throws when the property children is not an only child', () => {
@@ -312,7 +312,7 @@ describe('callback', () => {
         const instance = renderer.create(component, { createNodeMock: () => target1 }).getInstance();
         renderer.create(React.cloneElement(component), { createNodeMock: () => target2 });
 
-        expect(IntersectionObserverContainer.count()).toBe(1);
+        expect(observerElementsMap.size).toBe(1);
 
         const boundingClientRect = {};
         const intersectionRect = {};

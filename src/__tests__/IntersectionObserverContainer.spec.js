@@ -7,7 +7,7 @@ const defaultOptions = { rootMargin: '-10% 0%', threshold: [0, 0.5, 1] };
 const noop = () => {};
 
 afterEach(() => {
-    IntersectionObserverContainer.clear();
+    observerElementsMap.clear();
 });
 
 test('IntersectionObserverContainer creates a new IntersectionObserver instance', () => {
@@ -17,19 +17,6 @@ test('IntersectionObserverContainer creates a new IntersectionObserver instance'
     expect(mockInstance).toBeInstanceOf(window.IntersectionObserver);
     expect(observer).toEqual(mockInstance);
     window.IntersectionObserver = IntersectionObserver;
-});
-
-test('clear removes all pooled objects from observerElementsMap', () => {
-    const instance = new IntersectionObserver(noop, defaultOptions);
-    observerElementsMap.set(instance);
-    IntersectionObserverContainer.clear();
-    expect(observerElementsMap.size).toEqual(0);
-});
-
-test('count returns the size of the observerElementsMap', () => {
-    const instance = new IntersectionObserver(noop, defaultOptions);
-    observerElementsMap.set(instance);
-    expect(IntersectionObserverContainer.count()).toEqual(1);
 });
 
 describe('#getPooled', () => {

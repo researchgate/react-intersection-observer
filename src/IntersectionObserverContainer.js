@@ -72,12 +72,4 @@ export default class IntersectionObserverContainer {
             }
         }
     }
-
-    static clear() {
-        observerElementsMap.clear();
-    }
-
-    static count() {
-        return observerElementsMap.size;
-    }
 }
