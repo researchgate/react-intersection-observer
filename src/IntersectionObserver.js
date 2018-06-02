@@ -70,18 +70,12 @@ export default class IntersectionObserver extends React.Component {
     };
 
     get options() {
-        return observerOptions.reduce((prev, key) => {
+        return observerOptions.reduce((options, key) => {
             if (objectProto.hasOwnProperty.call(this.props, key)) {
-                let value = this.props[key];
-                if (key === 'root' && objectProto.toString.call(this.props[key]) === '[object String]') {
-                    value = document.querySelector(value);
-                }
-                return {
-                    ...prev,
-                    [key]: value,
-                };
+                const useQuery = key === 'root' && objectProto.toString.call(this.props[key]) === '[object String]';
+                options[key] = useQuery ? document.querySelector(this.props[key]) : this.props[key];
             }
-            return prev;
+            return options;
         }, {});
     }
 
