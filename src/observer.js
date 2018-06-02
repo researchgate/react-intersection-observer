@@ -7,7 +7,7 @@ export function getPooled(options = {}) {
     const rootMargin = parseRootMargin(options.rootMargin);
     const threshold = Array.isArray(options.threshold)
         ? options.threshold
-        : [typeof options.threshold !== 'undefined' ? options.threshold : 0];
+        : [options.threshold != null ? options.threshold : 0];
     const observers = observerElementsMap.keys();
     let observer;
     while ((observer = observers.next().value)) {
