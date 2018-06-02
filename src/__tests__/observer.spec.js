@@ -7,7 +7,7 @@ import {
     observeElement,
     observerElementsMap,
     unobserveElement,
-} from '../IntersectionObserverContainer';
+} from '../observer';
 
 const IntersectionObserver = window.IntersectionObserver;
 const defaultOptions = { rootMargin: '-10% 0%', threshold: [0, 0.5, 1] };

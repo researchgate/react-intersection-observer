@@ -3,7 +3,7 @@ import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import invariant from 'invariant';
 import warning from 'warning';
-import { createObserver, findObserverElement, observeElement, unobserveElement } from './IntersectionObserverContainer';
+import { createObserver, findObserverElement, observeElement, unobserveElement } from './observer';
 import { isDOMTypeElement, shallowCompareOptions } from './utils';
 
 /**

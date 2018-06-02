@@ -3,7 +3,7 @@ import 'intersection-observer';
 import React from 'react';
 import renderer from 'react-test-renderer';
 import IntersectionObserver, { callback } from '../IntersectionObserver';
-import { findObserverElement, observerElementsMap } from '../IntersectionObserverContainer';
+import { findObserverElement, observerElementsMap } from '../observer';
 
 function mockUtilsFunctions() {
     const utils = require.requireActual('../utils');
