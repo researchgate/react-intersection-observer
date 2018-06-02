@@ -46,12 +46,12 @@ export function findObserverElement(observer, entry) {
  * @param {IntersectionObserver} observer
  */
 export function callback(changes, observer) {
-    changes.forEach(entry => {
-        const instance = findObserverElement(observer, entry);
-        if (instance) {
-            instance.handleChange(entry);
+    for (let i = 0; i < changes.length; i++) {
+        const element = findObserverElement(observer, changes[i]);
+        if (element) {
+            element.handleChange(changes[i]);
         }
-    });
+    }
 }
 
 export function createObserver(options) {
