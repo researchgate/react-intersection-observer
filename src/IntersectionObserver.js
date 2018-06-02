@@ -7,6 +7,7 @@ import { createObserver, observeElement, unobserveElement } from './observer';
 import { isDOMTypeElement, shallowCompareOptions } from './utils';
 
 const observerOptions = ['root', 'rootMargin', 'threshold'];
+const observerProps = ['disabled'].concat(observerOptions);
 const objectProto = Object.prototype;
 
 export default class IntersectionObserver extends React.Component {
@@ -112,20 +113,16 @@ export default class IntersectionObserver extends React.Component {
         if (typeof this.props.children.ref === 'function') {
             this.props.children.ref(target);
         }
-        if (this.renderedTarget && target && this.renderedTarget !== target) {
+        /**
+         * This is a bit ugly: would like to use getSnapshotBeforeUpdate(), but we do not want to depend on
+         * react-lifecycles-compat to support React versions prior to 16.3 as this extra boolean gets the job done.
+         */
+        this.targetChanged = (this.renderedTarget && target) != null && this.renderedTarget !== target;
+        if (this.targetChanged) {
             this.unobserve();
-            this.targetChanged = true;
-        } else {
-            this.targetChanged = false;
         }
         this.target = target;
     };
-
-    compareObserverProps(prevProps) {
-        return observerOptions
-            .concat(['disabled'])
-            .some(option => shallowCompareOptions(this.props[option], prevProps[option]));
-    }
 
     observe() {
         this.target = isDOMTypeElement(this.target) ? this.target : findDOMNode(this.target);
@@ -138,13 +135,6 @@ export default class IntersectionObserver extends React.Component {
             unobserveElement(this);
         }
     };
-
-    reobserve() {
-        this.unobserve();
-        if (!this.props.disabled) {
-            this.observe();
-        }
-    }
 
     componentDidMount() {
         // eslint-disable-next-line no-undef
@@ -160,8 +150,16 @@ export default class IntersectionObserver extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.targetChanged || this.compareObserverProps(prevProps)) {
-            this.reobserve();
+        const propsChanged = observerProps.some(prop => shallowCompareOptions(this.props[prop], prevProps[prop]));
+
+        if (propsChanged) {
+            this.unobserve();
+        }
+
+        if (this.targetChanged || propsChanged) {
+            if (!this.props.disabled) {
+                this.observe();
+            }
         }
     }
 

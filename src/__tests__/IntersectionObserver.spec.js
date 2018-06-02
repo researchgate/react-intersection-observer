@@ -123,14 +123,16 @@ describe('update', () => {
         const tree = renderer.create(component, { createNodeMock: () => target });
         const instance = tree.getInstance();
 
-        const spy = jest.spyOn(instance, 'reobserve');
+        const spy1 = jest.spyOn(instance, 'observe');
+        const spy2 = jest.spyOn(instance, 'unobserve');
 
         tree.update(
             <IntersectionObserver onChange={noop} rootMargin="20% 10%">
                 <span />
             </IntersectionObserver>,
         );
-        expect(spy).toBeCalled();
+        expect(spy1).toHaveBeenCalledTimes(1);
+        expect(spy2).toHaveBeenCalledTimes(1);
     });
 
     test('should cleanup when tree reconciliation has led to a full rebuild', () => {
@@ -165,7 +167,7 @@ describe('update', () => {
             </IntersectionObserver>,
         );
 
-        expect(spy1).toHaveBeenCalledTimes(2);
+        expect(spy1).toHaveBeenCalledTimes(1);
         expect(spy2).toHaveBeenCalledTimes(1);
         expect(instance.target).toBe(target);
     });
@@ -281,7 +283,8 @@ describe('update', () => {
             },
         });
         const instance = tree.getInstance();
-        const spy = jest.spyOn(instance, 'reobserve');
+        const spy1 = jest.spyOn(instance, 'observe');
+        const spy2 = jest.spyOn(instance, 'unobserve');
 
         tree.update(
             <IntersectionObserver onChange={noop}>
@@ -295,7 +298,8 @@ describe('update', () => {
             </IntersectionObserver>,
         );
 
-        expect(spy).toHaveBeenCalledTimes(1);
+        expect(spy1).toHaveBeenCalledTimes(1);
+        expect(spy2).toHaveBeenCalledTimes(1);
     });
 });
 
