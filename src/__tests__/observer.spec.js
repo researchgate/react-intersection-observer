@@ -116,7 +116,7 @@ describe('#findObserverElement', () => {
         const observer = createObserver();
         const entry = { target: { nodeType: 1, id: 1 }, observer };
         observeElement(entry);
-        const instance = findObserverElement(entry);
+        const instance = findObserverElement(null, entry);
         expect(instance).toBeNull();
     });
 
@@ -129,7 +129,7 @@ describe('#findObserverElement', () => {
         const observer = createObserver();
         const entry = { target: { nodeType: 1, id: 1 }, observer };
         observeElement(entry);
-        const instance = findObserverElement(entry, observer);
+        const instance = findObserverElement(observer, entry);
         expect(instance).toEqual(entry);
     });
 
@@ -140,8 +140,8 @@ describe('#findObserverElement', () => {
         const entry2 = { target: { nodeType: 1, id: 1 }, observer: observer2 };
         observeElement(entry1);
         observeElement(entry2);
-        const instance1 = findObserverElement(entry1, observer1);
-        const instance2 = findObserverElement(entry2, observer2);
+        const instance1 = findObserverElement(observer1, entry1);
+        const instance2 = findObserverElement(observer2, entry2);
         expect(instance1).toEqual(entry1);
         expect(instance2).toEqual(entry2);
     });
@@ -152,8 +152,8 @@ describe('#findObserverElement', () => {
         const entry2 = { target: { nodeType: 1, id: 2 }, observer };
         observeElement(entry1);
         observeElement(entry2);
-        const instance1 = findObserverElement(entry1, observer);
-        const instance2 = findObserverElement(entry2, observer);
+        const instance1 = findObserverElement(observer, entry1);
+        const instance2 = findObserverElement(observer, entry2);
         expect(instance1).toEqual(entry1);
         expect(instance2).toEqual(entry2);
     });
@@ -165,8 +165,8 @@ describe('#findObserverElement', () => {
         const entry2 = { target: { nodeType: 1, id: 2 }, observer: observer2 };
         observeElement(entry1);
         observeElement(entry2);
-        const instance1 = findObserverElement(entry1, observer1);
-        const instance2 = findObserverElement(entry2, observer2);
+        const instance1 = findObserverElement(observer1, entry1);
+        const instance2 = findObserverElement(observer2, entry2);
         expect(instance1).toEqual(entry1);
         expect(instance2).toEqual(entry2);
     });

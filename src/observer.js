@@ -23,7 +23,7 @@ export function getPooled(options = {}) {
     return null;
 }
 
-export function findObserverElement(entry, observer) {
+export function findObserverElement(observer, entry) {
     const elements = observerElementsMap.get(observer);
     if (elements) {
         const values = elements.values();
@@ -47,7 +47,7 @@ export function findObserverElement(entry, observer) {
  */
 export function callback(changes, observer) {
     changes.forEach(entry => {
-        const instance = findObserverElement(entry, observer);
+        const instance = findObserverElement(observer, entry);
         if (instance) {
             instance.handleChange(entry);
         }

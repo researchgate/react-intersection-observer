@@ -93,7 +93,7 @@ test("should save target in the observer targets' list on mount", () => {
     );
     const tree = renderer.create(component, { createNodeMock: () => target });
     const observer = tree.getInstance().observer;
-    const retrieved = findObserverElement({ target }, observer);
+    const retrieved = findObserverElement(observer, { target });
 
     expect(retrieved).toEqual(tree.getInstance());
 });
@@ -108,7 +108,7 @@ test("should remove target from the observer targets' list on umount", () => {
     const instance = tree.getInstance();
     const observer = instance.observer;
     tree.unmount();
-    const retrieved = findObserverElement({ target }, observer);
+    const retrieved = findObserverElement(observer, { target });
 
     expect(retrieved).toBeNull();
 });
