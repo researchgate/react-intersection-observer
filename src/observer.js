@@ -11,11 +11,10 @@ export function getPooled(options = {}) {
     const observers = observerElementsMap.keys();
     let observer;
     while ((observer = observers.next().value)) {
-        const unmatched = [
-            [root, observer.root],
-            [rootMargin, observer.rootMargin],
-            [threshold, observer.thresholds],
-        ].some(option => shallowCompareOptions(...option));
+        const unmatched =
+            root !== observer.root ||
+            rootMargin !== observer.rootMargin ||
+            shallowCompareOptions(threshold, observer.thresholds);
 
         if (!unmatched) {
             return observer;
