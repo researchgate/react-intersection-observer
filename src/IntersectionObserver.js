@@ -124,11 +124,11 @@ export default class IntersectionObserver extends React.Component {
         this.target = target;
     };
 
-    observe() {
+    observe = () => {
         this.target = isDOMTypeElement(this.target) ? this.target : findDOMNode(this.target);
         this.observer = createObserver(this.options);
         observeElement(this);
-    }
+    };
 
     unobserve = () => {
         if (this.target != null) {
