@@ -38,7 +38,24 @@ export function findObserverElement(entry, observer) {
     return null;
 }
 
-export function createObserver(callback, options) {
+/**
+ * The Intersection Observer API callback that is called whenever one element,
+ * called the target, intersects either the device viewport or a specified element.
+ * Also will get caled whenever the visibility of the target element changes and
+ * crosses desired amounts of intersection with the root.
+ * @param {array} changes
+ * @param {IntersectionObserver} observer
+ */
+export function callback(changes, observer) {
+    changes.forEach(entry => {
+        const instance = findObserverElement(entry, observer);
+        if (instance) {
+            instance.handleChange(entry);
+        }
+    });
+}
+
+export function createObserver(options) {
     return getPooled(options) || new IntersectionObserver(callback, options);
 }
 
