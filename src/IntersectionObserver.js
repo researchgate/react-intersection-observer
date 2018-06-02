@@ -99,10 +99,13 @@ export default class IntersectionObserver extends React.Component {
                 this.unobserve();
             }
         }
-        warning(
-            !this.props.hasOwnProperty('onlyOnce'),
-            'ReactIntersectionObserver: [deprecation] Use the second argument of onChange to unobserve a target instead of onlyOnce. This prop will be removed in the next major version.',
-        );
+        // eslint-disable-next-line no-undef
+        if (process.env.NODE_ENV !== 'production') {
+            warning(
+                !this.props.hasOwnProperty('onlyOnce'),
+                'ReactIntersectionObserver: [deprecation] Use the second argument of onChange to unobserve a target instead of onlyOnce. This prop will be removed in the next major version.',
+            );
+        }
     };
 
     handleNode = target => {
