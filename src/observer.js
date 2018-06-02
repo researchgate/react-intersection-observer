@@ -59,14 +59,10 @@ export function createObserver(options) {
 }
 
 export function observeElement(element) {
-    let targets;
-    if (observerElementsMap.has(element.observer)) {
-        targets = observerElementsMap.get(element.observer);
-    } else {
-        targets = new Set();
-        observerElementsMap.set(element.observer, targets);
+    if (!observerElementsMap.has(element.observer)) {
+        observerElementsMap.set(element.observer, new Set());
     }
-    targets.add(element);
+    observerElementsMap.get(element.observer).add(element);
     element.observer.observe(element.target);
 }
 
