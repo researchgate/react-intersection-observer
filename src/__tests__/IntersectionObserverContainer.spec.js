@@ -1,6 +1,6 @@
 /* eslint-env jest */
 import 'intersection-observer';
-import IntersectionObserverContainer, { storage, getPooled } from '../IntersectionObserverContainer';
+import IntersectionObserverContainer, { observerElementsMap, getPooled } from '../IntersectionObserverContainer';
 
 const IntersectionObserver = window.IntersectionObserver;
 const defaultOptions = { rootMargin: '-10% 0%', threshold: [0, 0.5, 1] };
@@ -19,16 +19,16 @@ test('IntersectionObserverContainer creates a new IntersectionObserver instance'
     window.IntersectionObserver = IntersectionObserver;
 });
 
-test('clear removes all pooled objects from storage', () => {
+test('clear removes all pooled objects from observerElementsMap', () => {
     const instance = new IntersectionObserver(noop, defaultOptions);
-    storage.set(instance);
+    observerElementsMap.set(instance);
     IntersectionObserverContainer.clear();
-    expect(storage.size).toEqual(0);
+    expect(observerElementsMap.size).toEqual(0);
 });
 
-test('count returns the size of the storage', () => {
+test('count returns the size of the observerElementsMap', () => {
     const instance = new IntersectionObserver(noop, defaultOptions);
-    storage.set(instance);
+    observerElementsMap.set(instance);
     expect(IntersectionObserverContainer.count()).toEqual(1);
 });
 
@@ -37,7 +37,7 @@ describe('#getPooled', () => {
 
     beforeEach(() => {
         instance = new IntersectionObserver(noop, defaultOptions);
-        storage.set(instance);
+        observerElementsMap.set(instance);
     });
 
     test('returns nothing given options did not match', () => {
@@ -67,11 +67,11 @@ describe('#getPooled', () => {
 });
 
 describe('#observe', () => {
-    test('observing a React instance when observer is already in storage', () => {
+    test('observing a React instance when observer is already in observerElementsMap', () => {
         const observer = IntersectionObserverContainer.create(noop, defaultOptions);
         const spy = jest.spyOn(observer, 'observe');
         const targets = new Set();
-        storage.set(observer, targets);
+        observerElementsMap.set(observer, targets);
         const element = { target: { nodeType: 1, id: 1 }, observer };
         IntersectionObserverContainer.observe(element);
 
@@ -79,12 +79,12 @@ describe('#observe', () => {
         expect(spy).toBeCalled();
     });
 
-    test('observing a React instance when observer is not in storage yet', () => {
+    test('observing a React instance when observer is not in observerElementsMap yet', () => {
         const observer = IntersectionObserverContainer.create(noop, defaultOptions);
         const spy = jest.spyOn(observer, 'observe');
         const element = { target: { nodeType: 1, id: 2 }, observer };
         IntersectionObserverContainer.observe(element);
-        const targets = Array.from(storage.get(observer));
+        const targets = Array.from(observerElementsMap.get(observer));
 
         expect(targets[0]).toEqual(element);
         expect(spy).toBeCalled();
@@ -101,7 +101,7 @@ describe('#unobserve', () => {
         IntersectionObserverContainer.observe(element2);
         IntersectionObserverContainer.unobserve(element1);
 
-        expect(storage.has(observer)).toBeTruthy();
+        expect(observerElementsMap.has(observer)).toBeTruthy();
         expect(spy.mock.calls[0][0]).toEqual({ nodeType: 1, id: 1 });
     });
 
@@ -112,7 +112,7 @@ describe('#unobserve', () => {
         IntersectionObserverContainer.observe(element);
         IntersectionObserverContainer.unobserve(element);
 
-        expect(storage.has(observer)).toBeFalsy();
+        expect(observerElementsMap.has(observer)).toBeFalsy();
         expect(spy).toBeCalled();
     });
 });

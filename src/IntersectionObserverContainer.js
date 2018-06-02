@@ -1,6 +1,6 @@
 import { parseRootMargin, shallowCompareOptions } from './utils';
 
-export const storage = new Map();
+export const observerElementsMap = new Map();
 
 export function getPooled(options = {}) {
     const root = options.root || null;
@@ -8,7 +8,7 @@ export function getPooled(options = {}) {
     const threshold = Array.isArray(options.threshold)
         ? options.threshold
         : [typeof options.threshold !== 'undefined' ? options.threshold : 0];
-    const observers = storage.keys();
+    const observers = observerElementsMap.keys();
     let observer;
     while ((observer = observers.next().value)) {
         const unmatched = [
@@ -34,7 +34,7 @@ export default class IntersectionObserverContainer {
     }
 
     static findElement(entry, observer) {
-        const elements = storage.get(observer);
+        const elements = observerElementsMap.get(observer);
         if (elements) {
             const values = elements.values();
             let element;
@@ -49,35 +49,35 @@ export default class IntersectionObserverContainer {
 
     static observe(element) {
         let targets;
-        if (storage.has(element.observer)) {
-            targets = storage.get(element.observer);
+        if (observerElementsMap.has(element.observer)) {
+            targets = observerElementsMap.get(element.observer);
         } else {
             targets = new Set();
-            storage.set(element.observer, targets);
+            observerElementsMap.set(element.observer, targets);
         }
         targets.add(element);
         element.observer.observe(element.target);
     }
 
     static unobserve(element) {
-        if (storage.has(element.observer)) {
-            const targets = storage.get(element.observer);
+        if (observerElementsMap.has(element.observer)) {
+            const targets = observerElementsMap.get(element.observer);
             if (targets.delete(element)) {
                 if (targets.size > 0) {
                     element.observer.unobserve(element.target);
                 } else {
                     element.observer.disconnect();
-                    storage.delete(element.observer);
+                    observerElementsMap.delete(element.observer);
                 }
             }
         }
     }
 
     static clear() {
-        storage.clear();
+        observerElementsMap.clear();
     }
 
     static count() {
-        return storage.size;
+        return observerElementsMap.size;
     }
 }
