@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import invariant from 'invariant';
 import warning from 'warning';
 import { createObserver, observeElement, unobserveElement } from './observer';
-import { isDOMTypeElement, shallowCompareOptions } from './utils';
+import { isDOMTypeElement, shallowCompare } from './utils';
 
 const observerOptions = ['root', 'rootMargin', 'threshold'];
 const observerProps = ['disabled'].concat(observerOptions);
@@ -144,7 +144,7 @@ export default class IntersectionObserver extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        const propsChanged = observerProps.some(prop => shallowCompareOptions(this.props[prop], prevProps[prop]));
+        const propsChanged = observerProps.some(prop => shallowCompare(this.props[prop], prevProps[prop]));
 
         if (propsChanged) {
             this.unobserve();

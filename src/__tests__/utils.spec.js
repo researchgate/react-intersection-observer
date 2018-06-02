@@ -1,6 +1,6 @@
 /* eslint-env jest */
 import React from 'react';
-import { isDOMTypeElement, parseRootMargin, shallowCompareOptions } from '../utils';
+import { isDOMTypeElement, parseRootMargin, shallowCompare } from '../utils';
 
 describe('isDOMTypeElement', () => {
     test('returns false when is not a valid React element', () => {
@@ -33,10 +33,10 @@ describe('parseRootMargin', () => {
     });
 });
 
-describe('shallowCompareOptions', () => {
+describe('shallowCompare', () => {
     const comparerFn = (nextProps, prevProps) =>
         ['disabled', 'root', 'rootMargin', 'threshold'].some(option =>
-            shallowCompareOptions(nextProps[option], prevProps[option]),
+            shallowCompare(nextProps[option], prevProps[option]),
         );
 
     test('should return true if threshold array length is not the same', () => {

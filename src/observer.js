@@ -1,4 +1,4 @@
-import { parseRootMargin, shallowCompareOptions } from './utils';
+import { parseRootMargin, shallowCompare } from './utils';
 
 export const observerElementsMap = new Map();
 
@@ -14,7 +14,7 @@ export function getPooled(options = {}) {
         const unmatched =
             root !== observer.root ||
             rootMargin !== observer.rootMargin ||
-            shallowCompareOptions(threshold, observer.thresholds);
+            shallowCompare(threshold, observer.thresholds);
 
         if (!unmatched) {
             return observer;
