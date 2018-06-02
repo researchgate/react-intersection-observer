@@ -24,51 +24,45 @@ export function getPooled(options = {}) {
     return null;
 }
 
-/**
- * If instances of a class can be reused because the options map,
- * we avoid creating instances of Intersection Observer by reusing them.
- */
-export default class IntersectionObserverContainer {
-    static create(callback, options) {
-        return getPooled(options) || new IntersectionObserver(callback, options);
-    }
-
-    static findElement(entry, observer) {
-        const elements = observerElementsMap.get(observer);
-        if (elements) {
-            const values = elements.values();
-            let element;
-            while ((element = values.next().value)) {
-                if (element.target === entry.target) {
-                    return element;
-                }
+export function findObserverElement(entry, observer) {
+    const elements = observerElementsMap.get(observer);
+    if (elements) {
+        const values = elements.values();
+        let element;
+        while ((element = values.next().value)) {
+            if (element.target === entry.target) {
+                return element;
             }
         }
-        return null;
     }
+    return null;
+}
 
-    static observe(element) {
-        let targets;
-        if (observerElementsMap.has(element.observer)) {
-            targets = observerElementsMap.get(element.observer);
-        } else {
-            targets = new Set();
-            observerElementsMap.set(element.observer, targets);
-        }
-        targets.add(element);
-        element.observer.observe(element.target);
+export function createObserver(callback, options) {
+    return getPooled(options) || new IntersectionObserver(callback, options);
+}
+
+export function observeElement(element) {
+    let targets;
+    if (observerElementsMap.has(element.observer)) {
+        targets = observerElementsMap.get(element.observer);
+    } else {
+        targets = new Set();
+        observerElementsMap.set(element.observer, targets);
     }
+    targets.add(element);
+    element.observer.observe(element.target);
+}
 
-    static unobserve(element) {
-        if (observerElementsMap.has(element.observer)) {
-            const targets = observerElementsMap.get(element.observer);
-            if (targets.delete(element)) {
-                if (targets.size > 0) {
-                    element.observer.unobserve(element.target);
-                } else {
-                    element.observer.disconnect();
-                    observerElementsMap.delete(element.observer);
-                }
+export function unobserveElement(element) {
+    if (observerElementsMap.has(element.observer)) {
+        const targets = observerElementsMap.get(element.observer);
+        if (targets.delete(element)) {
+            if (targets.size > 0) {
+                element.observer.unobserve(element.target);
+            } else {
+                element.observer.disconnect();
+                observerElementsMap.delete(element.observer);
             }
         }
     }

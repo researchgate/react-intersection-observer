@@ -3,7 +3,7 @@ import 'intersection-observer';
 import React from 'react';
 import renderer from 'react-test-renderer';
 import IntersectionObserver, { callback } from '../IntersectionObserver';
-import IntersectionObserverContainer, { observerElementsMap } from '../IntersectionObserverContainer';
+import { findObserverElement, observerElementsMap } from '../IntersectionObserverContainer';
 
 function mockUtilsFunctions() {
     const utils = require.requireActual('../utils');
@@ -93,7 +93,7 @@ test("should save target in the observer targets' list on mount", () => {
     );
     const tree = renderer.create(component, { createNodeMock: () => target });
     const observer = tree.getInstance().observer;
-    const retrieved = IntersectionObserverContainer.findElement({ target }, observer);
+    const retrieved = findObserverElement({ target }, observer);
 
     expect(retrieved).toEqual(tree.getInstance());
 });
@@ -108,7 +108,7 @@ test("should remove target from the observer targets' list on umount", () => {
     const instance = tree.getInstance();
     const observer = instance.observer;
     tree.unmount();
-    const retrieved = IntersectionObserverContainer.findElement({ target }, observer);
+    const retrieved = findObserverElement({ target }, observer);
 
     expect(retrieved).toBeNull();
 });
@@ -249,7 +249,7 @@ describe('update', () => {
     });
 
     test('should be defensive against unobserving nullified nodes', () => {
-        const spy = jest.spyOn(IntersectionObserverContainer, 'unobserve');
+        const sizeAfterObserving = observerElementsMap.size + 1;
         const component = (
             <IntersectionObserver onChange={noop}>
                 <span />
@@ -261,7 +261,7 @@ describe('update', () => {
         tree.getInstance().target = null;
         tree.getInstance().unobserve();
 
-        expect(spy).not.toBeCalled();
+        expect(observerElementsMap.size).toBe(sizeAfterObserving);
     });
 
     test('should not reobserve on a second render after root changed the first time', () => {
@@ -431,10 +431,10 @@ describe('handleChange', () => {
                     <span />
                 </IntersectionObserver>
             );
-            const spy = jest.spyOn(IntersectionObserverContainer, 'observe');
+            const sizeBefore = observerElementsMap.size;
             renderer.create(component, { createNodeMock: () => target });
 
-            expect(spy).not.toBeCalled();
+            expect(observerElementsMap.size).toBe(sizeBefore);
         });
 
         test('should observe if not disabled', () => {
@@ -443,10 +443,10 @@ describe('handleChange', () => {
                     <span />
                 </IntersectionObserver>
             );
-            const spy = jest.spyOn(IntersectionObserverContainer, 'observe');
+            const sizeAfterObserving = observerElementsMap.size + 1;
             renderer.create(component, { createNodeMock: () => target }).getInstance();
 
-            expect(spy).toBeCalled();
+            expect(observerElementsMap.size).toBe(sizeAfterObserving);
         });
 
         test('should observe if no longer disabled', () => {

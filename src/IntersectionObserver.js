@@ -3,7 +3,7 @@ import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import invariant from 'invariant';
 import warning from 'warning';
-import IntersectionObserverContainer from './IntersectionObserverContainer';
+import { createObserver, findObserverElement, observeElement, unobserveElement } from './IntersectionObserverContainer';
 import { isDOMTypeElement, shallowCompareOptions } from './utils';
 
 /**
@@ -16,7 +16,7 @@ import { isDOMTypeElement, shallowCompareOptions } from './utils';
  */
 export function callback(changes, observer) {
     changes.forEach(entry => {
-        const instance = IntersectionObserverContainer.findElement(entry, observer);
+        const instance = findObserverElement(entry, observer);
         if (instance) {
             instance.handleChange(entry);
         }
@@ -143,13 +143,13 @@ export default class IntersectionObserver extends React.Component {
 
     observe() {
         this.target = isDOMTypeElement(this.target) ? this.target : findDOMNode(this.target);
-        this.observer = IntersectionObserverContainer.create(callback, this.options);
-        IntersectionObserverContainer.observe(this);
+        this.observer = createObserver(callback, this.options);
+        observeElement(this);
     }
 
     unobserve = () => {
         if (this.target != null) {
-            IntersectionObserverContainer.unobserve(this);
+            unobserveElement(this);
         }
     };
 
