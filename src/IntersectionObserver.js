@@ -3,27 +3,11 @@ import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import invariant from 'invariant';
 import warning from 'warning';
-import IntersectionObserverContainer from './IntersectionObserverContainer';
-import { isDOMTypeElement, shallowCompareOptions } from './utils';
-
-/**
- * The Intersection Observer API callback that is called whenever one element,
- * called the target, intersects either the device viewport or a specified element.
- * Also will get caled whenever the visibility of the target element changes and
- * crosses desired amounts of intersection with the root.
- * @param {array} changes
- * @param {IntersectionObserver} observer
- */
-export function callback(changes, observer) {
-    changes.forEach(entry => {
-        const instance = IntersectionObserverContainer.findElement(entry, observer);
-        if (instance) {
-            instance.handleChange(entry);
-        }
-    });
-}
+import { createObserver, observeElement, unobserveElement } from './observer';
+import { isDOMTypeElement, shallowCompare } from './utils';
 
 const observerOptions = ['root', 'rootMargin', 'threshold'];
+const observerProps = ['disabled'].concat(observerOptions);
 const objectProto = Object.prototype;
 
 export default class IntersectionObserver extends React.Component {
@@ -86,18 +70,12 @@ export default class IntersectionObserver extends React.Component {
     };
 
     get options() {
-        return observerOptions.reduce((prev, key) => {
+        return observerOptions.reduce((options, key) => {
             if (objectProto.hasOwnProperty.call(this.props, key)) {
-                let value = this.props[key];
-                if (key === 'root' && objectProto.toString.call(this.props[key]) === '[object String]') {
-                    value = document.querySelector(value);
-                }
-                return {
-                    ...prev,
-                    [key]: value,
-                };
+                const useQuery = key === 'root' && objectProto.toString.call(this.props[key]) === '[object String]';
+                options[key] = useQuery ? document.querySelector(this.props[key]) : this.props[key];
             }
-            return prev;
+            return options;
         }, {});
     }
 
@@ -116,49 +94,41 @@ export default class IntersectionObserver extends React.Component {
                 this.unobserve();
             }
         }
-        warning(
-            !this.props.hasOwnProperty('onlyOnce'),
-            'ReactIntersectionObserver: [deprecation] Use the second argument of onChange to unobserve a target instead of onlyOnce. This prop will be removed in the next major version.',
-        );
+        // eslint-disable-next-line no-undef
+        if (process.env.NODE_ENV !== 'production') {
+            warning(
+                !this.props.hasOwnProperty('onlyOnce'),
+                'ReactIntersectionObserver: [deprecation] Use the second argument of onChange to unobserve a target instead of onlyOnce. This prop will be removed in the next major version.',
+            );
+        }
     };
 
     handleNode = target => {
         if (typeof this.props.children.ref === 'function') {
             this.props.children.ref(target);
         }
-        if (this.renderedTarget && target && this.renderedTarget !== target) {
+        /**
+         * This is a bit ugly: would like to use getSnapshotBeforeUpdate(), but we do not want to depend on
+         * react-lifecycles-compat to support React versions prior to 16.3 as this extra boolean gets the job done.
+         */
+        this.targetChanged = (this.renderedTarget && target) != null && this.renderedTarget !== target;
+        if (this.targetChanged) {
             this.unobserve();
-            this.targetChanged = true;
-        } else {
-            this.targetChanged = false;
         }
         this.target = target;
     };
 
-    compareObserverProps(prevProps) {
-        return observerOptions
-            .concat(['disabled'])
-            .some(option => shallowCompareOptions(this.props[option], prevProps[option]));
-    }
-
-    observe() {
+    observe = () => {
         this.target = isDOMTypeElement(this.target) ? this.target : findDOMNode(this.target);
-        this.observer = IntersectionObserverContainer.create(callback, this.options);
-        IntersectionObserverContainer.observe(this);
-    }
+        this.observer = createObserver(this.options);
+        observeElement(this);
+    };
 
     unobserve = () => {
         if (this.target != null) {
-            IntersectionObserverContainer.unobserve(this);
+            unobserveElement(this);
         }
     };
-
-    reobserve() {
-        this.unobserve();
-        if (!this.props.disabled) {
-            this.observe();
-        }
-    }
 
     componentDidMount() {
         // eslint-disable-next-line no-undef
@@ -174,8 +144,16 @@ export default class IntersectionObserver extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.targetChanged || this.compareObserverProps(prevProps)) {
-            this.reobserve();
+        const propsChanged = observerProps.some(prop => shallowCompare(this.props[prop], prevProps[prop]));
+
+        if (propsChanged) {
+            this.unobserve();
+        }
+
+        if (this.targetChanged || propsChanged) {
+            if (!this.props.disabled) {
+                this.observe();
+            }
         }
     }
 

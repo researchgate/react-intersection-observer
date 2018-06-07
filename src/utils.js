@@ -18,10 +18,10 @@ export function parseRootMargin(rootMargin) {
     return `${m0} ${m1} ${m2} ${m3}`;
 }
 
-export function shallowCompareOptions(next, prev) {
+export function shallowCompare(next, prev) {
     if (Array.isArray(next) && Array.isArray(prev)) {
         if (next.length === prev.length) {
-            return next.some((_, index) => shallowCompareOptions(next[index], prev[index]));
+            return next.some((_, index) => shallowCompare(next[index], prev[index]));
         }
     }
     return next !== prev;

@@ -2,8 +2,8 @@
 import 'intersection-observer';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import IntersectionObserver, { callback } from '../IntersectionObserver';
-import IntersectionObserverContainer from '../IntersectionObserverContainer';
+import IntersectionObserver from '../IntersectionObserver';
+import { callback, findObserverElement, observerElementsMap } from '../observer';
 
 function mockUtilsFunctions() {
     const utils = require.requireActual('../utils');
@@ -30,7 +30,7 @@ afterAll(() => {
 });
 
 afterEach(() => {
-    IntersectionObserverContainer.clear();
+    observerElementsMap.clear();
 });
 
 test('throws when the property children is not an only child', () => {
@@ -93,7 +93,7 @@ test("should save target in the observer targets' list on mount", () => {
     );
     const tree = renderer.create(component, { createNodeMock: () => target });
     const observer = tree.getInstance().observer;
-    const retrieved = IntersectionObserverContainer.findElement({ target }, observer);
+    const retrieved = findObserverElement(observer, { target });
 
     expect(retrieved).toEqual(tree.getInstance());
 });
@@ -108,7 +108,7 @@ test("should remove target from the observer targets' list on umount", () => {
     const instance = tree.getInstance();
     const observer = instance.observer;
     tree.unmount();
-    const retrieved = IntersectionObserverContainer.findElement({ target }, observer);
+    const retrieved = findObserverElement(observer, { target });
 
     expect(retrieved).toBeNull();
 });
@@ -123,14 +123,16 @@ describe('update', () => {
         const tree = renderer.create(component, { createNodeMock: () => target });
         const instance = tree.getInstance();
 
-        const spy = jest.spyOn(instance, 'reobserve');
+        const spy1 = jest.spyOn(instance, 'observe');
+        const spy2 = jest.spyOn(instance, 'unobserve');
 
         tree.update(
             <IntersectionObserver onChange={noop} rootMargin="20% 10%">
                 <span />
             </IntersectionObserver>,
         );
-        expect(spy).toBeCalled();
+        expect(spy1).toHaveBeenCalledTimes(1);
+        expect(spy2).toHaveBeenCalledTimes(1);
     });
 
     test('should cleanup when tree reconciliation has led to a full rebuild', () => {
@@ -165,7 +167,7 @@ describe('update', () => {
             </IntersectionObserver>,
         );
 
-        expect(spy1).toHaveBeenCalledTimes(2);
+        expect(spy1).toHaveBeenCalledTimes(1);
         expect(spy2).toHaveBeenCalledTimes(1);
         expect(instance.target).toBe(target);
     });
@@ -249,7 +251,7 @@ describe('update', () => {
     });
 
     test('should be defensive against unobserving nullified nodes', () => {
-        const spy = jest.spyOn(IntersectionObserverContainer, 'unobserve');
+        const sizeAfterObserving = observerElementsMap.size + 1;
         const component = (
             <IntersectionObserver onChange={noop}>
                 <span />
@@ -261,7 +263,7 @@ describe('update', () => {
         tree.getInstance().target = null;
         tree.getInstance().unobserve();
 
-        expect(spy).not.toBeCalled();
+        expect(observerElementsMap.size).toBe(sizeAfterObserving);
     });
 
     test('should not reobserve on a second render after root changed the first time', () => {
@@ -281,7 +283,8 @@ describe('update', () => {
             },
         });
         const instance = tree.getInstance();
-        const spy = jest.spyOn(instance, 'reobserve');
+        const spy1 = jest.spyOn(instance, 'observe');
+        const spy2 = jest.spyOn(instance, 'unobserve');
 
         tree.update(
             <IntersectionObserver onChange={noop}>
@@ -295,7 +298,8 @@ describe('update', () => {
             </IntersectionObserver>,
         );
 
-        expect(spy).toHaveBeenCalledTimes(1);
+        expect(spy1).toHaveBeenCalledTimes(1);
+        expect(spy2).toHaveBeenCalledTimes(1);
     });
 });
 
@@ -312,7 +316,7 @@ describe('callback', () => {
         const instance = renderer.create(component, { createNodeMock: () => target1 }).getInstance();
         renderer.create(React.cloneElement(component), { createNodeMock: () => target2 });
 
-        expect(IntersectionObserverContainer.count()).toBe(1);
+        expect(observerElementsMap.size).toBe(1);
 
         const boundingClientRect = {};
         const intersectionRect = {};
@@ -431,10 +435,10 @@ describe('handleChange', () => {
                     <span />
                 </IntersectionObserver>
             );
-            const spy = jest.spyOn(IntersectionObserverContainer, 'observe');
+            const sizeBefore = observerElementsMap.size;
             renderer.create(component, { createNodeMock: () => target });
 
-            expect(spy).not.toBeCalled();
+            expect(observerElementsMap.size).toBe(sizeBefore);
         });
 
         test('should observe if not disabled', () => {
@@ -443,10 +447,10 @@ describe('handleChange', () => {
                     <span />
                 </IntersectionObserver>
             );
-            const spy = jest.spyOn(IntersectionObserverContainer, 'observe');
+            const sizeAfterObserving = observerElementsMap.size + 1;
             renderer.create(component, { createNodeMock: () => target }).getInstance();
 
-            expect(spy).toBeCalled();
+            expect(observerElementsMap.size).toBe(sizeAfterObserving);
         });
 
         test('should observe if no longer disabled', () => {
