@@ -28,11 +28,11 @@ is fully declarative and takes care of all the imperative parts for you.
 <details>
 <summary><strong>Table of Contents</strong></summary>
 
-* [What does IntersectionObserver do?](#what-does-intersectionobserver-do)
 * [Getting started](#getting-started)
   * [Installation](#installation)
   * [Inside your codebase](#inside-your-codebase)
-* [Why ReactIntersectionObserver?](#why-reactintersectionobserver)
+* [What does IntersectionObserver do?](#what-does-intersectionobserver-do)
+* [Why use this component?](#why-use-this-component)
   * [No bookkeeping](#no-bookkeeping)
   * [No extra markup](#no-extra-markup)
   * [Easy to adopt](#easy-to-adopt)
@@ -47,27 +47,10 @@ is fully declarative and takes care of all the imperative parts for you.
 
 ---
 
-## What does IntersectionObserver do?
-
-> IntersectionObservers calculate how much of a target element overlaps (or "intersects with") the visible portion of a
-> page, also known as the browser's "viewport":
->
-> \- >
-> [Dan Callahan](https://hacks.mozilla.org/2017/08/intersection-observer-comes-to-firefox/)&nbsp;&middot;&nbsp;<a href="https://creativecommons.org/licenses/by-sa/3.0/"> >
-> <img id="licensebutton_slim" alt="Creative Commons License" src="https://i.creativecommons.org/l/by-sa/3.0/80x15.png" style="margin-right:10px;margin-bottom:4px; border: 0;"></a>
-
-![Graphic example](https://hacks.mozilla.org/files/2017/08/Blank-Diagram-Page-1.png)
-
 ## Getting started
 
 ```shell
 npm install --save @researchgate/react-intersection-observer
-```
-
-Optionally add the polyfill and make sure it's required on your dependendencies for unsupporting browsers:
-
-```shell
-npm install --save intersection-observer
 ```
 
 Usage:
@@ -100,7 +83,23 @@ class ExampleComponent extends React.Component {
 }
 ```
 
-## Why ReactIntersectionObserver?
+Optionally add the **polyfill** and make sure it's required on your dependendencies for unsupporting browsers:
+
+```shell
+npm install --save intersection-observer
+```
+
+## What does IntersectionObserver do?
+
+> IntersectionObservers calculate how much of a target element overlaps (or "intersects with") the visible portion of a
+> page, also known as the browser's "viewport":
+>
+> [Dan Callahan](https://hacks.mozilla.org/2017/08/intersection-observer-comes-to-firefox/) · <a href="https://creativecommons.org/licenses/by-sa/3.0/">
+> <img id="licensebutton_slim" alt="Creative Commons License" src="https://i.creativecommons.org/l/by-sa/3.0/80x15.png" style="margin-right:10px;margin-bottom:4px; border: 0;"></a>
+
+![Graphic example](https://hacks.mozilla.org/files/2017/08/Blank-Diagram-Page-1.png)
+
+## Why use this component?
 
 The motivation is to provide the easiest possible solution for observing elements that enter the viewport on your
 **React** codebase. It's fully declarative and all complexity is abstracted away, focusing on reusability, and low
@@ -150,6 +149,51 @@ Find multiple examples and usage guidelines under:
 Recipes are useful code snippets solutions to common problems, for example, how to use ReactIntersectionObserver within
 a
 [Higher Order Component](https://researchgate.github.io/react-intersection-observer/?selectedKind=Recipes&selectedStory=Higher%20Order%20Component).
+<br>
+Here's how to create an **element monitoring** component:
+
+```jsx
+import React, { Component } from 'react';
+import Observer from '@researchgate/react-intersection-observer';
+
+export default class ViewableMonitor extends Component {
+    state = {
+        isIntersecting: false,
+    }
+
+    handleChange = ({ isIntersecting }) => {
+        this.setState({ isIntersecting });
+    };
+    
+    render() {
+        const { children, mount: Tag, ...rest } = this.props;
+        let element = children(this.state.isIntersecting);
+
+        if (Tag) {
+            element = <Tag>{element}</Tag>;
+        }
+
+        return (
+            <Observer {...rest} onChange={this.handleChange}>
+                {element}
+            </Observer>
+        );
+    }
+}
+```
+
+```jsx
+import React from 'react';
+import ViewableMonitor from './ViewableMonitor';
+
+export default () => (
+    <ViewableMonitor>
+        {isViewable =>
+            isViewable ? 'I am viewable' : 'I am still hiding'
+        }
+    </ViewableMonitor>
+);
+```
 
 Discover more recipes in our [examples section](docs/README.md).
 
@@ -191,8 +235,8 @@ Single React component or element that is used as the target (observable).
 * Changes happen asynchronously, similar to the way `requestIdleCallback` works.
 * Although you can consider callbacks immediate - always below 1 second - you can also get an immediate response on an
   element's visibility with `observer.takeRecords()`.
-* The primitives `Map` an `Set` are required. You may need to include a polyfill
-  for browsers lacking ES2015 support. If you're using babel, include `"babel-polyfill"` somewhere to your codebase.
+* The primitives `Map` an `Set` are required. You may need to include a polyfill for browsers lacking ES2015 support. If
+  you're using babel, include `"babel-polyfill"` somewhere to your codebase.
 
 ## Polyfill
 
