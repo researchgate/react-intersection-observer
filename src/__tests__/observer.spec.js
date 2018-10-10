@@ -120,11 +120,6 @@ describe('#findObserverElement', () => {
         expect(instance).toBeNull();
     });
 
-    test('given an entry without target property throws', () => {
-        createObserver();
-        expect(() => observeElement({})).toThrowErrorMatchingSnapshot();
-    });
-
     test('an entry matches the observer - single observer instance', () => {
         const observer = createObserver();
         const entry = { target: { nodeType: 1, id: 1 }, observer };

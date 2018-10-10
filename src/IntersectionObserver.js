@@ -17,7 +17,7 @@ export default class IntersectionObserver extends React.Component {
         /**
          * The element that is used as the target to observe.
          */
-        children: PropTypes.element.isRequired,
+        children: PropTypes.element,
 
         /**
          * The element that is used as the viewport for checking visibility of the target.
@@ -163,6 +163,10 @@ export default class IntersectionObserver extends React.Component {
 
     render() {
         this.renderedTarget = this.target; // this value is null on the first render
+
+        if (!this.props.children) {
+            return null;
+        }
 
         return React.cloneElement(React.Children.only(this.props.children), {
             ref: this.handleNode,

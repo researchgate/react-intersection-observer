@@ -63,7 +63,9 @@ export function observeElement(element) {
         observerElementsMap.set(element.observer, new Set());
     }
     observerElementsMap.get(element.observer).add(element);
-    element.observer.observe(element.target);
+    if (element.target) {
+        element.observer.observe(element.target);
+    }
 }
 
 export function unobserveElement(element) {
