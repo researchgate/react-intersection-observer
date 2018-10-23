@@ -104,9 +104,18 @@ export default class IntersectionObserver extends React.Component {
     };
 
     handleNode = target => {
-        if (typeof this.props.children.ref === 'function') {
-            this.props.children.ref(target);
+        /**
+         * Forward hijacked ref to user.
+         */
+        const nodeRef = this.props.children.ref;
+        if (nodeRef) {
+            if (typeof nodeRef === 'function') {
+                nodeRef(target);
+            } else if (typeof nodeRef === 'object') {
+                nodeRef.current = target;
+            }
         }
+
         /**
          * This is a bit ugly: would like to use getSnapshotBeforeUpdate(), but we do not want to depend on
          * react-lifecycles-compat to support React versions prior to 16.3 as this extra boolean gets the job done.

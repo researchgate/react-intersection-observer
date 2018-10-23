@@ -72,6 +72,19 @@ test('should call ref callback of children', () => {
     expect(spy).toHaveBeenCalledWith(target);
 });
 
+test('should handle children ref of type RefObject', () => {
+    const ref = React.createRef();
+    const component = (
+        <IntersectionObserver onChange={noop}>
+            <span ref={ref} />
+        </IntersectionObserver>
+    );
+
+    renderer.create(component, { createNodeMock: () => target });
+
+    expect(ref.current).toEqual(target);
+});
+
 test('options getter returns propTypes `root`, `rootMargin` and `threshold`', () => {
     const options = { root: { nodeType: 1 }, rootMargin: '50% 0%', threshold: [0, 1] };
     const component = (
