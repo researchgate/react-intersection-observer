@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.7.4"></a>
+## [0.7.4](https://github.com/researchgate/react-intersection-observer/compare/v0.7.3...v0.7.4) (2018-10-23)
+
+
+### Bug Fixes
+
+* **ref:** Handle ref objects in children prop. ([609e1a5](https://github.com/researchgate/react-intersection-observer/commit/609e1a5))
+
+
+
 <a name="0.7.3"></a>
 ## [0.7.3](https://github.com/researchgate/react-intersection-observer/compare/v0.7.2...v0.7.3) (2018-06-07)
 
