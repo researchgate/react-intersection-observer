@@ -155,9 +155,19 @@ Here's how to create an **element monitoring** component:
 
 ```jsx
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Observer from '@researchgate/react-intersection-observer';
 
 export default class ViewableMonitor extends Component {
+    static propTypes = {
+        tag: PropTypes.node,
+        children: PropTypes.func.isRequired,
+    }
+
+    static defaultProps = {
+        tag: 'div',
+    }
+
     state = {
         isIntersecting: false,
     }
@@ -167,16 +177,13 @@ export default class ViewableMonitor extends Component {
     };
     
     render() {
-        const { children, mount: Tag, ...rest } = this.props;
-        let element = children(this.state.isIntersecting);
-
-        if (Tag) {
-            element = <Tag>{element}</Tag>;
-        }
+        const { tag: Tag, children, ...rest } = this.props;
 
         return (
             <Observer {...rest} onChange={this.handleChange}>
-                {element}
+                <Tag>
+                    {children(this.state.isIntersecting)}
+                </Tag>
             </Observer>
         );
     }

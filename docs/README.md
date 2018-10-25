@@ -20,6 +20,7 @@ common situations that can be approached with ReactIntersectionObserver:
 * [Higher Order Component](docs/components/HigherOrderComponent/)
 * [Tracking Ad Impressions](docs/components/ImpressionTracking/)
 * [Viewable Monitor](docs/components/ViewableMonitor/)
+* [Graceful Degradation](docs/components/NativeObserver/)
 
 ### Can I submit a new recipe?
 
