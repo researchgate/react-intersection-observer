@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`#findObserverElement given an entry without target property throws 1`] = `"Cannot read property 'observe' of undefined"`;
-
-exports[`#getPooled throws if rootMargin cannot be parsed 1`] = `"rootMargin must be a string literal containing pixels and/or percent values"`;
