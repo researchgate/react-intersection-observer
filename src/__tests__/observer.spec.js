@@ -12,6 +12,8 @@ import {
 const IntersectionObserver = window.IntersectionObserver;
 const defaultOptions = { rootMargin: '-10% 0%', threshold: [0, 0.5, 1] };
 const noop = () => {};
+const target1 = { nodeType: 1, id: 1 };
+const target2 = { nodeType: 1, id: 2 };
 
 afterEach(() => {
     observerElementsMap.clear();
@@ -26,7 +28,7 @@ test('createObserver creates a new IntersectionObserver instance', () => {
     window.IntersectionObserver = IntersectionObserver;
 });
 
-describe('#getPooled', () => {
+describe('getPooled', () => {
     let instance;
 
     beforeEach(() => {
@@ -47,7 +49,9 @@ describe('#getPooled', () => {
     });
 
     test('throws if rootMargin cannot be parsed', () => {
-        expect(() => getPooled({ rootMargin: '-10% 0', threshold: 0 })).toThrowErrorMatchingSnapshot();
+        expect(() => getPooled({ rootMargin: '-10% 0', threshold: 0 })).toThrowErrorMatchingInlineSnapshot(
+            `"rootMargin must be a string literal containing pixels and/or percent values"`,
+        );
     });
 
     test('retrieves an existing IntersectionObserver instance given all options match', () => {
@@ -60,13 +64,13 @@ describe('#getPooled', () => {
     });
 });
 
-describe('#observeElement', () => {
+describe('observeElement', () => {
     test('observing a React instance when observer is already in observerElementsMap', () => {
         const observer = createObserver(defaultOptions);
         const spy = jest.spyOn(observer, 'observe');
         const targets = new Set();
         observerElementsMap.set(observer, targets);
-        const element = { target: { nodeType: 1, id: 1 }, observer };
+        const element = { observer, target: target1 };
         observeElement(element);
 
         expect(Array.from(targets)[0]).toEqual(element);
@@ -76,7 +80,7 @@ describe('#observeElement', () => {
     test('observing a React instance when observer is not in observerElementsMap yet', () => {
         const observer = createObserver(defaultOptions);
         const spy = jest.spyOn(observer, 'observe');
-        const element = { target: { nodeType: 1, id: 2 }, observer };
+        const element = { observer, target: target2 };
         observeElement(element);
         const targets = Array.from(observerElementsMap.get(observer));
 
@@ -85,36 +89,36 @@ describe('#observeElement', () => {
     });
 });
 
-describe('#unobserveElement', () => {
+describe('unobserveElement', () => {
     test('unobserving a React instance while instance still in use by other observables', () => {
         const observer = createObserver(defaultOptions);
         const spy = jest.spyOn(observer, 'unobserve');
-        const element1 = { target: { nodeType: 1, id: 1 }, observer };
-        const element2 = { target: { nodeType: 1, id: 2 }, observer };
+        const element1 = { observer, target: target1 };
+        const element2 = { observer, target: target2 };
         observeElement(element1);
         observeElement(element2);
-        unobserveElement(element1);
+        unobserveElement(element1, target1);
 
         expect(observerElementsMap.has(observer)).toBeTruthy();
-        expect(spy.mock.calls[0][0]).toEqual({ nodeType: 1, id: 1 });
+        expect(spy.mock.calls[0][0]).toEqual(target1);
     });
 
     test('unobserving a React instance while instance is not in use anymore', () => {
         const observer = createObserver(defaultOptions);
         const spy = jest.spyOn(observer, 'disconnect');
-        const element = { target: { nodeType: 1, id: 1 }, observer };
+        const element = { observer, target: target1 };
         observeElement(element);
-        unobserveElement(element);
+        unobserveElement(element, target1);
 
         expect(observerElementsMap.has(observer)).toBeFalsy();
         expect(spy).toBeCalled();
     });
 });
 
-describe('#findObserverElement', () => {
+describe('findObserverElement', () => {
     test('given an entry and no observer returns null', () => {
         const observer = createObserver();
-        const entry = { target: { nodeType: 1, id: 1 }, observer };
+        const entry = { observer, target: target1 };
         observeElement(entry);
         const instance = findObserverElement(null, entry);
         expect(instance).toBeNull();
@@ -122,13 +126,15 @@ describe('#findObserverElement', () => {
 
     test('given an entry without target property throws', () => {
         createObserver();
-        expect(() => observeElement({})).toThrowErrorMatchingSnapshot();
+        expect(() => observeElement({})).toThrowErrorMatchingInlineSnapshot(
+            `"Cannot read property 'observe' of undefined"`,
+        );
     });
 
     test('an entry matches the observer - single observer instance', () => {
         const observer = createObserver();
-        const entry = { target: { nodeType: 1, id: 1 }, observer };
-        observeElement(entry);
+        const entry = { observer, target: target1 };
+        observeElement(entry, target1);
         const instance = findObserverElement(observer, entry);
         expect(instance).toEqual(entry);
     });
@@ -136,8 +142,8 @@ describe('#findObserverElement', () => {
     test('an entry matches the observer - multiple observer instances', () => {
         const observer1 = createObserver();
         const observer2 = createObserver(defaultOptions);
-        const entry1 = { target: { nodeType: 1, id: 1 }, observer: observer1 };
-        const entry2 = { target: { nodeType: 1, id: 1 }, observer: observer2 };
+        const entry1 = { observer: observer1, target: target1 };
+        const entry2 = { observer: observer2, target: target1 };
         observeElement(entry1);
         observeElement(entry2);
         const instance1 = findObserverElement(observer1, entry1);
@@ -148,8 +154,8 @@ describe('#findObserverElement', () => {
 
     test('multiple entries match one observer', () => {
         const observer = createObserver();
-        const entry1 = { target: { nodeType: 1, id: 1 }, observer };
-        const entry2 = { target: { nodeType: 1, id: 2 }, observer };
+        const entry1 = { observer, target: target1 };
+        const entry2 = { observer, target: target2 };
         observeElement(entry1);
         observeElement(entry2);
         const instance1 = findObserverElement(observer, entry1);
@@ -161,8 +167,8 @@ describe('#findObserverElement', () => {
     test('multiple entries match multiple observers', () => {
         const observer1 = createObserver();
         const observer2 = createObserver(defaultOptions);
-        const entry1 = { target: { nodeType: 1, id: 1 }, observer: observer1 };
-        const entry2 = { target: { nodeType: 1, id: 2 }, observer: observer2 };
+        const entry1 = { observer: observer1, target: target1 };
+        const entry2 = { observer: observer2, target: target2 };
         observeElement(entry1);
         observeElement(entry2);
         const instance1 = findObserverElement(observer1, entry1);

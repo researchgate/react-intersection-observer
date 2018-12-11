@@ -1,25 +1,21 @@
 language: node_js
 node_js:
-  - "10"
-  - "6"
+  - "8"
+  - "9"
 cache: yarn
 deploy:
   local_dir: docs
   provider: pages
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  github_token: $GITHUB_TOKEN # Set on travis-ci.org dashboard
   on:
-   branch: master
-   condition: '"$TRAVIS_JOB_NUMBER" == *.1'
-before_install: yarn global add greenkeeper-lockfile@1
+    branch: master
+    condition: '"$TRAVIS_JOB_NUMBER" == *.1'
 before_script:
-  - greenkeeper-lockfile-update
-# true needs to be removed after https://github.com/conventional-changelog/conventional-github-releaser/pull/47 is fixed
-  - 'if [[ -n "$TRAVIS_TAG" ]] && [[ "$TRAVIS_JOB_NUMBER" == *.1 ]]; then yarn run create-github-release || true; fi'
+  - 'if [[ -n "$TRAVIS_TAG" ]] && [[ "$TRAVIS_JOB_NUMBER" == *.1 ]]; then yarn run create-github-release; fi'
 script:
   - yarn run lint
-  - yarn test -- --ci --coverage
+  - yarn test --ci --coverage
   - 'if [[ "$TRAVIS_JOB_NUMBER" == *.1 ]]; then yarn run build:storybook; fi'
-after_script: greenkeeper-lockfile-upload
 after_success:
   - bash <(curl -s https://codecov.io/bash)

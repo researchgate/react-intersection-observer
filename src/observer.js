@@ -38,9 +38,9 @@ export function findObserverElement(observer, entry) {
 }
 
 /**
- * The Intersection Observer API callback that is called whenever one element,
- * called the target, intersects either the device viewport or a specified element.
- * Also will get caled whenever the visibility of the target element changes and
+ * The Intersection Observer API callback that is called whenever one element
+ * – namely the target – intersects either the device viewport or a specified element.
+ * Also will get called whenever the visibility of the target element changes and
  * crosses desired amounts of intersection with the root.
  * @param {array} changes
  * @param {IntersectionObserver} observer
@@ -66,12 +66,12 @@ export function observeElement(element) {
     element.observer.observe(element.target);
 }
 
-export function unobserveElement(element) {
+export function unobserveElement(element, target) {
     if (observerElementsMap.has(element.observer)) {
         const targets = observerElementsMap.get(element.observer);
         if (targets.delete(element)) {
             if (targets.size > 0) {
-                element.observer.unobserve(element.target);
+                element.observer.unobserve(target);
             } else {
                 element.observer.disconnect();
                 observerElementsMap.delete(element.observer);
