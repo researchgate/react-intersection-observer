@@ -1,7 +1,7 @@
 {
   "name": "@researchgate/react-intersection-observer",
   "description": "React component for the Intersection Observer API",
-  "version": "0.7.4",
+  "version": "1.0.0-beta.0",
   "author": "Luis Merino <mail@luismerino.name>",
   "engines": {
     "node": "^8.10.0 || >=9.10.0"
@@ -52,13 +52,28 @@
     "typescript": "^3.2.2",
     "validate-commit-msg": "^2.14.0"
   },
-  "files": ["lib", "types/index.d.ts"],
+  "files": [
+    "lib",
+    "types/index.d.ts"
+  ],
   "types": "types/index.d.ts",
   "homepage": "https://github.com/researchgate/react-intersection-observer#readme",
-  "keywords": ["Intersection", "Observer", "react", "component", "viewport", "visible", "invisible", "researchgate"],
+  "keywords": [
+    "Intersection",
+    "Observer",
+    "react",
+    "component",
+    "viewport",
+    "visible",
+    "invisible",
+    "researchgate"
+  ],
   "license": "MIT",
   "lint-staged": {
-    "{src,docs/docs}/**/*.js": ["eslint --fix", "git add"]
+    "{src,docs/docs}/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "main": "lib/js/index.js",
   "module": "lib/es/index.js",
@@ -72,15 +87,17 @@
   },
   "jest": {
     "rootDir": "src",
-    "testMatch": ["**/__tests__/**/*.spec.js"],
-    "setupFiles": ["raf/polyfill"]
+    "testMatch": [
+      "**/__tests__/**/*.spec.js"
+    ],
+    "setupFiles": [
+      "raf/polyfill"
+    ]
   },
   "scripts": {
     "build": "yarn build:js && yarn build:es",
-    "build:js":
-      "cross-env BABEL_ENV=production BABEL_OUTPUT=cjs babel src --out-dir lib/js --ignore __tests__ --copy-files",
-    "build:es":
-      "cross-env BABEL_ENV=production BABEL_OUTPUT=esm babel src --out-dir lib/es --ignore __tests__ --copy-files",
+    "build:js": "cross-env BABEL_ENV=production BABEL_OUTPUT=cjs babel src --out-dir lib/js --ignore __tests__ --copy-files",
+    "build:es": "cross-env BABEL_ENV=production BABEL_OUTPUT=esm babel src --out-dir lib/es --ignore __tests__ --copy-files",
     "build:storybook": "build-storybook --output-dir docs",
     "clear": "rimraf ./lib",
     "commitmsg": "validate-commit-msg",
