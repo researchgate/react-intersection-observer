@@ -9,7 +9,7 @@
   "dependencies": {
     "invariant": "^2.2.2",
     "prop-types": "^15.6.0",
-    "warning": "^3.0.0"
+    "warning": "^4.0.2"
   },
   "devDependencies": {
     "@researchgate/babel-preset-rg": "^1.0.1",
