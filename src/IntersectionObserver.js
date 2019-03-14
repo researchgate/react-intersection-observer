@@ -13,10 +13,11 @@ const objectProto = Object.prototype;
 export default class IntersectionObserver extends React.Component {
     static displayName = 'IntersectionObserver';
 
-    state = {
-        isEntryLogged: false,
-        minThreshold: 0
-      }
+    constructor(props) {
+        super(props);
+        this.isEntred = false;
+        this.minThreshold = 0;
+    }
 
     static propTypes = {
         /**
@@ -82,7 +83,6 @@ export default class IntersectionObserver extends React.Component {
          * Function that will be invoked whenever the intersection ratio for this element goes below least value of threshold
          */
         onExit: PropTypes.func,
-
     };
 
     get options() {
@@ -97,23 +97,23 @@ export default class IntersectionObserver extends React.Component {
 
     setMinThreshold = () => {
         if (Array.isArray(this.props.threshold)) {
-            this.state.minThreshold = this.props.threshold.reduce(function(a, b) {
+            this.minThreshold = this.props.threshold.reduce((a, b) => {
                 return Math.min(a, b);
             });
         } else {
-            this.state.minThreshold = this.props.threshold;
+            this.minThreshold = this.props.threshold;
         }
     };
 
     handleChange = event => {
-        if (!this.state.isEntryLogged && event.intersectionRatio >= minThreshold) {
+        if (!this.isEntred && event.intersectionRatio >= this.minThreshold) {
             this.props.onEntry(event, this.unobserve);
-            this.state.isEntryLogged = true;
+            this.isEntred = true;
         }
 
-        if (this.state.isEntryLogged && event.intersectionRatio < minThreshold) {
+        if (this.isEntred && event.intersectionRatio < this.minThreshold) {
             this.props.onExit(event, this.unobserve);
-            this.state.isEntryLogged = false;
+            this.isEntred = false;
         }
 
         this.props.onChange(event, this.unobserve);
