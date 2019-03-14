@@ -9,4 +9,6 @@ interface Props {
     threshold?: number | number[];
     disabled?: boolean;
     onChange: (entry: IntersectionObserverEntry, unobserve: () => void) => void;
+    onEntry?: (entry: IntersectionObserverEntry, unobserve: () => void) => void;
+    onExit?: (entry: IntersectionObserverEntry, unobserve: () => void) => void;
 }
