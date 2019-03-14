@@ -13,6 +13,11 @@ const objectProto = Object.prototype;
 export default class IntersectionObserver extends React.Component {
     static displayName = 'IntersectionObserver';
 
+    state = {
+        isEntryLogged: false,
+        minThreshold: 0
+      }
+
     static propTypes = {
         /**
          * The element that is used as the target to observe.
@@ -67,6 +72,17 @@ export default class IntersectionObserver extends React.Component {
          * Function that will be invoked whenever the intersection value for this element changes.
          */
         onChange: PropTypes.func.isRequired,
+
+        /**
+         * Function that will be invoked whenever the intersection ratio for this element goes above least value of threshold
+         */
+        onEntry: PropTypes.func,
+
+        /**
+         * Function that will be invoked whenever the intersection ratio for this element goes below least value of threshold
+         */
+        onExit: PropTypes.func,
+
     };
 
     get options() {
@@ -79,7 +95,27 @@ export default class IntersectionObserver extends React.Component {
         }, {});
     }
 
+    setMinThreshold = () => {
+        if (Array.isArray(this.props.threshold)) {
+            this.state.minThreshold = this.props.threshold.reduce(function(a, b) {
+                return Math.min(a, b);
+            });
+        } else {
+            this.state.minThreshold = this.props.threshold;
+        }
+    };
+
     handleChange = event => {
+        if (!this.state.isEntryLogged && event.intersectionRatio >= minThreshold) {
+            this.props.onEntry(event, this.unobserve);
+            this.state.isEntryLogged = true;
+        }
+
+        if (this.state.isEntryLogged && event.intersectionRatio < minThreshold) {
+            this.props.onExit(event, this.unobserve);
+            this.state.isEntryLogged = false;
+        }
+
         this.props.onChange(event, this.unobserve);
 
         if (this.props.onlyOnce) {
@@ -150,6 +186,7 @@ export default class IntersectionObserver extends React.Component {
         if (!this.props.disabled) {
             this.observe();
         }
+        this.setMinThreshold();
     }
 
     componentDidUpdate(prevProps) {
@@ -164,6 +201,7 @@ export default class IntersectionObserver extends React.Component {
                 this.observe();
             }
         }
+        this.setMinThreshold();
     }
 
     componentWillUnmount() {
