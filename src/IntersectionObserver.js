@@ -15,7 +15,7 @@ export default class IntersectionObserver extends React.Component {
 
     constructor(props) {
         super(props);
-        this.isEntred = false;
+        this.isEntered = false;
         this.minThreshold = 0;
     }
 
@@ -106,14 +106,14 @@ export default class IntersectionObserver extends React.Component {
     };
 
     handleChange = event => {
-        if (this.props.onEntry && !this.isEntred && event.intersectionRatio >= this.minThreshold) {
+        if (this.props.onEntry && !this.isEntered && event.intersectionRatio >= this.minThreshold) {
             this.props.onEntry(event, this.unobserve);
-            this.isEntred = true;
+            this.isEntered = true;
         }
 
-        if (this.props.onExit && this.isEntred && event.intersectionRatio < this.minThreshold) {
+        if (this.props.onExit && this.isEntered && event.intersectionRatio < this.minThreshold) {
             this.props.onExit(event, this.unobserve);
-            this.isEntred = false;
+            this.isEntered = false;
         }
 
         this.props.onChange(event, this.unobserve);
