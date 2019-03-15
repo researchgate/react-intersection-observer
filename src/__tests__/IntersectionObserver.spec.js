@@ -349,6 +349,58 @@ describe('callback', () => {
         expect(spy.mock.calls[0][0]).toBe(entry1);
         expect(spy.mock.calls[1][0]).toBe(entry2);
     });
+
+    test('should call propType onEntry and onExit on node entry and exit', () => {
+        const spy = jest.fn();
+        const spyEntry = jest.fn();
+        const spyExit = jest.fn();
+        const component = (
+            <IntersectionObserver onChange={spy} onEntry={spyEntry} onExit={spyExit} threshold={[0.25, 0.5, 0.75]}>
+                <span />
+            </IntersectionObserver>
+        );
+        const target1 = Object.assign({ id: 1 }, target);
+        const instance = renderer.create(component, { createNodeMock: () => target1 }).getInstance();
+
+        const boundingClientRect = { width: 1, height: 1 };
+        const entry1 = new IntersectionObserverEntry({
+            target: target1,
+            boundingClientRect,
+            intersectionRect: { width: 0.26, height: 1 },
+        });
+        const entry2 = new IntersectionObserverEntry({
+            target: target1,
+            boundingClientRect,
+            intersectionRect: { width: 0.51, height: 1 },
+        });
+        const entry3 = new IntersectionObserverEntry({
+            target: target1,
+            boundingClientRect,
+            intersectionRect: { width: 0.76, height: 1 },
+        });
+        const entry4 = new IntersectionObserverEntry({
+            target: target1,
+            boundingClientRect,
+            intersectionRect: { width: 0.74, height: 1 },
+        });
+        const entry5 = new IntersectionObserverEntry({
+            target: target1,
+            boundingClientRect,
+            intersectionRect: { width: 0.49, height: 1 },
+        });
+        const entry6 = new IntersectionObserverEntry({
+            target: target1,
+            boundingClientRect,
+            intersectionRect: { width: 0.24, height: 1 },
+        });
+
+        callback([entry1, entry2, entry3, entry4, entry5, entry6], instance.observer);
+        expect(spy).toHaveBeenCalledTimes(6);
+        expect(spyEntry).toHaveBeenCalledTimes(1);
+        expect(spyExit).toHaveBeenCalledTimes(1);
+        expect(spyEntry.mock.calls[0][0]).toBe(entry1);
+        expect(spyExit.mock.calls[0][0]).toBe(entry6);
+    });
 });
 
 describe('handleChange', () => {
