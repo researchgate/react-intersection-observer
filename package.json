@@ -9,7 +9,8 @@
   "dependencies": {
     "invariant": "^2.2.2",
     "prop-types": "^15.6.0",
-    "warning": "^4.0.2"
+    "warning": "^4.0.2",
+    "intersection-observer": "^0.5.0"
   },
   "devDependencies": {
     "@researchgate/babel-preset-rg": "^1.0.1",
@@ -31,7 +32,6 @@
     "eslint-plugin-prettier": "^2.3.0",
     "eslint-plugin-react": "^7.5.1",
     "husky": "^0.14.3",
-    "intersection-observer": "^0.5.0",
     "jest": "^21.0.0",
     "lint-staged": "^6.0.0",
     "prettier": "^1.8.2",

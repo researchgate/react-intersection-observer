@@ -11,4 +11,6 @@ interface Props {
     onChange: (entry: IntersectionObserverEntry, unobserve: () => void) => void;
     onEntry?: (entry: IntersectionObserverEntry, unobserve: () => void) => void;
     onExit?: (entry: IntersectionObserverEntry, unobserve: () => void) => void;
+    onCertifiedView?: (entry: IntersectionObserverEntry, unobserve: () => void) => void;
+    waitTime?: number;
 }

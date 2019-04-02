@@ -83,6 +83,16 @@ export default class IntersectionObserver extends React.Component {
          * Function that will be invoked whenever the intersection ratio for this element goes below least value of threshold
          */
         onExit: PropTypes.func,
+
+        /**
+         * Function that will be invoked after specified waitTime after entry.
+         */
+        onCertifiedView: PropTypes.func,
+
+        /**
+         * Time interval in miliseconds to wait after entry to call certified view.
+         */
+        waitTime: PropTypes.number,
     };
 
     get options() {
@@ -109,11 +119,17 @@ export default class IntersectionObserver extends React.Component {
         if (this.props.onEntry && !this.isEntered && event.intersectionRatio >= this.minThreshold) {
             this.props.onEntry(event, this.unobserve);
             this.isEntered = true;
+            this.waitForCertifiedView = setTimeout(() => {
+                if (this.props.onCertifiedView) {
+                    this.props.onCertifiedView(event, this.unobserve);
+                }
+            }, this.props.waitTime);
         }
 
         if (this.props.onExit && this.isEntered && event.intersectionRatio < this.minThreshold) {
             this.props.onExit(event, this.unobserve);
             this.isEntered = false;
+            clearTimeout(this.waitForCertifiedView);
         }
 
         this.props.onChange(event, this.unobserve);

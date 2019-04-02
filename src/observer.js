@@ -1,3 +1,4 @@
+import 'intersection-observer'; // polyfill
 import { parseRootMargin, shallowCompare } from './utils';
 
 export const observerElementsMap = new Map();
