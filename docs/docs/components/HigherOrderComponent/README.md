@@ -1,16 +1,21 @@
-## Higher order component
+**Higher order component**
 
-A common way to avoid repetition and dynamic option setting is to use a HOC. Since our component is great at reusing instances based on the passed options, you don't have to worry about creating too many of them.
+A common way to avoid repetition and dynamic option setting is to use a HOC.
+Since our component is great at reusing instances based on the passed options,
+you don't have to worry about creating too many of them.
 
-The next example illustrates in a simple way how a HOC is used to wrap target elements for occlusion culling:
+The next example illustrates in a simple way how a HOC is used to wrap target
+elements for occlusion culling:
 
-### withIntersectionObserver.js
+**withIntersectionObserver.js**
+
 ```jsx
 import React, { Component } from 'react';
 import Observer from '@researchgate/react-intersection-observer';
 
-export default threshold => BaseComponent => {
-  const displayName = BaseComponent.displayName || BaseComponent.name || 'Component';
+export default (threshold) => (BaseComponent) => {
+  const displayName =
+    BaseComponent.displayName || BaseComponent.name || 'Component';
 
   return class WithIntersectionObserver extends Component {
     static displayName = `withIntersectionObserver(${displayName})`;
@@ -20,13 +25,18 @@ export default threshold => BaseComponent => {
     };
 
     handleChange = ({ isIntersecting, intersectionRatio }) => {
-      this.setState({ isIntersecting: isIntersecting && intersectionRatio >= threshold });
+      this.setState({
+        isIntersecting: isIntersecting && intersectionRatio >= threshold,
+      });
     };
 
     render() {
       return (
         <Observer onChange={this.handleChange} threshold={threshold}>
-          <BaseComponent {...this.props} isVisible={this.state.isIntersecting} />
+          <BaseComponent
+            {...this.props}
+            isVisible={this.state.isIntersecting}
+          />
         </Observer>
       );
     }
@@ -34,14 +44,17 @@ export default threshold => BaseComponent => {
 };
 ```
 
-### Target.js
+**Target.js**
+
 ```jsx
 import React, { Component } from 'react';
 
 export default class Target extends Component {
   render() {
     return (
-      <div className={`box ${this.props.isVisible ? 'visible' : 'transparent'}`}>
+      <div
+        className={`box ${this.props.isVisible ? 'visible' : 'transparent'}`}
+      >
         {this.props.isVisible ? 'Visible' : 'Culled'}
       </div>
     );
@@ -49,7 +62,8 @@ export default class Target extends Component {
 }
 ```
 
-### Component.js
+**Component.js**
+
 ```jsx
 import withIntersectionObserver from './WithIntersectionObserver';
 import Target from './Target';
@@ -57,7 +71,8 @@ import Target from './Target';
 export default withIntersectionObserver(0.99)(Target);
 ```
 
-### Example.js
+**Example.js**
+
 ```jsx
 import React from 'react';
 import Component from './Component';

@@ -1,12 +1,13 @@
-## Ad Impressions
+**Ad Impressions**
 
-The requirements for **Viewable Ad Impressions** should generally follow certain guidelines, industry-related standards, some of which are:
+The requirements for **Viewable Ad Impressions** should generally follow certain
+guidelines, industry-related standards, some of which are:
 
-* __Viewable pixels__: Greater than or equal to 50% of the pixels in the
-advertisement were on an in-focus browser tab on the viewable space of
-the browser page.
-* __Viewing time__: The time the pixel requirement is met was greater
-than or equal to one continuous second, post ad render.
+- **Viewable pixels**: Greater than or equal to 50% of the pixels in the
+  advertisement were on an in-focus browser tab on the viewable space of the
+  browser page.
+- **Viewing time**: The time the pixel requirement is met was greater than or
+  equal to one continuous second, post ad render.
 
 ```jsx
 import React from 'react';
@@ -17,7 +18,7 @@ export default class AdImpression extends React.Component {
     tracked: '',
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     if (event.isIntersecting && event.intersectionRatio >= 0.5) {
       this.recordedTimeout = setTimeout(() => {
         this.setState({ tracked: 'ad--tracked' });
@@ -36,6 +37,10 @@ export default class AdImpression extends React.Component {
   }
 }
 ```
-#### Notes
 
-DoubleClick DFP reporting is following the [Media Rating Council: Viewable Impression Guideline](http://www.mediaratingcouncil.org/063014%20Viewable%20Ad%20Impression%20Guideline_Final.pdf). Different criteria applies to Display ads of different kinds: Video, Images or Framed-content.
+**Notes**
+
+DoubleClick DFP reporting is following the
+[Media Rating Council: Viewable Impression Guideline](http://www.mediaratingcouncil.org/063014%20Viewable%20Ad%20Impression%20Guideline_Final.pdf).
+Different criteria applies to Display ads of different kinds: Video, Images or
+Framed-content.

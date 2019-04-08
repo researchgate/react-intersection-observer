@@ -1,4 +1,5 @@
-Basic usage of **IntersectionObserver** that changes the className of the observed **<div />** element when the visibility changes:
+Basic usage of **IntersectionObserver** that changes the className of the
+observed **<div />** element when the visibility changes:
 
 ```jsx
 import React, { Component } from 'react';
@@ -9,7 +10,7 @@ export default class WindowRoot extends Component {
     visibility: 'hidden',
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({
       visibility: event.isIntersecting ? 'visible' : 'invisible',
     });

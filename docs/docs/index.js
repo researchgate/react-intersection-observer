@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import 'intersection-observer';
 import React from 'react';
 import { storiesOf } from '@storybook/react';
@@ -14,16 +14,16 @@ import PlaygroundRootMargin from './components/Playground';
 import './components/style.css';
 
 storiesOf('Examples', module)
-    .add('Window', WindowRoot)
-    .add('Frame', WindowFrame)
-    .add('Thresholds', WithThresholds)
-    .add('Margin', WithRootMargin)
-    .add('Once', OnlyOnce);
+  .add('Window', WindowRoot)
+  .add('Frame', WindowFrame)
+  .add('Thresholds', WithThresholds)
+  .add('Margin', WithRootMargin)
+  .add('Once', OnlyOnce);
 
 storiesOf('Recipes', module)
-    .add('Higher Order Component', HigherOrderComponent)
-    .add('Ad Impressions', ImpressionTracking);
+  .add('Higher Order Component', HigherOrderComponent)
+  .add('Ad Impressions', ImpressionTracking);
 
 storiesOf('Playground', module)
-    .addDecorator(withKnobs)
-    .add('rootMargin', () => <PlaygroundRootMargin />);
+  .addDecorator(withKnobs)
+  .add('rootMargin', () => <PlaygroundRootMargin />);

@@ -1,10 +1,5 @@
-import * as storybook from '@storybook/react';
-import { setOptions } from '@storybook/addon-options';
+import { addDecorator, configure } from '@storybook/react';
+import { addReadme } from 'storybook-readme';
 
-setOptions({
-  name: 'React Intersection Observer',
-  url: 'https://github.com/researchgate/react-intersection-observer',
-  downPanelInRight: true,
-});
-
-storybook.configure(() => require('../docs/docs/index.js'), module);
+addDecorator(addReadme);
+configure(() => require('../docs/docs'), module);
