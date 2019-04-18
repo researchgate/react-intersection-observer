@@ -1,9 +1,9 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
-import invariant from 'invariant';
 import { createObserver, observeElement, unobserveElement } from './observer';
 import { shallowCompare } from './utils';
+import Config from './config';
 
 const observerOptions = ['root', 'rootMargin', 'threshold'];
 const observableProps = ['root', 'rootMargin', 'threshold', 'disabled'];
@@ -98,10 +98,12 @@ class IntersectionObserver extends React.Component {
         if (this.props.children == null || this.props.disabled) {
             return false;
         }
-        invariant(
-            this.targetNode,
-            "ReactIntersectionObserver: Can't find DOM node in the provided children. Make sure to render at least one DOM node in the tree.",
-        );
+        if (!this.targetNode) {
+            Config.errorReporter(
+                "ReactIntersectionObserver: Can't find DOM node in the provided children. Make sure to render at least one DOM node in the tree.",
+            );
+            return false;
+        }
         this.observer = createObserver(getOptions(this.props));
         this.target = this.targetNode;
         observeElement(this);
