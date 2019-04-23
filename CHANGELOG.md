@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 <a name="1.0.0"></a>
+# [1.0.0](https://github.com/researchgate/react-intersection-observer/compare/v0.7.4...v1.0.0) (2019-04-23)
+
+
+### Features
+
+* **null-children:** Support for null children and null DOM node ([#52](https://github.com/researchgate/react-intersection-observer/issues/52)) ([da021c7](https://github.com/researchgate/react-intersection-observer/commit/da021c7))
+
+
+### BREAKING CHANGES
+
+* **null-children:** Drop support for React < 16.3.2
+
+* chore(release): 1.0.0-beta.0
+
+* chore(errorReporter): added configurable error reporter
+
+* chore(release): 1.0.0-beta.1
+
+* chore(readme): update docs about errorReporting
+
+
+
+<a name="1.0.0"></a>
 # [1.0.0](https://github.com/researchgate/react-intersection-observer/compare/v1.0.0-beta.0...v1.0.0) (2019-04-18)
 
 
