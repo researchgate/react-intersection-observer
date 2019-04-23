@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import 'intersection-observer';
 import React from 'react';
 import { storiesOf } from '@storybook/react';

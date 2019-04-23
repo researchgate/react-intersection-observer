@@ -1,23 +1,32 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
-import invariant from 'invariant';
-import warning from 'warning';
 import { createObserver, observeElement, unobserveElement } from './observer';
-import { isDOMTypeElement, shallowCompare } from './utils';
+import { shallowCompare } from './utils';
+import Config from './config';
 
 const observerOptions = ['root', 'rootMargin', 'threshold'];
-const observerProps = ['disabled'].concat(observerOptions);
-const objectProto = Object.prototype;
+const observableProps = ['root', 'rootMargin', 'threshold', 'disabled'];
+const { hasOwnProperty, toString } = Object.prototype;
 
-export default class IntersectionObserver extends React.Component {
+const getOptions = props => {
+    return observerOptions.reduce((options, key) => {
+        if (hasOwnProperty.call(props, key)) {
+            const rootIsString = key === 'root' && toString.call(props[key]) === '[object String]';
+            options[key] = rootIsString ? document.querySelector(props[key]) : props[key];
+        }
+        return options;
+    }, {});
+};
+
+class IntersectionObserver extends React.Component {
     static displayName = 'IntersectionObserver';
 
     static propTypes = {
         /**
          * The element that is used as the target to observe.
          */
-        children: PropTypes.element.isRequired,
+        children: PropTypes.element,
 
         /**
          * The element that is used as the viewport for checking visibility of the target.
@@ -50,14 +59,6 @@ export default class IntersectionObserver extends React.Component {
         threshold: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
 
         /**
-         * When true indicate that events fire only until the element is intersecting.
-         * Different browsers behave differently towards the isIntersecting property, make sure
-         * you polyfill and/or override the IntersectionObserverEntry object's prototype to your needs.
-         * Defaults to false.
-         */
-        onlyOnce: PropTypes.bool,
-
-        /**
          * Controls whether the element should stop being observed by its IntersectionObserver instance.
          * Defaults to false.
          */
@@ -69,112 +70,105 @@ export default class IntersectionObserver extends React.Component {
         onChange: PropTypes.func.isRequired,
     };
 
-    get options() {
-        return observerOptions.reduce((options, key) => {
-            if (objectProto.hasOwnProperty.call(this.props, key)) {
-                const useQuery = key === 'root' && objectProto.toString.call(this.props[key]) === '[object String]';
-                options[key] = useQuery ? document.querySelector(this.props[key]) : this.props[key];
-            }
-            return options;
-        }, {});
-    }
-
     handleChange = event => {
-        this.props.onChange(event, this.unobserve);
-
-        if (this.props.onlyOnce) {
-            // eslint-disable-next-line no-undef
-            if (process.env.NODE_ENV !== 'production') {
-                invariant(
-                    'isIntersecting' in event,
-                    "onlyOnce requires isIntersecting to exists in IntersectionObserverEntry's prototype. Either your browser or your polyfill lacks support.",
-                );
-            }
-            if (event.isIntersecting) {
-                this.unobserve();
-            }
-        }
-        // eslint-disable-next-line no-undef
-        if (process.env.NODE_ENV !== 'production') {
-            warning(
-                !this.props.hasOwnProperty('onlyOnce'),
-                'ReactIntersectionObserver: [deprecation] Use the second argument of onChange to unobserve a target instead of onlyOnce. This prop will be removed in the next major version.',
-            );
-        }
+        this.props.onChange(event, this.externalUnobserve);
     };
 
     handleNode = target => {
-        /**
-         * Forward hijacked ref to user.
-         */
-        const nodeRef = this.props.children.ref;
-        if (nodeRef) {
-            if (typeof nodeRef === 'function') {
-                nodeRef(target);
-            } else if (typeof nodeRef === 'object') {
-                nodeRef.current = target;
+        const { children } = this.props;
+
+        if (children != null) {
+            /**
+             * Forward hijacked ref to user.
+             */
+            const nodeRef = children.ref;
+            if (nodeRef) {
+                if (typeof nodeRef === 'function') {
+                    nodeRef(target);
+                } else if (typeof nodeRef === 'object') {
+                    nodeRef.current = target;
+                }
             }
         }
 
-        /**
-         * This is a bit ugly: would like to use getSnapshotBeforeUpdate(), but we do not want to depend on
-         * react-lifecycles-compat to support React versions prior to 16.3 as this extra boolean gets the job done.
-         */
-        this.targetChanged = (this.renderedTarget && target) != null && this.renderedTarget !== target;
-        if (this.targetChanged) {
-            this.unobserve();
-        }
-        this.target = target;
+        this.targetNode = target && findDOMNode(target);
     };
 
     observe = () => {
-        this.target = isDOMTypeElement(this.target) ? this.target : findDOMNode(this.target);
-        this.observer = createObserver(this.options);
-        observeElement(this);
-    };
-
-    unobserve = () => {
-        if (this.target != null) {
-            unobserveElement(this);
+        if (this.props.children == null || this.props.disabled) {
+            return false;
         }
-    };
-
-    componentDidMount() {
-        // eslint-disable-next-line no-undef
-        if (process.env.NODE_ENV !== 'production' && parseInt(React.version, 10) < 16) {
-            invariant(
-                this.target,
-                'Stateless function components cannot be given refs. Attempts to access this ref will fail.',
+        if (!this.targetNode) {
+            Config.errorReporter(
+                "ReactIntersectionObserver: Can't find DOM node in the provided children. Make sure to render at least one DOM node in the tree.",
             );
+            return false;
         }
-        if (!this.props.disabled) {
+        this.observer = createObserver(getOptions(this.props));
+        this.target = this.targetNode;
+        observeElement(this);
+
+        return true;
+    };
+
+    unobserve = target => {
+        unobserveElement(this, target);
+    };
+
+    externalUnobserve = () => {
+        this.unobserve(this.targetNode);
+    };
+
+    getSnapshotBeforeUpdate(prevProps) {
+        this.prevTargetNode = this.targetNode;
+
+        const relatedPropsChanged = observableProps.some(prop => shallowCompare(this.props[prop], prevProps[prop]));
+        if (relatedPropsChanged) {
+            if (this.prevTargetNode) {
+                if (!prevProps.disabled) {
+                    this.unobserve(this.prevTargetNode);
+                }
+            }
+        }
+
+        return relatedPropsChanged;
+    }
+
+    componentDidUpdate(_, __, relatedPropsChanged) {
+        let targetNodeChanged = false;
+        // check if we didn't unobserve previously due to a prop change
+        if (!relatedPropsChanged) {
+            targetNodeChanged = this.prevTargetNode !== this.targetNode;
+            // check we have a previous node we want to unobserve
+            if (targetNodeChanged && this.prevTargetNode != null) {
+                this.unobserve(this.prevTargetNode);
+            }
+        }
+
+        if (relatedPropsChanged || targetNodeChanged) {
             this.observe();
         }
     }
 
-    componentDidUpdate(prevProps) {
-        const propsChanged = observerProps.some(prop => shallowCompare(this.props[prop], prevProps[prop]));
-
-        if (propsChanged) {
-            this.unobserve();
-        }
-
-        if (this.targetChanged || propsChanged) {
-            if (!this.props.disabled) {
-                this.observe();
-            }
-        }
+    componentDidMount() {
+        this.observe();
     }
 
     componentWillUnmount() {
-        this.unobserve();
+        if (this.targetNode) {
+            this.unobserve(this.targetNode);
+        }
     }
 
     render() {
-        this.renderedTarget = this.target; // this value is null on the first render
+        const { children } = this.props;
 
-        return React.cloneElement(React.Children.only(this.props.children), {
-            ref: this.handleNode,
-        });
+        return children != null
+            ? React.cloneElement(React.Children.only(children), {
+                  ref: this.handleNode,
+              })
+            : null;
     }
 }
+
+export { IntersectionObserver as default, getOptions };

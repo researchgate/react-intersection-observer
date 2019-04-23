@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`handleChange should throw with \`onlyOnce\` if entry lacks \`isIntersecting\` 1`] = `"onlyOnce requires isIntersecting to exists in IntersectionObserverEntry's prototype. Either your browser or your polyfill lacks support."`;
-
-exports[`throws on mount if children is StatelessComponent in React 15 1`] = `"Stateless function components cannot be given refs. Attempts to access this ref will fail."`;
-
-exports[`throws when the property children is not an only child 1`] = `"React.Children.only expected to receive a single React element child."`;

@@ -3,6 +3,3 @@ npm-debug.log*
 yarn-error.log
 lib
 coverage
-docs/static
-docs/favicon*
-docs/*.html

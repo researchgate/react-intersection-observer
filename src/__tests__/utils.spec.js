@@ -1,25 +1,14 @@
 /* eslint-env jest */
-import React from 'react';
-import { isDOMTypeElement, parseRootMargin, shallowCompare } from '../utils';
-
-describe('isDOMTypeElement', () => {
-    test('returns false when is not a valid React element', () => {
-        const node = document.createElement('div');
-        expect(isDOMTypeElement(node)).toBe(false);
-    });
-    test('returns false if it is a React element but not a DOM node type', () => {
-        const Element = () => <div />;
-        expect(isDOMTypeElement(<Element />)).toBe(false);
-    });
-    test('returns true if it is a React element and DOM node type', () => {
-        expect(isDOMTypeElement(<div />)).toBe(true);
-    });
-});
+import { parseRootMargin, shallowCompare } from '../utils';
 
 describe('parseRootMargin', () => {
     test('throws when using wrong units', () => {
-        expect(() => parseRootMargin('10')).toThrowErrorMatchingSnapshot();
-        expect(() => parseRootMargin('10% 10')).toThrowErrorMatchingSnapshot();
+        expect(() => parseRootMargin('10')).toThrowErrorMatchingInlineSnapshot(
+            `"rootMargin must be a string literal containing pixels and/or percent values"`,
+        );
+        expect(() => parseRootMargin('10% 10')).toThrowErrorMatchingInlineSnapshot(
+            `"rootMargin must be a string literal containing pixels and/or percent values"`,
+        );
     });
 
     test('returns rootMargins with all four values', () => {
