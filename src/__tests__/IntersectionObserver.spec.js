@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import renderer from 'react-test-renderer';
 import IntersectionObserver, { getOptions } from '../IntersectionObserver';
 import { callback, observerElementsMap } from '../observer';
+import Config from '../config';
 
 jest.mock('react-dom', () => {
     const { findDOMNode } = jest.requireActual('react-dom');
@@ -321,6 +322,36 @@ describe('updating', () => {
 
         expect(unobserve).toBeCalledTimes(1);
         expect(observe).toBeCalledTimes(1);
+    });
+
+    test('should call a setup errorReporter without a DOM Node', () => {
+        const spy = jest.fn();
+        const origErrorReporter = Config.errorReporter;
+        Config.errorReporter = spy;
+        const tree = renderer.create(
+            <IntersectionObserver onChange={noop}>
+                <ProxyComponent>
+                    <div />
+                </ProxyComponent>
+            </IntersectionObserver>,
+            { createNodeMock },
+        );
+        const instance = tree.getInstance();
+        const observe = jest.spyOn(instance, 'observe');
+        const unobserve = jest.spyOn(instance, 'unobserve');
+
+        tree.update(
+            <IntersectionObserver onChange={noop}>
+                <ProxyComponent key="forcesRender">{null}</ProxyComponent>
+            </IntersectionObserver>,
+        );
+
+        expect(spy).toBeCalled();
+        expect(unobserve).toBeCalledTimes(1);
+        expect(observe).toBeCalledTimes(1);
+        expect(observe).toReturnWith(false);
+
+        Config.errorReporter = origErrorReporter;
     });
 
     test('should observe when updating with a DOM Node', () => {
