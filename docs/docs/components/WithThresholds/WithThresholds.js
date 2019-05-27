@@ -10,7 +10,9 @@ const storyBookAction = decorateAction([
 ])('onChange');
 
 const getPrintableThreshold = (ratio, range) =>
-    range.reduce((prev, curr) => (Math.abs(curr - ratio) < Math.abs(prev - ratio) ? curr : prev));
+    range.reduce((prev, curr) =>
+        Math.abs(curr - ratio) < Math.abs(prev - ratio) ? curr : prev
+    );
 
 export default class WithThresholds extends Component {
     state = {
@@ -22,17 +24,25 @@ export default class WithThresholds extends Component {
         storyBookAction(event);
         this.setState({
             visibility: event.isIntersecting ? 'visible' : 'invisible',
-            threshold: getPrintableThreshold(event.intersectionRatio.toFixed(2), [0, 0.25, 0.5, 0.75, 1]),
+            threshold: getPrintableThreshold(
+                event.intersectionRatio.toFixed(2),
+                [0, 0.25, 0.5, 0.75, 1]
+            ),
         });
     };
 
     render() {
         return (
             <div>
-                <div className={`header ${this.state.visibility}`}>{this.state.threshold * 100}%</div>
+                <div className={`header ${this.state.visibility}`}>
+                    {this.state.threshold * 100}%
+                </div>
                 <div className="body">
                     <div className={this.state.visibility}>
-                        <Observer onChange={this.handleChange} threshold={[0, 0.25, 0.5, 0.75, 1]}>
+                        <Observer
+                            onChange={this.handleChange}
+                            threshold={[0, 0.25, 0.5, 0.75, 1]}
+                        >
                             <div className={`box ${this.state.visibility}`} />
                         </Observer>
                     </div>

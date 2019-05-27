@@ -12,8 +12,12 @@ const { hasOwnProperty, toString } = Object.prototype;
 const getOptions = props => {
     return observerOptions.reduce((options, key) => {
         if (hasOwnProperty.call(props, key)) {
-            const rootIsString = key === 'root' && toString.call(props[key]) === '[object String]';
-            options[key] = rootIsString ? document.querySelector(props[key]) : props[key];
+            const rootIsString =
+                key === 'root' &&
+                toString.call(props[key]) === '[object String]';
+            options[key] = rootIsString
+                ? document.querySelector(props[key])
+                : props[key];
         }
         return options;
     }, {});
@@ -34,7 +38,11 @@ class IntersectionObserver extends React.Component {
          * Defaults to the browser viewport if not specified or if null.
          */
         root: PropTypes.oneOfType(
-            [PropTypes.string].concat(typeof HTMLElement === 'undefined' ? [] : PropTypes.instanceOf(HTMLElement)),
+            [PropTypes.string].concat(
+                typeof HTMLElement === 'undefined'
+                    ? []
+                    : PropTypes.instanceOf(HTMLElement)
+            )
         ),
 
         /**
@@ -56,7 +64,10 @@ class IntersectionObserver extends React.Component {
          * The default is 0 (meaning as soon as even one pixel is visible, the callback will be run).
          * A value of 1.0 means that the threshold isn't considered passed until every pixel is visible.
          */
-        threshold: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
+        threshold: PropTypes.oneOfType([
+            PropTypes.number,
+            PropTypes.arrayOf(PropTypes.number),
+        ]),
 
         /**
          * Controls whether the element should stop being observed by its IntersectionObserver instance.
@@ -100,7 +111,7 @@ class IntersectionObserver extends React.Component {
         }
         if (!this.targetNode) {
             Config.errorReporter(
-                "ReactIntersectionObserver: Can't find DOM node in the provided children. Make sure to render at least one DOM node in the tree.",
+                "ReactIntersectionObserver: Can't find DOM node in the provided children. Make sure to render at least one DOM node in the tree."
             );
             return false;
         }
@@ -122,7 +133,9 @@ class IntersectionObserver extends React.Component {
     getSnapshotBeforeUpdate(prevProps) {
         this.prevTargetNode = this.targetNode;
 
-        const relatedPropsChanged = observableProps.some(prop => shallowCompare(this.props[prop], prevProps[prop]));
+        const relatedPropsChanged = observableProps.some(prop =>
+            shallowCompare(this.props[prop], prevProps[prop])
+        );
         if (relatedPropsChanged) {
             if (this.prevTargetNode) {
                 if (!prevProps.disabled) {

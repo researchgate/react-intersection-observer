@@ -44,13 +44,19 @@ describe('getPooled', () => {
     });
 
     test('returns nothing given threshold did not match', () => {
-        expect(getPooled({ rootMargin: '-10% 0%', threshold: [0, 0.5, 1, 0.25] })).toBeNull();
-        expect(getPooled({ rootMargin: '-10% 0%', threshold: [1, 0.5, 0] })).toBeNull();
+        expect(
+            getPooled({ rootMargin: '-10% 0%', threshold: [0, 0.5, 1, 0.25] })
+        ).toBeNull();
+        expect(
+            getPooled({ rootMargin: '-10% 0%', threshold: [1, 0.5, 0] })
+        ).toBeNull();
     });
 
     test('throws if rootMargin cannot be parsed', () => {
-        expect(() => getPooled({ rootMargin: '-10% 0', threshold: 0 })).toThrowErrorMatchingInlineSnapshot(
-            `"rootMargin must be a string literal containing pixels and/or percent values"`,
+        expect(() =>
+            getPooled({ rootMargin: '-10% 0', threshold: 0 })
+        ).toThrowErrorMatchingInlineSnapshot(
+            `"rootMargin must be a string literal containing pixels and/or percent values"`
         );
     });
 
@@ -127,7 +133,7 @@ describe('findObserverElement', () => {
     test('given an entry without target property throws', () => {
         createObserver();
         expect(() => observeElement({})).toThrowErrorMatchingInlineSnapshot(
-            `"Cannot read property 'observe' of undefined"`,
+            `"Cannot read property 'observe' of undefined"`
         );
     });
 

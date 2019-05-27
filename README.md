@@ -13,37 +13,46 @@
 
 > Bring ReactIntersectionObserver over today, your React children will love it!
 
-**React Intersection Observer** is a **React** component, acting as a wrapper for the **IntersectionObserver API**. It
-is fully declarative and takes care of all the imperative parts for you.
+**React Intersection Observer** is a **React** component, acting as a wrapper
+for the **IntersectionObserver API**. It is fully declarative and takes care of
+all the imperative parts for you.
 
 **React Intersection Observer** is good at:
 
--   **reusing instances**: comparing the passed options
--   **performance**: chooses smartly when to re-render and when to re-observe
--   **being unopinionated**: how to handle visibility changes is left entirely up to the developer
--   **being intuitive**: looks like the Native API
+- **reusing instances**: comparing the passed options
+- **performance**: chooses smartly when to re-render and when to re-observe
+- **being unopinionated**: how to handle visibility changes is left entirely up
+  to the developer
+- **being intuitive**: looks like the Native API
 
 <br>
 
 <details>
 <summary><strong>Table of Contents</strong></summary>
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
--   [Getting started](#getting-started)
-    -   [Installation](#installation)
-    -   [Inside your codebase](#inside-your-codebase)
--   [What does IntersectionObserver do?](#what-does-intersectionobserver-do)
--   [Why use this component?](#why-use-this-component)
-    -   [No bookkeeping](#no-bookkeeping)
-    -   [No extra markup](#no-extra-markup)
-    -   [Easy to adopt](#easy-to-adopt)
--   [Documentation](#documentation)
--   [Options](#options)
--   [Notes](#notes)
--   [Polyfill](#polyfill)
--   [IntersectionObserver's Browser Support](#intersectionobservers-browser-support)
--   [Contributing](#contributing)
--   [License](#license)
-    </details>
+- [Getting started](#getting-started)
+- [What does IntersectionObserver do?](#what-does-intersectionobserver-do)
+- [Why use this component?](#why-use-this-component)
+  - [No bookkeeping](#no-bookkeeping)
+  - [No extra markup](#no-extra-markup)
+  - [Easy to adopt](#easy-to-adopt)
+- [Documentation](#documentation)
+  - [Demos](#demos)
+  - [Recipes](#recipes)
+  - [Exception handling](#exception-handling)
+  - [Options](#options)
+  - [Notes](#notes)
+- [Polyfill](#polyfill)
+  - [Caveats](#caveats)
+- [**IntersectionObserver**'s Browser Support](#intersectionobservers-browser-support)
+  - [Out of the box](#out-of-the-box)
+  - [Using polyfill](#using-polyfill)
+- [Contributing](#contributing)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+</details>
 
 ---
 
@@ -61,29 +70,30 @@ import 'intersection-observer'; // optional polyfill
 import Observer from '@researchgate/react-intersection-observer';
 
 class ExampleComponent extends React.Component {
-    handleIntersection(event) {
-        console.log(event.isIntersecting);
-    }
+  handleIntersection(event) {
+    console.log(event.isIntersecting);
+  }
 
-    render() {
-        const options = {
-            onChange: this.handleIntersection,
-            root: '#scrolling-container',
-            rootMargin: '0% 0% -25%',
-        };
+  render() {
+    const options = {
+      onChange: this.handleIntersection,
+      root: '#scrolling-container',
+      rootMargin: '0% 0% -25%',
+    };
 
-        return (
-            <div id="scrolling-container" style={{ overflow: 'scroll', height: 100 }}>
-                <Observer {...options}>
-                    <div>I am the target element</div>
-                </Observer>
-            </div>
-        );
-    }
+    return (
+      <div id="scrolling-container" style={{ overflow: 'scroll', height: 100 }}>
+        <Observer {...options}>
+          <div>I am the target element</div>
+        </Observer>
+      </div>
+    );
+  }
 }
 ```
 
-Optionally add the **polyfill** and make sure it's required on your dependendencies for unsupporting browsers:
+Optionally add the **polyfill** and make sure it's required on your
+dependendencies for unsupporting browsers:
 
 ```shell
 npm install --save intersection-observer
@@ -91,8 +101,9 @@ npm install --save intersection-observer
 
 ## What does IntersectionObserver do?
 
-> IntersectionObservers calculate how much of a target element overlaps (or "intersects with") the visible portion of a
-> page, also known as the browser's "viewport":
+> IntersectionObservers calculate how much of a target element overlaps (or
+> "intersects with") the visible portion of a page, also known as the browser's
+> "viewport":
 >
 > [Dan Callahan](https://hacks.mozilla.org/2017/08/intersection-observer-comes-to-firefox/)&nbsp;&middot;&nbsp;<a href="https://creativecommons.org/licenses/by-sa/3.0/"><img id="licensebutton_slim" alt="Creative Commons License" src="https://i.creativecommons.org/l/by-sa/3.0/80x15.png" style="margin-right:10px;margin-bottom:4px; border: 0;"></a>
 
@@ -100,9 +111,10 @@ npm install --save intersection-observer
 
 ## Why use this component?
 
-The motivation is to provide the easiest possible solution for observing elements that enter the viewport on your
-**React** codebase. It's fully declarative and all complexity is abstracted away, focusing on reusability, and low
-memory consumption.
+The motivation is to provide the easiest possible solution for observing
+elements that enter the viewport on your **React** codebase. It's fully
+declarative and all complexity is abstracted away, focusing on reusability, and
+low memory consumption.
 
 ### No bookkeeping
 
@@ -110,29 +122,34 @@ It's built with compatibility in mind, adhering 100% to the
 [native API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Intersection_observer_options)
 implementation and DSL, but takes care of all the bookkeeping work for you.
 
-Instances and nodes are managed internally so that any changes to the passed options or tree root reconciliation cleans
-up and re-observes nodes on-demand to avoid any unexpected memory leaks.
+Instances and nodes are managed internally so that any changes to the passed
+options or tree root reconciliation cleans up and re-observes nodes on-demand to
+avoid any unexpected memory leaks.
 
 ### No extra markup
 
-ReactIntersectionObserver does not create any extra DOM elements, it attaches to the only child you'll provide to it.
-This is done using `findDOMNode` to retrieve the first DOM node found. If your child already has an existing `ref`,
-either a callback or object (from createRef), these will be handled normally in either case.
+ReactIntersectionObserver does not create any extra DOM elements, it attaches to
+the only child you'll provide to it. This is done using `findDOMNode` to
+retrieve the first DOM node found. If your child already has an existing `ref`,
+either a callback or object (from createRef), these will be handled normally in
+either case.
 
 ### Easy to adopt
 
-When using ReactIntersectionObserver the only required prop is the `onChange` function. Any changes to the visibility of
-the element will invoke this callback, just like in the
+When using ReactIntersectionObserver the only required prop is the `onChange`
+function. Any changes to the visibility of the element will invoke this
+callback, just like in the
 [native API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Targeting_an_element_to_be_observed) -
-you’ll receive one `IntersectionObserverEntry` argument per change. This gives you an ideal and flexible base to build
-upon.
+you’ll receive one `IntersectionObserverEntry` argument per change. This gives
+you an ideal and flexible base to build upon.
 
 Some of the things you may want to use ReactIntersectionObserver for:
 
--   Determining advertisement impressions
--   Lazy loading - Images, or anything that will enter the viewport
--   Occlusion culling - Don't render an object until is close to the viewport edges
--   [Sentinel Scrolling - Infinite scroller with a recycled Sentinel](https://github.com/researchgate/react-intersection-list)
+- Determining advertisement impressions
+- Lazy loading - Images, or anything that will enter the viewport
+- Occlusion culling - Don't render an object until is close to the viewport
+  edges
+- [Sentinel Scrolling - Infinite scroller with a recycled Sentinel](https://github.com/researchgate/react-intersection-list)
 
 ## Documentation
 
@@ -145,8 +162,8 @@ Find multiple examples and usage guidelines under:
 
 ### Recipes
 
-Recipes are useful code snippets solutions to common problems, for example, how to use ReactIntersectionObserver within
-a
+Recipes are useful code snippets solutions to common problems, for example, how
+to use ReactIntersectionObserver within a
 [Higher Order Component](https://researchgate.github.io/react-intersection-observer/?selectedKind=Recipes&selectedStory=Higher%20Order%20Component).
 <br> Here's how to create an **element monitoring** component:
 
@@ -156,32 +173,32 @@ import PropTypes from 'prop-types';
 import Observer from '@researchgate/react-intersection-observer';
 
 export default class ViewableMonitor extends Component {
-    static propTypes = {
-        tag: PropTypes.node,
-        children: PropTypes.func.isRequired,
-    };
+  static propTypes = {
+    tag: PropTypes.node,
+    children: PropTypes.func.isRequired,
+  };
 
-    static defaultProps = {
-        tag: 'div',
-    };
+  static defaultProps = {
+    tag: 'div',
+  };
 
-    state = {
-        isIntersecting: false,
-    };
+  state = {
+    isIntersecting: false,
+  };
 
-    handleChange = ({ isIntersecting }) => {
-        this.setState({ isIntersecting });
-    };
+  handleChange = ({ isIntersecting }) => {
+    this.setState({ isIntersecting });
+  };
 
-    render() {
-        const { tag: Tag, children, ...rest } = this.props;
+  render() {
+    const { tag: Tag, children, ...rest } = this.props;
 
-        return (
-            <Observer {...rest} onChange={this.handleChange}>
-                <Tag>{children(this.state.isIntersecting)}</Tag>
-            </Observer>
-        );
-    }
+    return (
+      <Observer {...rest} onChange={this.handleChange}>
+        <Tag>{children(this.state.isIntersecting)}</Tag>
+      </Observer>
+    );
+  }
 }
 ```
 
@@ -190,7 +207,9 @@ import React from 'react';
 import ViewableMonitor from './ViewableMonitor';
 
 export default () => (
-    <ViewableMonitor>{isViewable => (isViewable ? 'I am viewable' : 'I am still hiding')}</ViewableMonitor>
+  <ViewableMonitor>
+    {isViewable => (isViewable ? 'I am viewable' : 'I am still hiding')}
+  </ViewableMonitor>
 );
 ```
 
@@ -198,7 +217,13 @@ Discover more recipes in our [examples section](docs/README.md).
 
 ### Exception handling
 
-By default, an `invariant` error is thrown if there isn't a DOM node to observe when mounted. We've added a helpful and descriptive message that's supposed to help you identify potential problems early on. However, this could also unexpectedtly trigger in production, specially with dynamic children, causing a bigger problem (bubbling up) if not handled correctly (e.g.: error boundary). In such cases, you can set the config for the error reporter to adjust it to your needs:
+By default, an `invariant` error is thrown if there isn't a DOM node to observe
+when mounted. We've added a helpful and descriptive message that's supposed to
+help you identify potential problems early on. However, this could also
+unexpectedtly trigger in production, specially with dynamic children, causing a
+bigger problem (bubbling up) if not handled correctly (e.g.: error boundary). In
+such cases, you can set the config for the error reporter to adjust it to your
+needs:
 
 ```js
 import { Config } from '@researchgate/react-intersection-observer';
@@ -216,42 +241,53 @@ Config.errorReporter(function(errorMsg) {
 
 **root**: `HTMLElement|string` | default `window object`
 
-The element or selector string that is used as the viewport for checking visibility of the target.
+The element or selector string that is used as the viewport for checking
+visibility of the target.
 
 **rootMargin**: `string` | default `0px 0px 0px 0px`
 
-Margin around the root. Specify using units _px_ or _%_ (top, right, bottom left). Can contain negative values.
+Margin around the root. Specify using units _px_ or _%_ (top, right, bottom
+left). Can contain negative values.
 
 **threshold**: `number|Array<number>` | default: `0`
 
-Indicates at what percentage of the target's visibility the observer's callback should be executed. If you only want to
-detect when visibility passes the 50% mark, you can use a value of 0.5. If you want the callback run every time
-visibility passes another 25%, you would specify the array [0, 0.25, 0.5, 0.75, 1].
+Indicates at what percentage of the target's visibility the observer's callback
+should be executed. If you only want to detect when visibility passes the 50%
+mark, you can use a value of 0.5. If you want the callback run every time
+visibility passes another 25%, you would specify the array [0, 0.25, 0.5, 0.75,
+1].
 
 **disabled**: `boolean` | default: `false`
 
-Controls whether the element should stop being observed by its IntersectionObserver instance. Useful for temporarily
-disabling the observing mechanism and restoring it later.
+Controls whether the element should stop being observed by its
+IntersectionObserver instance. Useful for temporarily disabling the observing
+mechanism and restoring it later.
 
-**onChange** (required): `(entry: IntersectionObserverEntry, unobserve: () => void) => void`
+**onChange** (required):
+`(entry: IntersectionObserverEntry, unobserve: () => void) => void`
 
-Function that will be invoked whenever an observer's callback contains this target in its changes.
+Function that will be invoked whenever an observer's callback contains this
+target in its changes.
 
 **children**: `React.Element<*>|null`
 
-Single React component or element that is used as the target (observable). As of `v1.0.0`, children can be null. Null children won't be observed.
+Single React component or element that is used as the target (observable). As of
+`v1.0.0`, children can be null. Null children won't be observed.
 
 ### Notes
 
--   According to the spec, an initial event is being fired when starting to observe a non-intersecting element as well.
-    -   _Edge's implementation seems to
-        [miss the initial event](https://github.com/w3c/IntersectionObserver/issues/222#issuecomment-311539591), although
-        Edge 16 behavior aligns with the spec._
--   Changes happen asynchronously, similar to the way `requestIdleCallback` works.
--   Although you can consider callbacks immediate - always below 1 second - you can also get an immediate response on an
-    element's visibility with `observer.takeRecords()`.
--   The primitives `Map` an `Set` are required. You may need to include a polyfill for browsers lacking ES2015 support. If
-    you're using babel, include `"babel-polyfill"` somewhere to your codebase.
+- According to the spec, an initial event is being fired when starting to
+  observe a non-intersecting element as well.
+  - _Edge's implementation seems to
+    [miss the initial event](https://github.com/w3c/IntersectionObserver/issues/222#issuecomment-311539591),
+    although Edge 16 behavior aligns with the spec._
+- Changes happen asynchronously, similar to the way `requestIdleCallback` works.
+- Although you can consider callbacks immediate - always below 1 second - you
+  can also get an immediate response on an element's visibility with
+  `observer.takeRecords()`.
+- The primitives `Map` an `Set` are required. You may need to include a polyfill
+  for browsers lacking ES2015 support. If you're using babel, include
+  `"babel-polyfill"` somewhere to your codebase.
 
 ## Polyfill
 
@@ -262,16 +298,19 @@ When needing the full spec's support, we highly recommend using the
 
 #### Ealier Spec
 
-Earlier preview versions of [Edge](https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/12156111/) and
-prior to version 58 of [Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=713819#c8), the support for
-`isIntersecting` was lacking. This property was added to the spec later and both teams where unable to implement it
-earlier.
+Earlier preview versions of
+[Edge](https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/12156111/)
+and prior to version 58 of
+[Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=713819#c8), the
+support for `isIntersecting` was lacking. This property was added to the spec
+later and both teams where unable to implement it earlier.
 
 #### Performance issues
 
 As the above-mentioned polyfill doesn't perform callback invocation
-[asynchronously](https://github.com/WICG/IntersectionObserver/issues/225), you might want to decorate your `onChange`
-callback with a `requestIdleCallback` or `setTimeout` call to avoid a potential performance degradation:
+[asynchronously](https://github.com/WICG/IntersectionObserver/issues/225), you
+might want to decorate your `onChange` callback with a `requestIdleCallback` or
+`setTimeout` call to avoid a potential performance degradation:
 
 ```js
 onChange = entry => requestIdleCallback(() => this.handleChange(entry));
@@ -320,10 +359,12 @@ onChange = entry => requestIdleCallback(() => this.handleChange(entry));
     </tr>
 </table>
 
--   [1][reportedly available](https://www.chromestatus.com/features/5695342691483648), it didn't trigger the events on
-    initial load and lacks `isIntersecting` until later versions.
--   [2] This feature was implemented in Gecko 53.0 (Firefox 53.0 / Thunderbird 53.0 / SeaMonkey 2.50) behind the
-    preference `dom.IntersectionObserver.enabled`.
+- [1][reportedly available](https://www.chromestatus.com/features/5695342691483648),
+  it didn't trigger the events on initial load and lacks `isIntersecting` until
+  later versions.
+- [2] This feature was implemented in Gecko 53.0 (Firefox 53.0 / Thunderbird
+  53.0 / SeaMonkey 2.50) behind the preference
+  `dom.IntersectionObserver.enabled`.
 
 ### Using polyfill
 
@@ -346,11 +387,13 @@ onChange = entry => requestIdleCallback(() => this.handleChange(entry));
 
 We'd love your help on creating React Intersection Observer!
 
-Before you do, please read our [Code of Conduct](.github/CODE_OF_CONDUCT.md) so you know what we expect when you
-contribute to our projects.
+Before you do, please read our [Code of Conduct](.github/CODE_OF_CONDUCT.md) so
+you know what we expect when you contribute to our projects.
 
-Our [Contributing Guide](.github/CONTRIBUTING.md) tells you about our development process and what we're looking for,
-gives you instructions on how to issue bugs and suggest features, and explains how you can build and test your changes.
+Our [Contributing Guide](.github/CONTRIBUTING.md) tells you about our
+development process and what we're looking for, gives you instructions on how to
+issue bugs and suggest features, and explains how you can build and test your
+changes.
 
-**Haven't contributed to an open source project before?** No problem! [Contributing Guide](.github/CONTRIBUTING.md) has
-you covered as well.
+**Haven't contributed to an open source project before?** No problem!
+[Contributing Guide](.github/CONTRIBUTING.md) has you covered as well.

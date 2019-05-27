@@ -4,10 +4,12 @@ import { parseRootMargin, shallowCompare } from '../utils';
 describe('parseRootMargin', () => {
     test('throws when using wrong units', () => {
         expect(() => parseRootMargin('10')).toThrowErrorMatchingInlineSnapshot(
-            `"rootMargin must be a string literal containing pixels and/or percent values"`,
+            `"rootMargin must be a string literal containing pixels and/or percent values"`
         );
-        expect(() => parseRootMargin('10% 10')).toThrowErrorMatchingInlineSnapshot(
-            `"rootMargin must be a string literal containing pixels and/or percent values"`,
+        expect(() =>
+            parseRootMargin('10% 10')
+        ).toThrowErrorMatchingInlineSnapshot(
+            `"rootMargin must be a string literal containing pixels and/or percent values"`
         );
     });
 
@@ -25,7 +27,7 @@ describe('parseRootMargin', () => {
 describe('shallowCompare', () => {
     const comparerFn = (nextProps, prevProps) =>
         ['disabled', 'root', 'rootMargin', 'threshold'].some(option =>
-            shallowCompare(nextProps[option], prevProps[option]),
+            shallowCompare(nextProps[option], prevProps[option])
         );
 
     test('should return true if threshold array length is not the same', () => {
@@ -43,14 +45,24 @@ describe('shallowCompare', () => {
     });
 
     test('should return false if options are equal', () => {
-        const nextProps = { disabled: true, root: 1, rootMargin: 2, threshold: [0.25, 0.75, 0.5] };
+        const nextProps = {
+            disabled: true,
+            root: 1,
+            rootMargin: 2,
+            threshold: [0.25, 0.75, 0.5],
+        };
         const prevProps = { ...nextProps };
 
         expect(comparerFn(nextProps, prevProps)).toBeFalsy();
     });
 
     test('should return true if options are different', () => {
-        const nextProps = { disabled: true, root: 1, rootMargin: 2, threshold: [0.25, 0.75, 0.5] };
+        const nextProps = {
+            disabled: true,
+            root: 1,
+            rootMargin: 2,
+            threshold: [0.25, 0.75, 0.5],
+        };
         const prevProps = { ...nextProps, threshold: 1 };
 
         expect(comparerFn(nextProps, prevProps)).toBeTruthy();

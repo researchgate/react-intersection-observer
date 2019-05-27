@@ -25,7 +25,9 @@ export default class WithRootMargin extends Component {
     render() {
         return (
             <div>
-                <div className={`header ${this.state.visibility}`}>{this.state.visibility}</div>
+                <div className={`header ${this.state.visibility}`}>
+                    {this.state.visibility}
+                </div>
                 <div className="body body--frame">
                     <div
                         className="scroller scroller--gradient"
@@ -42,7 +44,9 @@ export default class WithRootMargin extends Component {
                                 root={this.state.scroller}
                                 rootMargin="0% 0% -25%"
                             >
-                                <div className={`box ${this.state.visibility}`} />
+                                <div
+                                    className={`box ${this.state.visibility}`}
+                                />
                             </Observer>
                         </div>
                     </div>

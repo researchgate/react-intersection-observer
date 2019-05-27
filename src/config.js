@@ -15,7 +15,9 @@ export default Object.create(null, {
         },
         set(value) {
             if (typeof value !== 'function') {
-                throw new Error('ReactIntersectionObserver: `Config.errorReporter` must be a callable');
+                throw new Error(
+                    'ReactIntersectionObserver: `Config.errorReporter` must be a callable'
+                );
             }
             config.errorReporter = value;
         },

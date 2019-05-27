@@ -27,7 +27,7 @@ describe('Config', () => {
         expect(() => {
             Config.errorReporter = 'fail';
         }).toThrowErrorMatchingInlineSnapshot(
-            `"ReactIntersectionObserver: \`Config.errorReporter\` must be a callable"`,
+            `"ReactIntersectionObserver: \`Config.errorReporter\` must be a callable"`
         );
     });
 });

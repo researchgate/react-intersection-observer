@@ -1,21 +1,18 @@
 language: node_js
 node_js:
-  - "8"
-  - "9"
+  - "10"
 cache: yarn
 deploy:
-  local_dir: docs
+  local_dir: .docs
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN # Set on travis-ci.org dashboard
   on:
     branch: master
     condition: '"$TRAVIS_JOB_NUMBER" == *.1'
-before_script:
-  - 'if [[ -n "$TRAVIS_TAG" ]] && [[ "$TRAVIS_JOB_NUMBER" == *.1 ]]; then yarn run create-github-release; fi'
 script:
-  - yarn run lint
-  - yarn test --ci --coverage
-  - 'if [[ "$TRAVIS_JOB_NUMBER" == *.1 ]]; then yarn run build:storybook; fi'
+  - "(yarn lint && yarn test --ci --coverage) || travis_terminate"
+  - 'if [[ "$TRAVIS_JOB_NUMBER" == *.1 ]]; then yarn build:storybook || travis_terminate 1; fi'
+  - yarn release
 after_success:
   - bash <(curl -s https://codecov.io/bash)

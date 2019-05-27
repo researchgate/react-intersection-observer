@@ -3,7 +3,10 @@ import { decorateAction } from '@storybook/addon-actions';
 import Observer from '../../../../src/IntersectionObserver';
 
 const storyBookAction = decorateAction([
-    args => ['isIntersecting', 'intersectionRatio'].map(key => `${key}: ${args[0][key]}`),
+    args =>
+        ['isIntersecting', 'intersectionRatio'].map(
+            key => `${key}: ${args[0][key]}`
+        ),
 ])('onChange');
 
 export default class WindowRoot extends Component {
@@ -21,7 +24,9 @@ export default class WindowRoot extends Component {
     render() {
         return (
             <div>
-                <div className={`header ${this.state.visibility}`}>{this.state.visibility}</div>
+                <div className={`header ${this.state.visibility}`}>
+                    {this.state.visibility}
+                </div>
                 <div className="body">
                     <Observer onChange={this.handleChange}>
                         <div className={`box ${this.state.visibility}`} />

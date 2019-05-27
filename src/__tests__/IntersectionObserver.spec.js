@@ -48,9 +48,11 @@ test('throws when the property children is not an only child', () => {
             <IntersectionObserver onChange={noop}>
                 <span />
                 <span />
-            </IntersectionObserver>,
-        ),
-    ).toThrowErrorMatchingInlineSnapshot(`"React.Children.only expected to receive a single React element child."`);
+            </IntersectionObserver>
+        )
+    ).toThrowErrorMatchingInlineSnapshot(
+        `"React.Children.only expected to receive a single React element child."`
+    );
 });
 
 test('throws trying to observe children without a DOM node', () => {
@@ -61,32 +63,38 @@ test('throws trying to observe children without a DOM node', () => {
         renderer.create(
             <IntersectionObserver onChange={noop}>
                 <ProxyComponent>{null}</ProxyComponent>
-            </IntersectionObserver>,
-        ),
+            </IntersectionObserver>
+        )
     ).toThrowErrorMatchingInlineSnapshot(
-        `"ReactIntersectionObserver: Can't find DOM node in the provided children. Make sure to render at least one DOM node in the tree."`,
+        `"ReactIntersectionObserver: Can't find DOM node in the provided children. Make sure to render at least one DOM node in the tree."`
     );
     expect(observerElementsMap.size).toBe(sizeBeforeObserving);
 });
 
 test('should not observe children that equal null or undefined', () => {
     const sizeBeforeObserving = observerElementsMap.size;
-    renderer.create(<IntersectionObserver onChange={noop}>{undefined}</IntersectionObserver>);
+    renderer.create(
+        <IntersectionObserver onChange={noop}>{undefined}</IntersectionObserver>
+    );
 
     expect(observerElementsMap.size).toBe(sizeBeforeObserving);
 });
 
 test('should not reobserve children that equal null or undefined', () => {
-    const tree = renderer.create(<IntersectionObserver onChange={noop}>{undefined}</IntersectionObserver>);
+    const tree = renderer.create(
+        <IntersectionObserver onChange={noop}>{undefined}</IntersectionObserver>
+    );
     const instance = tree.getInstance();
     const observe = jest.spyOn(instance, 'observe');
     const unobserve = jest.spyOn(instance, 'unobserve');
 
-    tree.update(<IntersectionObserver onChange={noop}>{null}</IntersectionObserver>);
+    tree.update(
+        <IntersectionObserver onChange={noop}>{null}</IntersectionObserver>
+    );
     tree.update(
         <IntersectionObserver onChange={noop} rootMargin="1%">
             {null}
-        </IntersectionObserver>,
+        </IntersectionObserver>
     );
 
     expect(unobserve).not.toBeCalled();
@@ -95,9 +103,12 @@ test('should not reobserve children that equal null or undefined', () => {
 });
 
 test('should reobserve null children updating to a DOM node', () => {
-    const tree = renderer.create(<IntersectionObserver onChange={noop}>{null}</IntersectionObserver>, {
-        createNodeMock,
-    });
+    const tree = renderer.create(
+        <IntersectionObserver onChange={noop}>{null}</IntersectionObserver>,
+        {
+            createNodeMock,
+        }
+    );
     const instance = tree.getInstance();
     const observe = jest.spyOn(instance, 'observe');
     const unobserve = jest.spyOn(instance, 'unobserve');
@@ -105,7 +116,7 @@ test('should reobserve null children updating to a DOM node', () => {
     tree.update(
         <IntersectionObserver onChange={noop}>
             <div />
-        </IntersectionObserver>,
+        </IntersectionObserver>
     );
 
     expect(observe).toBeCalledTimes(1);
@@ -118,13 +129,15 @@ test('should unobserve children updating to null', () => {
         <IntersectionObserver onChange={noop}>
             <div />
         </IntersectionObserver>,
-        { createNodeMock },
+        { createNodeMock }
     );
     const instance = tree.getInstance();
     const observe = jest.spyOn(instance, 'observe');
     const unobserve = jest.spyOn(instance, 'unobserve');
 
-    tree.update(<IntersectionObserver onChange={noop}>{null}</IntersectionObserver>);
+    tree.update(
+        <IntersectionObserver onChange={noop}>{null}</IntersectionObserver>
+    );
 
     expect(unobserve).toBeCalledTimes(1);
     expect(observe).toReturnWith(false);
@@ -137,7 +150,7 @@ test('should call ref callback of children with target', () => {
         <IntersectionObserver onChange={noop}>
             <span ref={spy} />
         </IntersectionObserver>,
-        { createNodeMock },
+        { createNodeMock }
     );
 
     expect(spy).toBeCalledWith(target);
@@ -150,7 +163,7 @@ test('should handle children ref of type RefObject', () => {
         <IntersectionObserver onChange={noop}>
             <span ref={ref} />
         </IntersectionObserver>,
-        { createNodeMock },
+        { createNodeMock }
     );
 
     expect(ref.current).toEqual(target);
@@ -159,13 +172,17 @@ test('should handle children ref of type RefObject', () => {
 test('getOptions returns props `root`, `rootMargin` and `threshold`', () => {
     disablePropTypes();
 
-    const options = { root: { nodeType: 1 }, rootMargin: '50% 0%', threshold: [0, 1] };
+    const options = {
+        root: { nodeType: 1 },
+        rootMargin: '50% 0%',
+        threshold: [0, 1],
+    };
 
     const tree = renderer.create(
         <IntersectionObserver onChange={noop} {...options}>
             <span />
         </IntersectionObserver>,
-        { createNodeMock },
+        { createNodeMock }
     );
 
     expect(getOptions(tree.getInstance().props)).toEqual(options);
@@ -180,7 +197,7 @@ test('should observe target on mount', () => {
         <IntersectionObserver onChange={noop}>
             <span />
         </IntersectionObserver>,
-        { createNodeMock },
+        { createNodeMock }
     );
 
     expect(sizeAfterObserving).toBe(observerElementsMap.size);
@@ -193,7 +210,7 @@ test('should unobserve target on unmount', () => {
         <IntersectionObserver onChange={noop}>
             <span />
         </IntersectionObserver>,
-        { createNodeMock },
+        { createNodeMock }
     );
 
     tree.unmount();
@@ -216,7 +233,7 @@ describe('updating', () => {
             <IntersectionObserver {...initialProps}>
                 <span />
             </IntersectionObserver>,
-            { createNodeMock },
+            { createNodeMock }
         );
         const instance = tree.getInstance();
         const unobserve = jest.spyOn(instance, 'unobserve');
@@ -226,67 +243,74 @@ describe('updating', () => {
         tree.update(
             <IntersectionObserver {...initialProps}>
                 <span />
-            </IntersectionObserver>,
+            </IntersectionObserver>
         );
         // only children updating [1/1]
         tree.update(
             <IntersectionObserver {...initialProps}>
                 <div />
-            </IntersectionObserver>,
+            </IntersectionObserver>
         );
         // DOM node not updating [1/1]
         tree.update(
             <IntersectionObserver {...initialProps}>
                 <div key="forcesRender" />
-            </IntersectionObserver>,
+            </IntersectionObserver>
         );
         // only root updating (document) [2/2]
         tree.update(
             <IntersectionObserver {...initialProps} root={root2}>
                 <div />
-            </IntersectionObserver>,
+            </IntersectionObserver>
         );
         // only root updating (window) [3/3]
         tree.update(
             <IntersectionObserver {...initialProps} root={root1}>
                 <div />
-            </IntersectionObserver>,
+            </IntersectionObserver>
         );
         // only rootMargin updating [4/4]
         tree.update(
-            <IntersectionObserver {...initialProps} root={root1} rootMargin="20% 10%">
+            <IntersectionObserver
+                {...initialProps}
+                root={root1}
+                rootMargin="20% 10%"
+            >
                 <div />
-            </IntersectionObserver>,
+            </IntersectionObserver>
         );
         // only threshold updating (non-scalar) [5/5]
         tree.update(
             <IntersectionObserver {...initialProps} threshold={[0.5, 1]}>
                 <div />
-            </IntersectionObserver>,
+            </IntersectionObserver>
         );
         // only threshold updating (length changed) [6/6]
         tree.update(
-            <IntersectionObserver {...initialProps} threshold={[0, 0.25, 0.5, 0.75, 1]}>
+            <IntersectionObserver
+                {...initialProps}
+                threshold={[0, 0.25, 0.5, 0.75, 1]}
+            >
                 <div />
-            </IntersectionObserver>,
+            </IntersectionObserver>
         );
         // only threshold updating (scalar) [7/7]
         tree.update(
             <IntersectionObserver {...initialProps} threshold={1}>
                 <div />
-            </IntersectionObserver>,
+            </IntersectionObserver>
         );
         // both props and children updating [8/8]
         tree.update(
             <IntersectionObserver {...initialProps}>
                 <span />
-            </IntersectionObserver>,
+            </IntersectionObserver>
         );
         // sanity check: nothing else updates [8/8]
         tree.update(
             <IntersectionObserver {...initialProps}>
                 <span />
-            </IntersectionObserver>,
+            </IntersectionObserver>
         );
 
         expect(unobserve).toBeCalledTimes(8);
@@ -304,7 +328,7 @@ describe('updating', () => {
                     <div />
                 </ProxyComponent>
             </IntersectionObserver>,
-            { createNodeMock },
+            { createNodeMock }
         );
         const instance = tree.getInstance();
         const observe = jest.spyOn(instance, 'observe');
@@ -314,10 +338,10 @@ describe('updating', () => {
             tree.update(
                 <IntersectionObserver onChange={noop}>
                     <ProxyComponent key="forcesRender">{null}</ProxyComponent>
-                </IntersectionObserver>,
-            ),
+                </IntersectionObserver>
+            )
         ).toThrowErrorMatchingInlineSnapshot(
-            `"ReactIntersectionObserver: Can't find DOM node in the provided children. Make sure to render at least one DOM node in the tree."`,
+            `"ReactIntersectionObserver: Can't find DOM node in the provided children. Make sure to render at least one DOM node in the tree."`
         );
 
         expect(unobserve).toBeCalledTimes(1);
@@ -334,7 +358,7 @@ describe('updating', () => {
                     <div />
                 </ProxyComponent>
             </IntersectionObserver>,
-            { createNodeMock },
+            { createNodeMock }
         );
         const instance = tree.getInstance();
         const observe = jest.spyOn(instance, 'observe');
@@ -343,7 +367,7 @@ describe('updating', () => {
         tree.update(
             <IntersectionObserver onChange={noop}>
                 <ProxyComponent key="forcesRender">{null}</ProxyComponent>
-            </IntersectionObserver>,
+            </IntersectionObserver>
         );
 
         expect(spy).toBeCalled();
@@ -365,7 +389,7 @@ describe('updating', () => {
                     <div />
                 </ProxyComponent>
             </IntersectionObserver>,
-            { createNodeMock },
+            { createNodeMock }
         );
         const instance = tree.getInstance();
         const unobserve = jest.spyOn(instance, 'unobserve');
@@ -374,7 +398,7 @@ describe('updating', () => {
             tree.update(
                 <IntersectionObserver onChange={noop}>
                     <ProxyComponent key="forcesRender">{null}</ProxyComponent>
-                </IntersectionObserver>,
+                </IntersectionObserver>
             );
         }).toThrow();
 
@@ -386,7 +410,7 @@ describe('updating', () => {
                 <ProxyComponent>
                     <div />
                 </ProxyComponent>
-            </IntersectionObserver>,
+            </IntersectionObserver>
         );
 
         expect(sizeAfterObserving).toBe(observerElementsMap.size);
@@ -404,8 +428,12 @@ describe('onChange', () => {
                 <span />
             </IntersectionObserver>
         );
-        const instance1 = renderer.create(component, { createNodeMock: () => targets.div }).getInstance();
-        const instance2 = renderer.create(React.cloneElement(component), { createNodeMock }).getInstance();
+        const instance1 = renderer
+            .create(component, { createNodeMock: () => targets.div })
+            .getInstance();
+        const instance2 = renderer
+            .create(React.cloneElement(component), { createNodeMock })
+            .getInstance();
 
         expect(observerElementsMap.size).toBe(1);
 
@@ -422,8 +450,16 @@ describe('onChange', () => {
 
         callback([entry1, entry2], instance1.observer);
 
-        expect(onChange).toHaveBeenNthCalledWith(1, entry1, instance1.externalUnobserve);
-        expect(onChange).toHaveBeenNthCalledWith(2, entry2, instance2.externalUnobserve);
+        expect(onChange).toHaveBeenNthCalledWith(
+            1,
+            entry1,
+            instance1.externalUnobserve
+        );
+        expect(onChange).toHaveBeenNthCalledWith(
+            2,
+            entry2,
+            instance2.externalUnobserve
+        );
     });
 
     test('unobserve using the second argument from onChange', () => {
@@ -438,7 +474,7 @@ describe('onChange', () => {
                 <IntersectionObserver onChange={onChange}>
                     <span />
                 </IntersectionObserver>,
-                { createNodeMock },
+                { createNodeMock }
             )
             .getInstance();
 
@@ -452,7 +488,7 @@ describe('onChange', () => {
                     intersectionRect,
                 }),
             ],
-            instance.observer,
+            instance.observer
         );
 
         expect(sizeAfterUnobserving).toBe(observerElementsMap.size);
@@ -466,7 +502,7 @@ describe('disabled', () => {
             <IntersectionObserver onChange={noop} disabled={true}>
                 <span />
             </IntersectionObserver>,
-            { createNodeMock },
+            { createNodeMock }
         );
 
         expect(observerElementsMap.size).toBe(sizeBeforeObserving);
@@ -477,7 +513,7 @@ describe('disabled', () => {
             <IntersectionObserver onChange={noop} disabled={true}>
                 <span />
             </IntersectionObserver>,
-            { createNodeMock },
+            { createNodeMock }
         );
         const instance = tree.getInstance();
         const observe = jest.spyOn(instance, 'observe');
@@ -486,7 +522,7 @@ describe('disabled', () => {
         tree.update(
             <IntersectionObserver onChange={noop}>
                 <span />
-            </IntersectionObserver>,
+            </IntersectionObserver>
         );
 
         expect(unobserve).not.toBeCalled();
@@ -498,7 +534,7 @@ describe('disabled', () => {
             <IntersectionObserver onChange={noop}>
                 <span />
             </IntersectionObserver>,
-            { createNodeMock },
+            { createNodeMock }
         );
         const instance = tree.getInstance();
         const unobserve = jest.spyOn(instance, 'unobserve');
@@ -507,7 +543,7 @@ describe('disabled', () => {
         tree.update(
             <IntersectionObserver onChange={noop} disabled={true}>
                 <span />
-            </IntersectionObserver>,
+            </IntersectionObserver>
         );
 
         expect(unobserve).toBeCalled();

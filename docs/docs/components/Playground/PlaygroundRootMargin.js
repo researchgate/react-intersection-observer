@@ -4,7 +4,10 @@ import { select } from '@storybook/addon-knobs/react';
 import Observer from '../../../../src/IntersectionObserver';
 
 const storyBookAction = decorateAction([
-    args => ['isIntersecting', 'intersectionRatio'].map(key => `${key}: ${args[0][key]}`),
+    args =>
+        ['isIntersecting', 'intersectionRatio'].map(
+            key => `${key}: ${args[0][key]}`
+        ),
 ])('onChange');
 
 export default class WindowRoot extends Component {
@@ -28,7 +31,7 @@ export default class WindowRoot extends Component {
                 '-60px': '-60px',
                 '120px': '120px',
             },
-            '60px',
+            '60px'
         );
 
         return (
@@ -37,7 +40,10 @@ export default class WindowRoot extends Component {
                     {this.state.visibility} → rootMargin={rootMargin}
                 </div>
                 <div className="body">
-                    <Observer onChange={this.handleChange} rootMargin={rootMargin}>
+                    <Observer
+                        onChange={this.handleChange}
+                        rootMargin={rootMargin}
+                    >
                         <div className={`box ${this.state.visibility}`} />
                     </Observer>
                 </div>
