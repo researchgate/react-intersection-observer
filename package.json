@@ -72,7 +72,8 @@
   "spire": {
     "extends": "@researchgate/spire-config",
     "plugins": [
-      "spire-plugin-semantic-release"
+      "spire-plugin-semantic-release",
+      "<rootDir>/.spire/spire-plugin-tslint"
     ]
   },
   "scripts": {
