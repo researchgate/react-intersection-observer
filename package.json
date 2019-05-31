@@ -24,7 +24,6 @@
     "@types/react": "16.8.18",
     "babel-loader": "^8.0.6",
     "cross-env": "^5.2.0",
-    "css-loader": "^2.1.1",
     "eslint": "^5.16.0",
     "intersection-observer": "^0.7.0",
     "react": "^16.8.6",
@@ -33,7 +32,6 @@
     "spire": "^1.7.2",
     "spire-plugin-semantic-release": "^1.7.2",
     "storybook-readme": "^5.0.3",
-    "style-loader": "^0.23.1",
     "typescript": "^3.4.5"
   },
   "files": [
