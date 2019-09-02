@@ -5826,6 +5826,15 @@ fs-extra@^7.0.0, fs-extra@^7.0.1:
     jsonfile "^4.0.0"
     universalify "^0.1.0"
 
+fs-extra@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-8.1.0.tgz#49d43c45a88cd9677668cb7be1b46efdb8d2e1c0"
+  integrity sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==
+  dependencies:
+    graceful-fs "^4.2.0"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
+
 fs-minipass@^1.2.5:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/fs-minipass/-/fs-minipass-1.2.6.tgz#2c5cc30ded81282bfe8a0d7c7c1853ddeb102c07"
@@ -6166,6 +6175,11 @@ got@^6.7.1:
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.1.9:
   version "4.1.15"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.15.tgz#ffb703e1066e8a0eeaa4c8b80ba9253eeefbfb00"
+
+graceful-fs@^4.2.0:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.2.tgz#6f0952605d0140c1cfdb138ed005775b92d67b02"
+  integrity sha512-IItsdsea19BoLC7ELy13q1iJFNmd7ofZH5+X/pJr90/nRoPEX0DJo1dHDbgtYWOhJhcCgMDTOw84RZ72q6lB+Q==
 
 growly@^1.3.0:
   version "1.3.0"
@@ -6540,6 +6554,13 @@ import-from@^2.1.0:
   resolved "https://registry.yarnpkg.com/import-from/-/import-from-2.1.0.tgz#335db7f2a7affd53aaa471d4b8021dee36b7f3b1"
   dependencies:
     resolve-from "^3.0.0"
+
+import-from@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/import-from/-/import-from-3.0.0.tgz#055cfec38cd5a27d8057ca51376d7d3bf0891966"
+  integrity sha512-CiuXOFFSzkU5x/CR0+z7T91Iht4CXgfCxVOFRhh2Zyhg5wOpWvvDLQUsWl+gcN+QscYBjez8hDCt85O7RLDttQ==
+  dependencies:
+    resolve-from "^5.0.0"
 
 import-lazy@^2.1.0:
   version "2.1.0"
@@ -11393,21 +11414,23 @@ spdx-license-ids@^3.0.0:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.4.tgz#75ecd1a88de8c184ef015eafb51b5b48bfd11bb1"
 
-spire-config-default@^1.7.2:
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/spire-config-default/-/spire-config-default-1.7.2.tgz#49c212c3952ed3c51f70d6a401a234a8b4349e92"
+spire-config-default@^1.7.3:
+  version "1.7.2-next.1"
+  resolved "https://registry.yarnpkg.com/spire-config-default/-/spire-config-default-1.7.2-next.1.tgz#302b5b83e62ba285fe474d6b1549c35d7435bab5"
+  integrity sha512-60iUxdexKKMgb80K3maCG8J4e6ENmCHzx185pLtNNBeAUdmFlbquWN8hZMrDqo8DAZ35/z0ocefZsTQlWg87nA==
   dependencies:
-    spire-plugin-clean "^1.7.2"
+    spire-plugin-clean "^1.7.2-next.1+98c6149"
     spire-plugin-doctoc "^1.7.1"
-    spire-plugin-eslint "^1.7.2"
-    spire-plugin-jest "^1.7.2"
-    spire-plugin-lint-staged "^1.7.2"
-    spire-plugin-prettier "^1.7.2"
-    spire-plugin-semantic-release "^1.7.2"
+    spire-plugin-eslint "^1.7.2-next.1+98c6149"
+    spire-plugin-jest "^1.7.2-next.1+98c6149"
+    spire-plugin-lint-staged "^1.7.2-next.1+98c6149"
+    spire-plugin-prettier "^1.7.2-next.1+98c6149"
+    spire-plugin-semantic-release "^1.7.2-next.1+98c6149"
 
-spire-plugin-clean@^1.7.2:
+spire-plugin-clean@^1.7.2-next.1+98c6149:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/spire-plugin-clean/-/spire-plugin-clean-1.7.2.tgz#832cc2d989aa64b3eec4e8d39274e1cf308b927d"
+  integrity sha512-kBZlUmqhGgcPxdeJlUryY3gGznwEmQHJIeFyrpze0Gcs00EAJTAMOQjdY5voIMBbxKjgj6k+i1VCNMRICqiXjQ==
   dependencies:
     execa "^1.0.0"
 
@@ -11417,9 +11440,10 @@ spire-plugin-doctoc@^1.7.1:
   dependencies:
     doctoc "^1.4.0"
 
-spire-plugin-eslint@^1.7.2:
+spire-plugin-eslint@^1.7.2-next.1+98c6149:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/spire-plugin-eslint/-/spire-plugin-eslint-1.7.2.tgz#903fe08b587088b049df67bcaba049b72aca820b"
+  integrity sha512-p5RfF61m5BWrV94WukzaYKJcS03H/uC6V5ZAipNnTn9lcZz264DI8QHuEToWAbcbVEPKrVD8baj2GRkcMV0Edw==
   dependencies:
     babel-eslint "^10.0.1"
     eslint "^5.16.0"
@@ -11428,9 +11452,10 @@ spire-plugin-eslint@^1.7.2:
     eslint-plugin-prettier "^3.0.0"
     execa "^1.0.0"
 
-spire-plugin-jest@^1.7.2:
+spire-plugin-jest@^1.7.2-next.1+98c6149:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/spire-plugin-jest/-/spire-plugin-jest-1.7.2.tgz#74e83b9f62955f00f5062abb5859328943c4b0a8"
+  integrity sha512-FadaD079//suuOkHkZtMkySLBAIF4HCUw91HovSPI3MuIL573mpm1ePnxqPpnq4KTdPiBn2XqVAqlPMp4CQ2zw==
   dependencies:
     execa "^1.0.0"
     jest "^24.7.0"
@@ -11441,23 +11466,39 @@ spire-plugin-lerna-release@^1.4.0:
   dependencies:
     lerna "^3.13.1"
 
-spire-plugin-lint-staged@^1.7.2:
+spire-plugin-lint-staged@^1.7.2-next.1+98c6149:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/spire-plugin-lint-staged/-/spire-plugin-lint-staged-1.7.2.tgz#918e7ea0b9b763a6928c7a2d53fd11328cb51edd"
+  integrity sha512-fJFCC4ai3SGPHNnh3E9bRKsKhks2T3lo/anl25nGiwvl0GxLa65qUcGN9LIkYgLiKoEAVZXcap0wpB3DOnqpgA==
   dependencies:
     lint-staged "^8.1.5"
     prettier "^1.16.4"
 
-spire-plugin-prettier@^1.7.2:
+spire-plugin-prettier@^1.7.2-next.1+98c6149:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/spire-plugin-prettier/-/spire-plugin-prettier-1.7.2.tgz#0e1b7c01bed829f39bca5dacebee98182e7978b0"
+  integrity sha512-xX7lKZJghrjxNkZQ7bSX2yDnNmXl9SalYSoPPagCbjkA+tENbzuk2tj1OBaHiFnR/NI0JHP4r67Qj+Uim1MyUw==
   dependencies:
     execa "^1.0.0"
     prettier "^1.16.4"
 
-spire-plugin-semantic-release@^1.7.2:
+spire-plugin-semantic-release@^1.7.2-next.1+98c6149:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/spire-plugin-semantic-release/-/spire-plugin-semantic-release-1.7.2.tgz#4f46dda0e704b556517df77e84f8218396bda45e"
+  integrity sha512-k4hY6UgDQwihjjNFpRdKp4AqiNNNHIQr7iGpEpsHSM5rZO3e/7wse6ltiJS/oQmdHy1WmkTp/59bWCHN85iK3g==
+  dependencies:
+    "@semantic-release/changelog" "^3.0.1"
+    "@semantic-release/commit-analyzer" "^6.1.0"
+    "@semantic-release/git" "^7.0.5"
+    "@semantic-release/github" "^5.2.10"
+    "@semantic-release/release-notes-generator" "^7.1.4"
+    execa "^1.0.0"
+    semantic-release "^15.12.2"
+
+spire-plugin-semantic-release@^1.7.4-next.11:
+  version "1.7.2-next.1"
+  resolved "https://registry.yarnpkg.com/spire-plugin-semantic-release/-/spire-plugin-semantic-release-1.7.2-next.1.tgz#afad3fd6330aaed12cd42d9f70fe40ec2d47f636"
+  integrity sha512-TfWTpowKYbw3Gu/5ODiWFpswg540UQvq2AHasFg8G30aFc4kHONDuvgF6nPFUyT7m/dFRs7aoJ67M2A8MRMOug==
   dependencies:
     "@semantic-release/changelog" "^3.0.1"
     "@semantic-release/commit-analyzer" "^6.1.0"
@@ -11475,17 +11516,18 @@ spire-plugin-yarn@^1.7.0:
     use-yarn "^2.2.0"
     yarn-deduplicate "^1.1.1"
 
-spire@^1.7.2:
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/spire/-/spire-1.7.2.tgz#cb47c9f8fb8f6dbea7c8c9d609b28d97e4fe45f6"
+spire@^1.7.4-next.11:
+  version "1.7.4-next.11"
+  resolved "https://registry.yarnpkg.com/spire/-/spire-1.7.4-next.11.tgz#debee857aa699b9d96fa4b746ff9e054b23c5cf7"
+  integrity sha512-3K/KJsbj9DKesElrb9WVoMMqZb1l9puTrKgapEsvG2EsQ9UeAA//ylTTHjC/arW4jRXIHqod87wreMDwZQmiSw==
   dependencies:
     cosmiconfig "^5.2.0"
-    fs-extra "^7.0.1"
-    import-from "^2.1.0"
+    fs-extra "^8.1.0"
+    import-from "^3.0.0"
     invariant "^2.2.4"
     pretty-format "^24.7.0"
     signale "^1.4.0"
-    spire-config-default "^1.7.2"
+    spire-config-default "^1.7.3"
     yargs "^13.2.4"
 
 split-on-first@^1.0.0:
