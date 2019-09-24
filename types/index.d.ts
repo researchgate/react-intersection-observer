@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface Props {
-    children: React.ReactElement<any> | null | undefined;
+    children: React.ReactNode;
     root?: string | Element | null;
     rootMargin?: string;
     threshold?: number | number[];
