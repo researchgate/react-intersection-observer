@@ -4,7 +4,7 @@
   "version": "1.0.1",
   "author": "Luis Merino <mail@luismerino.name>",
   "engines": {
-    "node": ">=10.0.0"
+    "node": "^8.10.0 || >=9.10.0"
   },
   "bugs": {
     "url": "https://github.com/researchgate/react-intersection-observer/issues"
