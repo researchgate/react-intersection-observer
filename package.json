@@ -24,7 +24,7 @@
     "@types/react": "16.8.18",
     "babel-loader": "^8.0.6",
     "cross-env": "^5.2.0",
-    "eslint": "^5.16.0",
+    "eslint": "^6.0.0",
     "intersection-observer": "^0.7.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
