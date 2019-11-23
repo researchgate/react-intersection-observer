@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/researchgate/react-intersection-observer/compare/v1.0.2...v1.0.3) (2019-11-23)
+
+
+### Bug Fixes
+
+* **typings:** children props should be ReactNode ([#72](https://github.com/researchgate/react-intersection-observer/issues/72)) ([43aa3a2](https://github.com/researchgate/react-intersection-observer/commit/43aa3a2c4042dcbbff027728c237af6fc96e5e53)), closes [/github.com/DefinitelyTyped/DefinitelyTyped/blob/41fe335d209b4cd46dedafd1a91849d7fec6880d/types/react/index.d.ts#L1218-L1222](https://github.com//github.com/DefinitelyTyped/DefinitelyTyped/blob/41fe335d209b4cd46dedafd1a91849d7fec6880d/types/react/index.d.ts/issues/L1218-L1222)
+
 ## [1.0.2](https://github.com/researchgate/react-intersection-observer/compare/v1.0.1...v1.0.2) (2019-11-23)
 
 
