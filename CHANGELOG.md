@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/researchgate/react-intersection-observer/compare/v1.0.3...v1.0.4) (2019-11-23)
+
+
+### Bug Fixes
+
+* **publish:** Do not publish tests ([0030cf0](https://github.com/researchgate/react-intersection-observer/commit/0030cf0415f9c3b8b816651290363876c6229bb9))
+
 ## [1.0.3](https://github.com/researchgate/react-intersection-observer/compare/v1.0.2...v1.0.3) (2019-11-23)
 
 
