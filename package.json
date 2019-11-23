@@ -75,8 +75,8 @@
   },
   "scripts": {
     "build": "yarn build:js && yarn build:es",
-    "build:js": "cross-env BABEL_ENV=production BABEL_OUTPUT=cjs babel src --out-dir lib/js --ignore __tests__ --copy-files",
-    "build:es": "cross-env BABEL_ENV=production BABEL_OUTPUT=esm babel src --out-dir lib/es --ignore __tests__ --copy-files",
+    "build:js": "cross-env BABEL_ENV=production BABEL_OUTPUT=cjs babel src --out-dir lib/js --ignore **/__tests__",
+    "build:es": "cross-env BABEL_ENV=production BABEL_OUTPUT=esm babel src --out-dir lib/es --ignore **/__tests__",
     "build:storybook": "build-storybook -o .docs",
     "lint": "spire lint",
     "prepublishOnly": "yarn build",
