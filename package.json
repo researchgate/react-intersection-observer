@@ -14,14 +14,15 @@
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
     "@researchgate/babel-preset": "^1.2.1",
     "@researchgate/spire-config": "^1.5.4",
     "@storybook/addon-actions": "^5.0.11",
     "@storybook/addon-knobs": "^5.0.11",
     "@storybook/addon-options": "^5.0.11",
     "@storybook/react": "^5.0.11",
-    "@types/react": "16.9.12",
+    "@types/react": "^16.9.13",
     "babel-loader": "^8.0.6",
     "cross-env": "^6.0.0",
     "intersection-observer": "^0.7.0",
