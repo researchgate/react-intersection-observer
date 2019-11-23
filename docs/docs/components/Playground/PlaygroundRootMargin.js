@@ -4,9 +4,9 @@ import { select } from '@storybook/addon-knobs/react';
 import Observer from '../../../../src/IntersectionObserver';
 
 const storyBookAction = decorateAction([
-    args =>
+    (args) =>
         ['isIntersecting', 'intersectionRatio'].map(
-            key => `${key}: ${args[0][key]}`
+            (key) => `${key}: ${args[0][key]}`
         ),
 ])('onChange');
 
@@ -15,7 +15,7 @@ export default class WindowRoot extends Component {
         visibility: 'hidden',
     };
 
-    handleChange = event => {
+    handleChange = (event) => {
         storyBookAction(event);
         this.setState({
             visibility: event.isIntersecting ? 'visible' : 'invisible',

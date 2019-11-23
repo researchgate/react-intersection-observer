@@ -4,7 +4,7 @@ export function parseRootMargin(rootMargin) {
     const marginString = rootMargin ? rootMargin.trim() : '0px';
     const [m0 = '0px', m1 = m0, m2 = m0, m3 = m1] = marginString
         .split(/\s+/)
-        .map(margin => {
+        .map((margin) => {
             if (!marginRE.test(margin)) {
                 throw new Error(
                     'rootMargin must be a string literal containing pixels and/or percent values'

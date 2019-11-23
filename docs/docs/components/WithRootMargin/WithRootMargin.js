@@ -3,9 +3,9 @@ import { decorateAction } from '@storybook/addon-actions';
 import Observer from '../../../../src/IntersectionObserver';
 
 const storyBookAction = decorateAction([
-    args =>
+    (args) =>
         ['isIntersecting', 'intersectionRatio']
-            .map(key => `${key}: ${args[0][key]}`)
+            .map((key) => `${key}: ${args[0][key]}`)
             .concat(['rootMargin: 0% 0% -25% 0%']),
 ])('onChange');
 
@@ -15,7 +15,7 @@ export default class WithRootMargin extends Component {
         scroller: null,
     };
 
-    handleChange = event => {
+    handleChange = (event) => {
         storyBookAction(event);
         this.setState({
             visibility: event.isIntersecting ? 'visible' : 'invisible',
@@ -31,7 +31,7 @@ export default class WithRootMargin extends Component {
                 <div className="body body--frame">
                     <div
                         className="scroller scroller--gradient"
-                        ref={node => {
+                        ref={(node) => {
                             if (!this.state.scroller) {
                                 this.setState({ scroller: node });
                             }

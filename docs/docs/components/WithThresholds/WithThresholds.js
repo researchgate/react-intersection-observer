@@ -3,9 +3,9 @@ import { decorateAction } from '@storybook/addon-actions';
 import Observer from '../../../../src/IntersectionObserver';
 
 const storyBookAction = decorateAction([
-    args =>
+    (args) =>
         ['isIntersecting', 'intersectionRatio']
-            .map(key => `${key}: ${args[0][key]}`)
+            .map((key) => `${key}: ${args[0][key]}`)
             .concat('thresholds: [0, 0.25, 0.5, 0.75, 1]'),
 ])('onChange');
 
@@ -20,7 +20,7 @@ export default class WithThresholds extends Component {
         threshold: 0,
     };
 
-    handleChange = event => {
+    handleChange = (event) => {
         storyBookAction(event);
         this.setState({
             visibility: event.isIntersecting ? 'visible' : 'invisible',
