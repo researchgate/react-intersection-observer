@@ -9,7 +9,7 @@ const observerOptions = ['root', 'rootMargin', 'threshold'];
 const observableProps = ['root', 'rootMargin', 'threshold', 'disabled'];
 const { hasOwnProperty, toString } = Object.prototype;
 
-const getOptions = props => {
+const getOptions = (props) => {
     return observerOptions.reduce((options, key) => {
         if (hasOwnProperty.call(props, key)) {
             const rootIsString =
@@ -81,11 +81,11 @@ class IntersectionObserver extends React.Component {
         onChange: PropTypes.func.isRequired,
     };
 
-    handleChange = event => {
+    handleChange = (event) => {
         this.props.onChange(event, this.externalUnobserve);
     };
 
-    handleNode = target => {
+    handleNode = (target) => {
         const { children } = this.props;
 
         if (children != null) {
@@ -122,7 +122,7 @@ class IntersectionObserver extends React.Component {
         return true;
     };
 
-    unobserve = target => {
+    unobserve = (target) => {
         unobserveElement(this, target);
     };
 
@@ -133,7 +133,7 @@ class IntersectionObserver extends React.Component {
     getSnapshotBeforeUpdate(prevProps) {
         this.prevTargetNode = this.targetNode;
 
-        const relatedPropsChanged = observableProps.some(prop =>
+        const relatedPropsChanged = observableProps.some((prop) =>
             shallowCompare(this.props[prop], prevProps[prop])
         );
         if (relatedPropsChanged) {

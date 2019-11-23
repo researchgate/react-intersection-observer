@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Observer from '../../../../src/IntersectionObserver';
 
-export default threshold => BaseComponent => {
+export default (threshold) => (BaseComponent) => {
     const displayName =
         BaseComponent.displayName || BaseComponent.name || 'Component';
 

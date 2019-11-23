@@ -26,7 +26,7 @@ describe('parseRootMargin', () => {
 
 describe('shallowCompare', () => {
     const comparerFn = (nextProps, prevProps) =>
-        ['disabled', 'root', 'rootMargin', 'threshold'].some(option =>
+        ['disabled', 'root', 'rootMargin', 'threshold'].some((option) =>
             shallowCompare(nextProps[option], prevProps[option])
         );
 

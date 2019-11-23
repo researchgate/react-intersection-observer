@@ -10,7 +10,7 @@ export default class AdImpression extends React.Component {
         tracked: '',
     };
 
-    handleChange = event => {
+    handleChange = (event) => {
         if (event.isIntersecting && event.intersectionRatio >= 0.5) {
             this.recordedTimeout = setTimeout(() => {
                 this.setState({ tracked: 'ad--tracked' });
