@@ -343,7 +343,7 @@ onChange = entry => requestIdleCallback(() => this.handleChange(entry));
     </tr>
     <tr>
         <td>Safari</td>
-        <td>Safari Technology Preview</td>
+        <td>12.1</td>
     </tr>
     <tr>
         <td>Chrome for Android</td>
