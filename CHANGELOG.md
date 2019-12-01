@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/researchgate/react-intersection-observer/compare/v1.0.4...v1.0.5) (2019-12-01)
+
+
+### Bug Fixes
+
+* **deps:** lock file maintenance ([#79](https://github.com/researchgate/react-intersection-observer/issues/79)) ([5d9256f](https://github.com/researchgate/react-intersection-observer/commit/5d9256f137085db7e06f2eb1f98404c53b00032d))
+
 ## [1.0.4](https://github.com/researchgate/react-intersection-observer/compare/v1.0.3...v1.0.4) (2019-11-23)
 
 
