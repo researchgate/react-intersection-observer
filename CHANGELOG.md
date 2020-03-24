@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/researchgate/react-intersection-observer/compare/v1.1.0...v1.1.1) (2020-03-24)
+
+
+### Bug Fixes
+
+* **forwardRef:** fix error boundary not forwarding the ref ([568cd57](https://github.com/researchgate/react-intersection-observer/commit/568cd579c9003597eecc7b501bfc9fa9205633f7))
+
 # [1.1.0](https://github.com/researchgate/react-intersection-observer/compare/v1.0.5...v1.1.0) (2020-03-24)
 
 
