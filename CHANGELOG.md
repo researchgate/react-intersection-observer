@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/researchgate/react-intersection-observer/compare/v1.0.5...v1.1.0) (2020-03-24)
+
+
+### Features
+
+* **errorReporting:** error reporting happens now in error boundary ([11f5e9f](https://github.com/researchgate/react-intersection-observer/commit/11f5e9f10b300d210996b9b8f2bf51d90664e298))
+
 ## [1.0.5](https://github.com/researchgate/react-intersection-observer/compare/v1.0.4...v1.0.5) (2019-12-01)
 
 
