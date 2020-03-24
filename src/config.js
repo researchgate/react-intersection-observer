@@ -1,17 +1,10 @@
-import invariant from 'invariant';
-
 const config = {};
 
 export default Object.create(null, {
     errorReporter: {
         configurable: false,
         get() {
-            return (
-                config.errorReporter ||
-                function(format) {
-                    return invariant(false, format);
-                }
-            );
+            return config.errorReporter;
         },
         set(value) {
             if (typeof value !== 'function') {

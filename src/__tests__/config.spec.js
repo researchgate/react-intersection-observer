@@ -1,26 +1,20 @@
 /* eslint-env jest */
 import Config from '../config';
-import invariant from 'invariant';
-
-jest.mock('invariant', () => jest.fn());
 
 describe('Config', () => {
-    const testErrorReporter = jest.fn();
-    const errorMsg = 'Intentionally throw exception';
-
     test('default errorReporter', () => {
-        Config.errorReporter(errorMsg);
-        expect(invariant).toBeCalledWith(false, errorMsg);
+        expect(Config.errorReporter).toBeUndefined();
     });
 
     test('custom errorReporter', () => {
-        const defaultTestErrorReporter = Config.errorReporter;
-        Config.errorReporter = testErrorReporter;
+        const testErrorReporter = jest.fn();
+        const errorMsg = 'Intentionally throw exception';
+        const infoMsg = 'Meta information for exception';
+        const InlineConfig = require('../config');
+        InlineConfig.errorReporter = testErrorReporter;
+        InlineConfig.errorReporter(errorMsg, infoMsg);
 
-        Config.errorReporter(errorMsg);
-        expect(testErrorReporter).toBeCalledWith(errorMsg);
-
-        Config.errorReporter = defaultTestErrorReporter;
+        expect(testErrorReporter).toBeCalledWith(errorMsg, infoMsg);
     });
 
     test('custom non-callable errorReporter', () => {

@@ -10,7 +10,6 @@
     "url": "https://github.com/researchgate/react-intersection-observer/issues"
   },
   "dependencies": {
-    "invariant": "^2.2.4",
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
@@ -67,6 +66,7 @@
       "**/__tests__/**/*.spec.js"
     ]
   },
+  "prettier": "@researchgate/prettier-config",
   "spire": {
     "extends": "@researchgate/spire-config",
     "plugins": [
@@ -85,6 +85,5 @@
     "storybook": "start-storybook -p 9001 -c .storybook",
     "test": "spire test",
     "ts:check": "tsc --project types"
-  },
-  "prettier": "@researchgate/prettier-config"
+  }
 }

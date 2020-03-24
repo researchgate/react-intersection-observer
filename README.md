@@ -41,7 +41,7 @@ all the imperative parts for you.
 - [Documentation](#documentation)
   - [Demos](#demos)
   - [Recipes](#recipes)
-  - [Exception handling](#exception-handling)
+  - [Handling a missing DOM node situation](#handling-a-missing-dom-node-situation)
   - [Options](#options)
   - [Notes](#notes)
 - [Polyfill](#polyfill)
@@ -208,34 +208,62 @@ import ViewableMonitor from './ViewableMonitor';
 
 export default () => (
   <ViewableMonitor>
-    {isViewable => (isViewable ? 'I am viewable' : 'I am still hiding')}
+    {(isViewable) => (isViewable ? 'I am viewable' : 'I am still hiding')}
   </ViewableMonitor>
 );
 ```
 
 Discover more recipes in our [examples section](docs/README.md).
 
-### Exception handling
+### Handling a missing DOM node situation
 
-By default, an `invariant` error is thrown if there isn't a DOM node to observe
-when mounted. We've added a helpful and descriptive message that's supposed to
-help you identify potential problems early on. However, this could also
-unexpectedtly trigger in production, specially with dynamic children, causing a
-bigger problem (bubbling up) if not handled correctly (e.g.: error boundary). In
-such cases, you can set the config for the error reporter to adjust it to your
-needs:
+In cases where there isn't a DOM node available to observe when rendering,
+you'll be seeing an error logged in the console:
+
+```js
+ReactIntersectionObserver: Can't find DOM node in the provided children. Make sure to render at least one DOM node in the tree.
+```
+
+This somewhat helpful and descriptive message is supposed to help you identify
+potential problems implementing `observers` early on. If you miss the exception
+for some reason and ends up in production (prone to happen with dynamic
+children), this component will NOT unmount. Instead, it will gracefully catch
+the error so that you can do custom logging and report it. For example:
 
 ```js
 import { Config } from '@researchgate/react-intersection-observer';
 
-Config.errorReporter(function(errorMsg) {
-    if (process.env.NODE_ENV === 'production') {
-        sendReport((errorMsg);
-    } else {
-        console.error(errorMsg);
-    }
+if (process.env.NODE_ENV === 'production') {
+  Config.errorReporter(function(error) {
+    sendReport(error);
+  });
+}
+```
+
+Maybe you want to deal with the error on your own, for example, by rendering a
+fallback. In that case, you can re-throw the error so that it bubbles up to the
+next boundary:
+
+```js
+import { Config } from '@researchgate/react-intersection-observer';
+
+Config.errorReporter(function(error) {
+  throw error;
 });
 ```
+
+If this error happens during mount, it's easy to spot. However, a lot of these
+errors usually happen during tree updates, because some child component that was
+previously observed suddently ceaces to exist in the UI. This usually means that
+either you shouldn't have rendered an `<Observer>` around it anymore or, you
+should have used the `disabled` property.
+
+At [ResearchGate](www.researchgate.net), we have found that not unmounting the
+tree just because we failed to `observe()` a DOM node suits our use cases
+better. It's fairly common having a lack of error boundaries around your
+components, and that leads to entire UIs parts being unmounted, which is not
+ideal to end users. By capturing errors, we are able to keep the UI unbroken
+while we fix them.
 
 ### Options
 
@@ -313,7 +341,7 @@ might want to decorate your `onChange` callback with a `requestIdleCallback` or
 `setTimeout` call to avoid a potential performance degradation:
 
 ```js
-onChange = entry => requestIdleCallback(() => this.handleChange(entry));
+onChange = (entry) => requestIdleCallback(() => this.handleChange(entry));
 ```
 
 ## [**IntersectionObserver**'s Browser Support](https://platform-status.mozilla.org/)

@@ -4,3 +4,4 @@ yarn-error.log
 /lib
 /src/coverage
 /.docs
+.DS_Store

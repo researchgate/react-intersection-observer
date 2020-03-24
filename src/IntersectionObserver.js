@@ -110,10 +110,9 @@ class IntersectionObserver extends React.Component {
             return false;
         }
         if (!this.targetNode) {
-            Config.errorReporter(
+            throw new Error(
                 "ReactIntersectionObserver: Can't find DOM node in the provided children. Make sure to render at least one DOM node in the tree."
             );
-            return false;
         }
         this.observer = createObserver(getOptions(this.props));
         this.target = this.targetNode;
@@ -184,4 +183,22 @@ class IntersectionObserver extends React.Component {
     }
 }
 
-export { IntersectionObserver as default, getOptions };
+class GuardedIntersectionObserver extends React.Component {
+    static displayName = 'ErrorBoundary(IntersectionObserver)';
+
+    componentDidCatch(error, info) {
+        if (Config.errorReporter) {
+            Config.errorReporter(error, info);
+        }
+    }
+
+    render() {
+        return <IntersectionObserver {...this.props} />;
+    }
+}
+
+export {
+    GuardedIntersectionObserver as default,
+    IntersectionObserver,
+    getOptions,
+};

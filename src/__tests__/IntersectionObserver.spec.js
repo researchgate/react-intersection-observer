@@ -2,7 +2,10 @@
 import 'intersection-observer';
 import React, { Component } from 'react';
 import renderer from 'react-test-renderer';
-import IntersectionObserver, { getOptions } from '../IntersectionObserver';
+import GuardedIntersectionObserver, {
+    IntersectionObserver,
+    getOptions,
+} from '../IntersectionObserver';
 import { callback, observerElementsMap } from '../observer';
 import Config from '../config';
 
@@ -19,6 +22,8 @@ jest.mock('react-dom', () => {
         },
     };
 });
+// the default "undefined" can't be re-assigned, so we preemptively set it as an empty function
+Config.errorReporter = function() {};
 
 const target = { nodeType: 1, type: 'span' };
 const targets = { div: { nodeType: 1, type: 'div' }, span: target };
@@ -69,6 +74,71 @@ test('throws trying to observe children without a DOM node', () => {
         `"ReactIntersectionObserver: Can't find DOM node in the provided children. Make sure to render at least one DOM node in the tree."`
     );
     expect(observerElementsMap.size).toBe(sizeBeforeObserving);
+});
+
+test('reports error trying to observe children without a DOM node', () => {
+    global.spyOn(console, 'error'); // suppress error boundary warning
+    const sizeBeforeObserving = observerElementsMap.size;
+    const originalErrorReporter = Config.errorReporter;
+    const spy = jest.fn();
+    Config.errorReporter = spy;
+
+    const tree = renderer
+        .create(
+            <GuardedIntersectionObserver onChange={noop}>
+                <ProxyComponent>{null}</ProxyComponent>
+            </GuardedIntersectionObserver>
+        )
+        .toTree();
+
+    expect(observerElementsMap.size).toBe(sizeBeforeObserving);
+    expect(spy).toBeCalledTimes(1);
+    expect(spy).toBeCalledWith(
+        expect.any(Error),
+        expect.objectContaining({ componentStack: expect.any(String) })
+    );
+    // Tree stayed mounted because of the error boundary
+    expect(tree.props.children.type).toEqual(ProxyComponent);
+
+    Config.errorReporter = originalErrorReporter;
+});
+
+test('reports errors by re-throwing trying observer children without a DOM node', () => {
+    global.spyOn(console, 'error'); // suppress error boundary warning
+    const originalErrorReporter = Config.errorReporter;
+    let called = false;
+    Config.errorReporter = (err) => {
+        called = true;
+        throw err;
+    };
+    class TestErrorBoundary extends React.Component {
+        state = { hasError: false };
+
+        componentDidCatch() {
+            this.setState({ hasError: true });
+        }
+
+        render() {
+            // eslint-disable-next-line react/prop-types
+            return this.state.hasError ? 'has-error' : this.props.children;
+        }
+    }
+
+    const children = renderer
+        .create(
+            <TestErrorBoundary>
+                <GuardedIntersectionObserver onChange={noop}>
+                    <ProxyComponent>{null}</ProxyComponent>
+                </GuardedIntersectionObserver>
+            </TestErrorBoundary>
+        )
+        .toJSON();
+
+    // Tree changed because of the custom error boundary
+    expect(children).toBe('has-error');
+    expect(called).toBe(true);
+
+    Config.errorReporter = originalErrorReporter;
 });
 
 test('should not observe children that equal null or undefined', () => {
@@ -348,37 +418,7 @@ describe('updating', () => {
         expect(observe).toBeCalledTimes(1);
     });
 
-    test('should call a setup errorReporter without a DOM Node', () => {
-        const spy = jest.fn();
-        const origErrorReporter = Config.errorReporter;
-        Config.errorReporter = spy;
-        const tree = renderer.create(
-            <IntersectionObserver onChange={noop}>
-                <ProxyComponent>
-                    <div />
-                </ProxyComponent>
-            </IntersectionObserver>,
-            { createNodeMock }
-        );
-        const instance = tree.getInstance();
-        const observe = jest.spyOn(instance, 'observe');
-        const unobserve = jest.spyOn(instance, 'unobserve');
-
-        tree.update(
-            <IntersectionObserver onChange={noop}>
-                <ProxyComponent key="forcesRender">{null}</ProxyComponent>
-            </IntersectionObserver>
-        );
-
-        expect(spy).toBeCalled();
-        expect(unobserve).toBeCalledTimes(1);
-        expect(observe).toBeCalledTimes(1);
-        expect(observe).toReturnWith(false);
-
-        Config.errorReporter = origErrorReporter;
-    });
-
-    test('should observe when updating with a DOM Node', () => {
+    test('should observe only when updating with a DOM Node', () => {
         global.spyOn(console, 'error'); // suppress error boundary warning
 
         const sizeAfterUnobserving = observerElementsMap.size;
