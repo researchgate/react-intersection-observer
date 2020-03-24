@@ -141,6 +141,23 @@ test('reports errors by re-throwing trying observer children without a DOM node'
     Config.errorReporter = originalErrorReporter;
 });
 
+test('error boundary forwards ref', () => {
+    let observer;
+    renderer.create(
+        <GuardedIntersectionObserver
+            onChange={noop}
+            ref={(instance) => {
+                observer = instance;
+            }}
+        >
+            <div />
+        </GuardedIntersectionObserver>,
+        { createNodeMock }
+    );
+
+    expect(observer instanceof IntersectionObserver).toBe(true);
+});
+
 test('should not observe children that equal null or undefined', () => {
     const sizeBeforeObserving = observerElementsMap.size;
     renderer.create(

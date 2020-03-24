@@ -183,8 +183,12 @@ class IntersectionObserver extends React.Component {
     }
 }
 
-class GuardedIntersectionObserver extends React.Component {
+class ErrorBoundary extends React.Component {
     static displayName = 'ErrorBoundary(IntersectionObserver)';
+
+    static propTypes = {
+        forwardedRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    };
 
     componentDidCatch(error, info) {
         if (Config.errorReporter) {
@@ -193,9 +197,17 @@ class GuardedIntersectionObserver extends React.Component {
     }
 
     render() {
-        return <IntersectionObserver {...this.props} />;
+        const { forwardedRef, ...props } = this.props;
+
+        return <IntersectionObserver ref={forwardedRef} {...props} />;
     }
 }
+
+const GuardedIntersectionObserver = React.forwardRef((props, ref) => (
+    <ErrorBoundary forwardedRef={ref} {...props} />
+));
+
+GuardedIntersectionObserver.displayName = 'IntersectionObserver';
 
 export {
     GuardedIntersectionObserver as default,
