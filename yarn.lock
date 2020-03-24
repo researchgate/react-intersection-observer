@@ -2185,10 +2185,10 @@
   resolved "https://registry.yarnpkg.com/@researchgate/prettier-config/-/prettier-config-1.3.0.tgz#9ca7a27375c12775768b44ef84130a810fa87af8"
   integrity sha512-MAeLKMyWBqSKB55CLNyvgs+5Zz3nMDQ6thCkVPgjid6k7nRXM/RwIQWU9u15I4Umm87z8HnDZjYLxcSW22Kffw==
 
-"@researchgate/spire-config@2.1.2":
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/@researchgate/spire-config/-/spire-config-2.1.2.tgz#dc8f71ef4c1939c08faf8bb431e6f10a7e1762a0"
-  integrity sha512-N2yvpg1KjOdOplq5dmBLC1nTV6lvGjiK+peMR1tleHUlZTi7l9NZP1UchH7aN0g07XXiGxNEAIL0+5NsfvNuzg==
+"@researchgate/spire-config@2.1.3":
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/@researchgate/spire-config/-/spire-config-2.1.3.tgz#d02873d9b6f6f58e5a0ab4eec57897556aec83dd"
+  integrity sha512-Jfx2I7gbm2cgkqtlrwNMzllZTSPN4Ue5ZE2uqI5iPtZ6XZtlFFXZ03mJKTsK3vQNwG38bpNM1Ht0hATkXepkcw==
   dependencies:
     "@researchgate/eslint-config-node" "^1.5.3"
     "@researchgate/eslint-config-node-babel" "^1.4.5"
