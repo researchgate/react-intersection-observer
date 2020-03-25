@@ -228,7 +228,8 @@ This somewhat helpful and descriptive message is supposed to help you identify
 potential problems implementing `observers` early on. If you miss the exception
 for some reason and ends up in production (prone to happen with dynamic
 children), this component will NOT unmount. Instead, it will gracefully catch
-the error so that you can do custom logging and report it. For example:
+the error and re-render the children so that you can do custom logging and
+report it. For example:
 
 ```js
 import { Config } from '@researchgate/react-intersection-observer';
@@ -252,11 +253,16 @@ Config.errorReporter(function(error) {
 });
 ```
 
-If this error happens during mount, it's easy to spot. However, a lot of these
-errors usually happen during tree updates, because some child component that was
-previously observed suddently ceaces to exist in the UI. This usually means that
-either you shouldn't have rendered an `<Observer>` around it anymore or, you
-should have used the `disabled` property.
+While sometimes this error happens during mount, and it's easy to spot, often
+types of errors happen during tree updates, because some child component that
+was previously observed suddently ceaces to exist in the UI. This usually means
+that either you shouldn't have rendered an `<Observer>` around it anymore or,
+you should have used the `disabled` property. That's why we capture errors and
+do re-rendering of the children as a fallback.
+
+If another kind of error happens, the `errorReporter` won't be invoked, and by
+rendering the children the error will bubble up to the nearest error boundary
+you defined.
 
 At [ResearchGate](www.researchgate.net), we have found that not unmounting the
 tree just because we failed to `observe()` a DOM node suits our use cases
