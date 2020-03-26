@@ -141,6 +141,45 @@ test('reports errors by re-throwing trying observer children without a DOM node'
     Config.errorReporter = originalErrorReporter;
 });
 
+test('render a fallback when some unexpected error happens', () => {
+    global.spyOn(console, 'error'); // suppress error boundary warning
+    const originalErrorReporter = Config.errorReporter;
+    const spy = jest.fn();
+    Config.errorReporter = spy;
+    class TestErrorBoundary extends React.Component {
+        state = { hasError: false };
+
+        componentDidCatch() {
+            this.setState({ hasError: true });
+        }
+
+        render() {
+            // eslint-disable-next-line react/prop-types
+            return this.state.hasError ? 'has-error' : this.props.children;
+        }
+    }
+
+    const Boom = () => {
+        throw new Error('unexpected rendering error');
+    };
+
+    const children = renderer
+        .create(
+            <TestErrorBoundary>
+                <GuardedIntersectionObserver onChange={noop}>
+                    <Boom />
+                </GuardedIntersectionObserver>
+            </TestErrorBoundary>
+        )
+        .toJSON();
+
+    // Tree changed because of the custom error boundary
+    expect(children).toBe('has-error');
+    expect(spy).not.toBeCalled();
+
+    Config.errorReporter = originalErrorReporter;
+});
+
 test('error boundary forwards ref', () => {
     let observer;
     renderer.create(
