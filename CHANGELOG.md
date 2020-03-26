@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/researchgate/react-intersection-observer/compare/v1.1.1...v1.1.2) (2020-03-26)
+
+
+### Bug Fixes
+
+* **errorBoundary:** fallback to children to propagate different errors ([#105](https://github.com/researchgate/react-intersection-observer/issues/105)) ([78eb990](https://github.com/researchgate/react-intersection-observer/commit/78eb990b7add3172420cf9fc020a2a4a8ccd1cbb))
+
 ## [1.1.1](https://github.com/researchgate/react-intersection-observer/compare/v1.1.0...v1.1.1) (2020-03-24)
 
 
