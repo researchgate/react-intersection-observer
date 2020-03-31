@@ -21,7 +21,7 @@
     "@storybook/addon-knobs": "5.3.18",
     "@storybook/addon-options": "5.3.18",
     "@storybook/react": "5.3.18",
-    "@types/react": "16.9.29",
+    "@types/react": "16.9.30",
     "babel-loader": "8.1.0",
     "cross-env": "7.0.2",
     "intersection-observer": "0.7.0",
