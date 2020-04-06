@@ -2192,18 +2192,18 @@
   dependencies:
     "@researchgate/eslint-config-base" "^1.4.3"
 
-"@researchgate/eslint-config-react-typescript@^1.6.2":
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/@researchgate/eslint-config-react-typescript/-/eslint-config-react-typescript-1.6.2.tgz#39c38b8c6c977b7a8f13e67850f73ce875194f13"
-  integrity sha512-q1QtQ5g7hx4va+jIEhecUzVuWAdPD7MWFzgRWXqwBPjyuwJho9IJbGHZXtfFYaoytPVHrvK1XFPHUE6KayE7Lg==
+"@researchgate/eslint-config-react-typescript@^1.6.3":
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/@researchgate/eslint-config-react-typescript/-/eslint-config-react-typescript-1.6.3.tgz#ab92c0cf55ec198ccb191bd1bd29d88d2d97730f"
+  integrity sha512-Ts2jZ/+MH3OFs/1hIXfXsig41jr3mvD1xgWwiLjHrUg20v7HZNAsBCyaunhf0I9+igaNWSx6p5weO0cbfYZS9A==
   dependencies:
-    "@researchgate/eslint-config-react" "^1.5.4"
+    "@researchgate/eslint-config-react" "^1.5.5"
     "@researchgate/eslint-settings-typescript" "^1.6.1"
 
-"@researchgate/eslint-config-react@^1.5.4":
-  version "1.5.4"
-  resolved "https://registry.yarnpkg.com/@researchgate/eslint-config-react/-/eslint-config-react-1.5.4.tgz#f016645f2817b1ec6d0f6b00ae45b97bbb1383a3"
-  integrity sha512-kzO1FG9zSBKlHdtOa9SFivBfmq3XsunmxdU1/C2fQ/6D0+5gff4zNbHcZtKoVT9facI5yx5mBSuH9l4L6w3T6A==
+"@researchgate/eslint-config-react@^1.5.5":
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/@researchgate/eslint-config-react/-/eslint-config-react-1.5.5.tgz#428060b63d24767dd7c09ebca01ab3f645eca6c5"
+  integrity sha512-YbQvrwZ0CIE1O2Z14PxFipayuTMccBsdXPXSpLVoLj+V54nhRrdsq33u1XvyswiJDMjOT6VwLvnED2KoDpCj7g==
   dependencies:
     "@researchgate/eslint-config-base" "^1.4.3"
 
@@ -2230,15 +2230,15 @@
   resolved "https://registry.yarnpkg.com/@researchgate/prettier-config/-/prettier-config-1.3.1.tgz#f65851bf336372ef3196289d3dd0abb5a2644e78"
   integrity sha512-AJ0zhVwC84OJ6pWSSJpFJCzj3+YZbtsjd2YoTPB/O09RaVsmuw9hWa7ybZA/iiopxf5QDAsAau1RIR8alY3cQw==
 
-"@researchgate/spire-config@2.1.4":
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/@researchgate/spire-config/-/spire-config-2.1.4.tgz#1127edbd204c65f2aa859f2fda67f0ac79dbfaa0"
-  integrity sha512-dfflY163VaZB0IIfSh/S7c1fBW8KK3u5yPKZEmRBfR7dxwsN48faxsDRT2Y4HQb6SfGTgS29KRZ5xUEDn9T12Q==
+"@researchgate/spire-config@2.1.5":
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@researchgate/spire-config/-/spire-config-2.1.5.tgz#0a018ad786ec97e82f0cb8d1d3e152b5b3b9d074"
+  integrity sha512-48n2MPoFOAeUdR9XPBvvhqBXBw/npsB/OQfFrILdlf6l9Mc93r4pa7g1deCH+XATpPEJHZO6chLzGK3cmEU/Kw==
   dependencies:
     "@researchgate/eslint-config-node" "^1.5.4"
     "@researchgate/eslint-config-node-babel" "^1.4.6"
-    "@researchgate/eslint-config-react" "^1.5.4"
-    "@researchgate/eslint-config-react-typescript" "^1.6.2"
+    "@researchgate/eslint-config-react" "^1.5.5"
+    "@researchgate/eslint-config-react-typescript" "^1.6.3"
     "@researchgate/jest-preset" "^1.3.2"
     "@researchgate/prettier-config" "^1.3.1"
     babel-eslint "^10.0.3"
@@ -2248,7 +2248,7 @@
     eslint-plugin-node "^11.0.0"
     eslint-plugin-prettier "^3.1.1"
     eslint-plugin-react "^7.12.4"
-    eslint-plugin-react-hooks "^2.1.2"
+    eslint-plugin-react-hooks "^3.0.0"
     prettier "^1.18.2"
     spire-plugin-jest "^1.7.2"
     spire-plugin-lerna-release "^1.4.0"
@@ -6482,10 +6482,10 @@ eslint-plugin-prettier@^3.1.0, eslint-plugin-prettier@^3.1.1:
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
-eslint-plugin-react-hooks@^2.1.2:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-2.5.1.tgz#4ef5930592588ce171abeb26f400c7fbcbc23cd0"
-  integrity sha512-Y2c4b55R+6ZzwtTppKwSmK/Kar8AdLiC2f9NADCuxbcTgPPg41Gyqa6b9GppgXSvCtkRw43ZE86CT5sejKC6/g==
+eslint-plugin-react-hooks@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-3.0.0.tgz#9e80c71846eb68dd29c3b21d832728aa66e5bd35"
+  integrity sha512-EjxTHxjLKIBWFgDJdhKKzLh5q+vjTFrqNZX36uIxWS4OfyXe5DawqPj3U5qeJ1ngLwatjzQnmR0Lz0J0YH3kxw==
 
 eslint-plugin-react@^7.12.4:
   version "7.19.0"
