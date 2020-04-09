@@ -3,16 +3,12 @@ import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import { createObserver, observeElement, unobserveElement } from './observer';
 import { shallowCompare } from './utils';
-import Config from './config';
 
 const observerOptions = ['root', 'rootMargin', 'threshold'];
 const observableProps = ['root', 'rootMargin', 'threshold', 'disabled'];
 const { hasOwnProperty, toString } = Object.prototype;
-const missingNodeError = new Error(
-    "ReactIntersectionObserver: Can't find DOM node in the provided children. Make sure to render at least one DOM node in the tree."
-);
 
-const getOptions = (props) => {
+export const getOptions = (props) => {
     return observerOptions.reduce((options, key) => {
         if (hasOwnProperty.call(props, key)) {
             const rootIsString =
@@ -26,7 +22,7 @@ const getOptions = (props) => {
     }, {});
 };
 
-class IntersectionObserver extends React.Component {
+export default class IntersectionObserver extends React.Component {
     static displayName = 'IntersectionObserver';
 
     static propTypes = {
@@ -113,7 +109,9 @@ class IntersectionObserver extends React.Component {
             return false;
         }
         if (!this.targetNode) {
-            throw missingNodeError;
+            throw new Error(
+                "ReactIntersectionObserver: Can't find DOM node in the provided children. Make sure to render at least one DOM node in the tree."
+            );
         }
         this.observer = createObserver(getOptions(this.props));
         this.target = this.targetNode;
@@ -183,47 +181,3 @@ class IntersectionObserver extends React.Component {
             : null;
     }
 }
-
-class ErrorBoundary extends React.Component {
-    static displayName = 'ErrorBoundary(IntersectionObserver)';
-
-    static propTypes = {
-        forwardedRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-    };
-
-    static getDerivedStateFromError() {
-        return { hasError: true };
-    }
-
-    state = {
-        hasError: false,
-    };
-
-    componentDidCatch(error, info) {
-        if (error === missingNodeError) {
-            Config.errorReporter && Config.errorReporter(error, info);
-        }
-    }
-
-    render() {
-        const { forwardedRef, ...props } = this.props;
-
-        if (this.state.hasError) {
-            return props.children;
-        }
-
-        return <IntersectionObserver ref={forwardedRef} {...props} />;
-    }
-}
-
-const GuardedIntersectionObserver = React.forwardRef((props, ref) => (
-    <ErrorBoundary forwardedRef={ref} {...props} />
-));
-
-GuardedIntersectionObserver.displayName = 'IntersectionObserver';
-
-export {
-    GuardedIntersectionObserver as default,
-    IntersectionObserver,
-    getOptions,
-};

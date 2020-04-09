@@ -32,6 +32,7 @@ all the imperative parts for you.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+
 - [Getting started](#getting-started)
 - [What does IntersectionObserver do?](#what-does-intersectionobserver-do)
 - [Why use this component?](#why-use-this-component)
@@ -41,7 +42,7 @@ all the imperative parts for you.
 - [Documentation](#documentation)
   - [Demos](#demos)
   - [Recipes](#recipes)
-  - [Handling a missing DOM node situation](#handling-a-missing-dom-node-situation)
+  - [Missing DOM nodes when observing](#missing-dom-nodes-when-observing)
   - [Options](#options)
   - [Notes](#notes)
 - [Polyfill](#polyfill)
@@ -215,7 +216,7 @@ export default () => (
 
 Discover more recipes in our [examples section](docs/README.md).
 
-### Handling a missing DOM node situation
+### Missing DOM nodes when observing
 
 In cases where there isn't a DOM node available to observe when rendering,
 you'll be seeing an error logged in the console:
@@ -227,49 +228,12 @@ ReactIntersectionObserver: Can't find DOM node in the provided children. Make su
 This somewhat helpful and descriptive message is supposed to help you identify
 potential problems implementing `observers` early on. If you miss the exception
 for some reason and ends up in production (prone to happen with dynamic
-children), this component will NOT unmount. Instead, it will gracefully catch
-the error and re-render the children so that you can do custom logging and
-report it. For example:
+children), the entire tree will unmount so be sensible about placing your error
+boundaries.
 
-```js
-import { Config } from '@researchgate/react-intersection-observer';
-
-if (process.env.NODE_ENV === 'production') {
-  Config.errorReporter(function(error) {
-    sendReport(error);
-  });
-}
-```
-
-Maybe you want to deal with the error on your own, for example, by rendering a
-fallback. In that case, you can re-throw the error so that it bubbles up to the
-next boundary:
-
-```js
-import { Config } from '@researchgate/react-intersection-observer';
-
-Config.errorReporter(function(error) {
-  throw error;
-});
-```
-
-While sometimes this error happens during mount, and it's easy to spot, often
-types of errors happen during tree updates, because some child component that
-was previously observed suddently ceaces to exist in the UI. This usually means
-that either you shouldn't have rendered an `<Observer>` around it anymore or,
-you should have used the `disabled` property. That's why we capture errors and
-do re-rendering of the children as a fallback.
-
-If another kind of error happens, the `errorReporter` won't be invoked, and by
-rendering the children the error will bubble up to the nearest error boundary
-you defined.
-
-At [ResearchGate](www.researchgate.net), we have found that not unmounting the
-tree just because we failed to `observe()` a DOM node suits our use cases
-better. It's fairly common having a lack of error boundaries around your
-components, and that leads to entire UIs parts being unmounted, which is not
-ideal to end users. By capturing errors, we are able to keep the UI unbroken
-while we fix them.
+Ultimately the way to avoid this is to either make sure you are rendering a DOM
+node inside your `<Observer>`, or to disable the observer until there's one
+`<Observer disabled>`.
 
 ### Options
 
