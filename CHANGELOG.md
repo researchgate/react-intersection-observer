@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/researchgate/react-intersection-observer/compare/v1.1.2...v1.1.3) (2020-04-09)
+
+
+### Bug Fixes
+
+* **boundary:** DOM missing throws; no error boundary ([a96c319](https://github.com/researchgate/react-intersection-observer/commit/a96c31978faaf8b56f31f0ea201c02f10aa83f1c))
+
 ## [1.1.2](https://github.com/researchgate/react-intersection-observer/compare/v1.1.1...v1.1.2) (2020-03-26)
 
 
