@@ -29,7 +29,7 @@
     "react-dom": "16.13.1",
     "react-test-renderer": "16.13.1",
     "spire": "1.8.3",
-    "spire-plugin-semantic-release": "1.8.2",
+    "spire-plugin-semantic-release": "2.0.2",
     "storybook-readme": "5.0.8",
     "typescript": "3.8.3"
   },
