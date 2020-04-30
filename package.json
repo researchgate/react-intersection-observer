@@ -15,7 +15,7 @@
   "devDependencies": {
     "@babel/cli": "7.8.4",
     "@babel/core": "7.9.6",
-    "@researchgate/babel-preset": "1.5.3",
+    "@researchgate/babel-preset": "2.0.0",
     "@researchgate/spire-config": "2.1.5",
     "@storybook/addon-actions": "5.3.18",
     "@storybook/addon-knobs": "5.3.18",
