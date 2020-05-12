@@ -13239,10 +13239,10 @@ spire-plugin-prettier@^2.0.2:
     execa "^4.0.0"
     prettier "^2.0.0"
 
-spire-plugin-semantic-release@2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/spire-plugin-semantic-release/-/spire-plugin-semantic-release-2.1.4.tgz#029a5510481f3588a322a43daa9f9e9238755920"
-  integrity sha512-R48HNeF6MzC+bpoxdxa1dHB5skr5HCJfVtBOGsh0dxnhCyLTCPN0S8o9UE1JfDUGv3uWD3CpwyZTI1x0Mge0Bg==
+spire-plugin-semantic-release@2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/spire-plugin-semantic-release/-/spire-plugin-semantic-release-2.1.5.tgz#241a6c2fe9a01efaa0b9df02bab3b6da4c4c72b1"
+  integrity sha512-XGdv8ZtVyog0fq+bnf4mKQPfZYwDzVNm93A7YnOoOVQm9qkXArgA/TmXgXLmVw9i/EW8p147/oksSQPkQmbSng==
   dependencies:
     "@semantic-release/changelog" "^5.0.0"
     "@semantic-release/commit-analyzer" "^8.0.0"
