@@ -1,7 +1,10 @@
-import ReactIntersectionObserver, { TargetNode } from './IntersectionObserver';
 import { parseRootMargin, shallowCompare } from './utils';
+import { Instance, TargetNode } from './types';
 
-export const observerElementsMap = new Map();
+export const observerElementsMap = new Map<
+  IntersectionObserver,
+  Set<Instance>
+>();
 
 export function getPooled(options: IntersectionObserverInit = {}) {
   const root = options.root || null;
@@ -31,7 +34,7 @@ export function findObserverElement(
   const elements = observerElementsMap.get(observer);
   if (elements) {
     const values = elements.values();
-    let element: ReactIntersectionObserver;
+    let element: Instance;
     while ((element = values.next().value)) {
       if (element.target === entry.target) {
         return element;
@@ -53,31 +56,41 @@ export function callback(
 ) {
   for (let i = 0; i < entries.length; i++) {
     const element = findObserverElement(observer, entries[i]);
-    if (element) {
+    if (element?.handleChange) {
       element.handleChange(entries[i]);
     }
   }
 }
 
-export function createObserver(options: IntersectionObserverInit) {
+export function createObserver(
+  options: IntersectionObserverInit
+): IntersectionObserver {
   return getPooled(options) || new IntersectionObserver(callback, options);
 }
 
-export function observeElement(element: ReactIntersectionObserver) {
-  if (!observerElementsMap.has(element.observer)) {
-    observerElementsMap.set(element.observer, new Set());
+export function observeElement(element: Instance) {
+  if (!element.observer) {
+    // Throw an error
+    element.observer!.observe;
+    return;
   }
-  observerElementsMap.get(element.observer).add(element);
-  element.observer!.observe(element.target!);
+
+  if (!observerElementsMap.has(element.observer)) {
+    observerElementsMap.set(element.observer, new Set<Instance>());
+  }
+
+  observerElementsMap.get(element.observer)?.add(element);
+  element.observer.observe(element.target!);
 }
 
-export function unobserveElement(
-  element: ReactIntersectionObserver,
-  target: TargetNode
-) {
+export function unobserveElement(element: Instance, target: TargetNode) {
+  if (!element.observer) {
+    return;
+  }
+
   if (observerElementsMap.has(element.observer)) {
     const targets = observerElementsMap.get(element.observer);
-    if (targets.delete(element)) {
+    if (targets?.delete(element)) {
       if (targets.size > 0) {
         element.observer!.unobserve(target);
       } else {
