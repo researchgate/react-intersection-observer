@@ -13,8 +13,8 @@
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
-    "@babel/cli": "7.10.0",
-    "@babel/core": "7.10.0",
+    "@babel/cli": "7.10.1",
+    "@babel/core": "7.10.1",
     "@researchgate/babel-preset": "2.0.0",
     "@researchgate/spire-config": "4.0.3",
     "@storybook/addon-actions": "5.3.19",
