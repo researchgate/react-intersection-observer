@@ -24,7 +24,7 @@
     "@types/react": "16.9.35",
     "babel-loader": "8.1.0",
     "cross-env": "7.0.2",
-    "intersection-observer": "0.7.0",
+    "intersection-observer": "0.10.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-test-renderer": "16.13.1",
