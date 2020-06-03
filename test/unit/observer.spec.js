@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import 'intersection-observer';
 import {
     createObserver,
@@ -7,13 +6,13 @@ import {
     observeElement,
     observerElementsMap,
     unobserveElement,
-} from '../observer';
+} from '../../src/observer';
 
 const IntersectionObserver = window.IntersectionObserver;
 const defaultOptions = { rootMargin: '-10% 0%', threshold: [0, 0.5, 1] };
 const noop = () => {};
-const target1 = { nodeType: 1, id: 1 };
-const target2 = { nodeType: 1, id: 2 };
+const target1 = { nodeType: 1, id: 1, ownerDocument: document };
+const target2 = { nodeType: 1, id: 2, ownerDocument: document };
 
 afterEach(() => {
     observerElementsMap.clear();

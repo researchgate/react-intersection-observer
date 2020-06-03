@@ -4,17 +4,16 @@
   "version": "1.1.3",
   "author": "Luis Merino <mail@luismerino.name>",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=10.18.1"
   },
   "bugs": {
     "url": "https://github.com/researchgate/react-intersection-observer/issues"
   },
-  "dependencies": {
-    "prop-types": "^15.7.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "7.10.1",
     "@babel/core": "7.10.2",
+    "@babel/preset-typescript": "7.10.1",
     "@researchgate/babel-preset": "2.0.0",
     "@researchgate/spire-config": "4.0.3",
     "@storybook/addon-actions": "5.3.19",
@@ -22,22 +21,30 @@
     "@storybook/addon-options": "5.3.19",
     "@storybook/react": "5.3.19",
     "@types/react": "16.9.35",
+    "@types/react-dom": "16.9.8",
+    "@typescript-eslint/eslint-plugin": "^3.1.0",
+    "@typescript-eslint/parser": "^3.1.0",
     "babel-loader": "8.1.0",
     "cross-env": "7.0.2",
-    "intersection-observer": "0.7.0",
+    "intersection-observer": "0.10.0",
+    "npm-run-all": "4.1.5",
+    "prop-types": "15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-test-renderer": "16.13.1",
     "spire": "2.1.4",
     "spire-plugin-semantic-release": "2.1.5",
     "storybook-readme": "5.0.8",
+    "ts-jest": "26.1.0",
     "typescript": "3.9.3"
+  },
+  "resolutions": {
+    "@types/react": "16.9.35"
   },
   "files": [
     "lib",
-    "types/index.d.ts"
+    "typings"
   ],
-  "types": "types/index.d.ts",
   "homepage": "https://github.com/researchgate/react-intersection-observer#readme",
   "keywords": [
     "Intersection",
@@ -52,6 +59,7 @@
   "license": "MIT",
   "main": "lib/js/index.js",
   "module": "lib/es/index.js",
+  "types": "typings/index.d.ts",
   "peerDependencies": {
     "react": "^16.3.2",
     "react-dom": "^16.3.2"
@@ -61,29 +69,42 @@
     "url": "https://github.com/researchgate/react-intersection-observer.git"
   },
   "jest": {
-    "rootDir": "src",
-    "testMatch": [
-      "**/__tests__/**/*.spec.js"
-    ]
+    "rootDir": "test",
+    "preset": "ts-jest/presets/js-with-babel",
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "<rootDir>/tsconfig.json"
+      }
+    }
   },
   "prettier": "@researchgate/prettier-config",
   "spire": {
-    "extends": "@researchgate/spire-config",
+    "extends": [
+      [
+        "@researchgate/spire-config",
+        {
+          "eslint": "react-typescript"
+        }
+      ]
+    ],
     "plugins": [
-      "spire-plugin-semantic-release",
-      "<rootDir>/.spire/spire-plugin-tslint"
+      "spire-plugin-semantic-release"
     ]
   },
   "scripts": {
-    "build": "yarn build:js && yarn build:es",
-    "build:js": "cross-env BABEL_ENV=production BABEL_OUTPUT=cjs babel src --out-dir lib/js --ignore **/__tests__",
-    "build:es": "cross-env BABEL_ENV=production BABEL_OUTPUT=esm babel src --out-dir lib/es --ignore **/__tests__",
+    "build": "run-s build:js build:typescript",
+    "build:js": "cross-env BABEL_ENV=production BABEL_OUTPUT=cjs babel src -x .ts,.tsx -d lib/js",
+    "build:typescript": "cross-env tsc --build src",
     "build:storybook": "build-storybook -o .docs",
+    "clean:lib": "rm -rf lib",
+    "clean:typescript": "tsc --build --clean src",
+    "clean": "run-p clean:*",
+    "format": "spire format",
     "lint": "spire lint",
-    "prepublishOnly": "yarn build",
+    "prepare": "run-s clean build",
+    "prerelease": "run-s lint test",
     "release": "spire release",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "test": "spire test",
-    "ts:check": "tsc --project types"
+    "test": "spire test"
   }
 }

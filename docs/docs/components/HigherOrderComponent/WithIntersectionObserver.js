@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Observer from '../../../../src/IntersectionObserver';
+import Observer from '@researchgate/react-intersection-observer';
 
 export default (threshold) => (BaseComponent) => {
     const displayName =

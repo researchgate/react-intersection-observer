@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { decorateAction } from '@storybook/addon-actions';
-import Observer from '../../../../src/IntersectionObserver';
+import Observer from '@researchgate/react-intersection-observer';
 
 const storyBookAction = decorateAction([
     (args) =>

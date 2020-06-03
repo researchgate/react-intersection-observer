@@ -1,5 +1,4 @@
-/* eslint-env jest */
-import { parseRootMargin, shallowCompare } from '../utils';
+import { parseRootMargin, shallowCompare } from '../../src/utils';
 
 describe('parseRootMargin', () => {
     test('throws when using wrong units', () => {

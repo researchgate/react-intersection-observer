@@ -1,13 +1,15 @@
-/* eslint-env jest */
 import 'intersection-observer';
-import React, { Component } from 'react';
+import React from 'react';
 import renderer from 'react-test-renderer';
-import IntersectionObserver, { getOptions } from '../IntersectionObserver';
-import { callback, observerElementsMap } from '../observer';
+import IntersectionObserver, {
+    getOptions,
+} from '../../src/IntersectionObserver';
+import { callback, observerElementsMap } from '../../src/observer';
+import mockTarget from './mock-target';
 
 jest.mock('react-dom', () => {
     const { findDOMNode } = jest.requireActual('react-dom');
-    const target = { nodeType: 1, type: 'noscript' };
+    const target = jest.requireActual('./mock-target');
     return {
         findDOMNode(x) {
             const found = findDOMNode(x);
@@ -19,22 +21,19 @@ jest.mock('react-dom', () => {
     };
 });
 
-const target = { nodeType: 1, type: 'span' };
-const targets = { div: { nodeType: 1, type: 'div' }, span: target };
+const target = { ...mockTarget, type: 'span' };
+const targets = {
+    div: { ...mockTarget, type: 'div' },
+    span: target,
+};
 const createNodeMock = ({ type }) => targets[type];
 const noop = () => {};
-const propTypes = IntersectionObserver.propTypes;
-class ProxyComponent extends Component {
+class RenderChildren extends React.Component {
     render() {
-        return this.props.children; // eslint-disable-line react/prop-types
+        // eslint-disable-next-line react/prop-types
+        return this.props.children;
     }
 }
-const disablePropTypes = () => {
-    IntersectionObserver.propTypes = {};
-};
-const enablePropTypes = () => {
-    IntersectionObserver.propTypes = propTypes;
-};
 
 afterEach(() => {
     observerElementsMap.clear();
@@ -61,7 +60,7 @@ test('throws trying to observe children without a DOM node', () => {
     expect(() =>
         renderer.create(
             <IntersectionObserver onChange={noop}>
-                <ProxyComponent>{null}</ProxyComponent>
+                <RenderChildren>{null}</RenderChildren>
             </IntersectionObserver>
         )
     ).toThrowErrorMatchingInlineSnapshot(
@@ -117,7 +116,6 @@ test('should reobserve null children updating to a DOM node', () => {
             <div />
         </IntersectionObserver>
     );
-
     expect(observe).toBeCalledTimes(1);
     expect(observe).toReturnWith(true);
     expect(unobserve).not.toBeCalled();
@@ -169,8 +167,6 @@ test('should handle children ref of type RefObject', () => {
 });
 
 test('getOptions returns props `root`, `rootMargin` and `threshold`', () => {
-    disablePropTypes();
-
     const options = {
         root: { nodeType: 1 },
         rootMargin: '50% 0%',
@@ -185,8 +181,6 @@ test('getOptions returns props `root`, `rootMargin` and `threshold`', () => {
     );
 
     expect(getOptions(tree.getInstance().props)).toEqual(options);
-
-    enablePropTypes();
 });
 
 test('should observe target on mount', () => {
@@ -218,8 +212,6 @@ test('should unobserve target on unmount', () => {
 
 describe('updating', () => {
     test('should reobserve with new root, rootMargin and/or threshold props', () => {
-        disablePropTypes();
-
         const root1 = { id: 'window', nodeType: 1 };
         const root2 = { id: 'document', nodeType: 1 };
         const initialProps = {
@@ -315,17 +307,15 @@ describe('updating', () => {
         expect(unobserve).toBeCalledTimes(8);
         expect(observe).toReturnTimes(8);
         expect(observe).toReturnWith(true);
-
-        enablePropTypes();
     });
 
     test('should throw when updating without a DOM Node', () => {
         global.spyOn(console, 'error'); // suppress error boundary warning
         const tree = renderer.create(
             <IntersectionObserver onChange={noop}>
-                <ProxyComponent>
+                <RenderChildren>
                     <div />
-                </ProxyComponent>
+                </RenderChildren>
             </IntersectionObserver>,
             { createNodeMock }
         );
@@ -336,7 +326,7 @@ describe('updating', () => {
         expect(() =>
             tree.update(
                 <IntersectionObserver onChange={noop}>
-                    <ProxyComponent key="forcesRender">{null}</ProxyComponent>
+                    <RenderChildren key="forcesRender">{null}</RenderChildren>
                 </IntersectionObserver>
             )
         ).toThrowErrorMatchingInlineSnapshot(
@@ -354,9 +344,9 @@ describe('updating', () => {
         const sizeAfterObserving = observerElementsMap.size + 1;
         const tree = renderer.create(
             <IntersectionObserver onChange={noop}>
-                <ProxyComponent>
+                <RenderChildren>
                     <div />
-                </ProxyComponent>
+                </RenderChildren>
             </IntersectionObserver>,
             { createNodeMock }
         );
@@ -366,7 +356,7 @@ describe('updating', () => {
         expect(() => {
             tree.update(
                 <IntersectionObserver onChange={noop}>
-                    <ProxyComponent key="forcesRender">{null}</ProxyComponent>
+                    <RenderChildren key="forcesRender">{null}</RenderChildren>
                 </IntersectionObserver>
             );
         }).toThrow();
@@ -376,9 +366,9 @@ describe('updating', () => {
 
         tree.update(
             <IntersectionObserver onChange={noop}>
-                <ProxyComponent>
+                <RenderChildren>
                     <div />
-                </ProxyComponent>
+                </RenderChildren>
             </IntersectionObserver>
         );
 

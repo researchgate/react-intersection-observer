@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { action } from '@storybook/addon-actions';
-import Observer from '../../../../src/IntersectionObserver';
+import Observer from '@researchgate/react-intersection-observer';
 
 const tracked = action('tracked');
 
