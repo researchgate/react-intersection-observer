@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/researchgate/react-intersection-observer/compare/v1.1.3...v1.2.0) (2020-06-04)
+
+
+### Features
+
+* **TypeScript:** the source is now fully typed using TS ([bacf08d](https://github.com/researchgate/react-intersection-observer/commit/bacf08dd9c5a58aa5188218218e518b97663577c))
+
 ## [1.1.3](https://github.com/researchgate/react-intersection-observer/compare/v1.1.2...v1.1.3) (2020-04-09)
 
 
