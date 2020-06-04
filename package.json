@@ -70,12 +70,7 @@
   },
   "jest": {
     "rootDir": "test",
-    "preset": "ts-jest/presets/js-with-babel",
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "<rootDir>/tsconfig.json"
-      }
-    }
+    "preset": "ts-jest/presets/js-with-babel"
   },
   "prettier": "@researchgate/prettier-config",
   "spire": {
