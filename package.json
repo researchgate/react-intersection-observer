@@ -36,7 +36,7 @@
     "spire-plugin-semantic-release": "2.1.5",
     "storybook-readme": "5.0.8",
     "ts-jest": "26.1.0",
-    "typescript": "3.9.3"
+    "typescript": "3.9.5"
   },
   "resolutions": {
     "@types/react": "16.9.35"
