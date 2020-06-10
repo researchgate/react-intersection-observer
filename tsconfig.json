@@ -11,6 +11,9 @@
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "jsx": "react",
-    "declarationDir": "typings"
-  }
+    "rootDir": ".",
+    "declarationDir": "./typings",
+    "outDir": "./lib/es"
+  },
+  "include": ["src/**/*.ts"]
 }

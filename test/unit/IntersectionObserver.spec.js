@@ -5,11 +5,11 @@ import IntersectionObserver, {
     getOptions,
 } from '../../src/IntersectionObserver';
 import { callback, observerElementsMap } from '../../src/observer';
-import mockTarget from './mock-target';
+import mockTarget from './__mocks__/mock-target';
 
 jest.mock('react-dom', () => {
     const { findDOMNode } = jest.requireActual('react-dom');
-    const target = jest.requireActual('./mock-target');
+    const target = jest.requireActual('./__mocks__/mock-target');
     return {
         findDOMNode(x) {
             const found = findDOMNode(x);

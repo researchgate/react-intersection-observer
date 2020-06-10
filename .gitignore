@@ -2,10 +2,9 @@ npm-debug.log*
 yarn-error.log
 /node_modules
 /lib
-/src/coverage
+coverage
 /.docs
 .DS_Store
 /.vscode
 tsconfig.tsbuildinfo
 typings
-test/coverage

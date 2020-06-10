@@ -35,7 +35,6 @@
     "spire": "2.1.4",
     "spire-plugin-semantic-release": "2.1.5",
     "storybook-readme": "5.0.8",
-    "ts-jest": "26.1.0",
     "typescript": "3.9.5"
   },
   "files": [
@@ -65,10 +64,6 @@
     "type": "git",
     "url": "https://github.com/researchgate/react-intersection-observer.git"
   },
-  "jest": {
-    "rootDir": "test",
-    "preset": "ts-jest/presets/js-with-babel"
-  },
   "prettier": "@researchgate/prettier-config",
   "spire": {
     "extends": [
@@ -86,10 +81,10 @@
   "scripts": {
     "build": "run-s build:js build:typescript",
     "build:js": "cross-env BABEL_ENV=production BABEL_OUTPUT=cjs babel src -x .ts,.tsx -d lib/js",
-    "build:typescript": "cross-env tsc --build src",
+    "build:typescript": "cross-env tsc --build",
     "build:storybook": "build-storybook -o .docs",
     "clean:lib": "rm -rf lib",
-    "clean:typescript": "tsc --build --clean src",
+    "clean:typescript": "tsc --build --clean",
     "clean": "run-p clean:*",
     "format": "spire format",
     "lint": "spire lint",

@@ -1,9 +1,0 @@
-{
-  "extends": "../tsconfig.base.json",
-  "compilerOptions": {
-    "rootDir": ".",
-    "declarationDir": "../typings",
-    "outDir": "../lib/es"
-  },
-  "include": ["*.ts"]
-}
