@@ -6,7 +6,7 @@ deploy:
   local_dir: .docs
   provider: pages
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN # Set on travis-ci.org dashboard
+  github_token: $GH_TOKEN
   on:
     branch: master
     condition: '"$TRAVIS_JOB_NUMBER" == *.1'
