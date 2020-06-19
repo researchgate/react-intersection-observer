@@ -11,8 +11,8 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@babel/cli": "7.10.1",
-    "@babel/core": "7.10.2",
+    "@babel/cli": "7.10.3",
+    "@babel/core": "7.10.3",
     "@babel/preset-typescript": "7.10.1",
     "@researchgate/babel-preset": "2.0.1",
     "@researchgate/spire-config": "4.0.3",
