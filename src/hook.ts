@@ -2,6 +2,16 @@ import { useRef, useCallback, useMemo } from 'react';
 import { createObserver, observeElement, unobserveElement } from './observer';
 import { ChangeHandler, Options, Unobserve, Instance } from './types';
 
+const noop = () => {}
+
+const thresholdCacheKey = (threshold: Options["threshold"]) => {
+  if (!threshold || typeof threshold === 'number') {
+    return threshold
+  }
+
+  return threshold.join(',')
+}
+
 /**
  * useIntersectionObserver hook that has almost the same api as <Observer />
  *
@@ -26,7 +36,9 @@ export const useIntersectionObserver = (
   const observingRef = useRef(false);
 
   const instanceRef = useRef<Instance>({
-    handleChange: (ev) => onChange(ev, () => {}),
+    // unobserve function needs an instance and instance.handleChange needs an unobserve to be caught by closure.
+    // So it's essentially a circular reference that's resolved by assigning handleChange later
+    handleChange: (ev) => onChange(ev, noop),
   });
 
   const unobserve = useCallback(() => {
@@ -35,6 +47,11 @@ export const useIntersectionObserver = (
       observingRef.current = false;
     }
   }, []);
+
+  const handleChange = (event: IntersectionObserverEntry) =>
+    onChange(event, unobserve);
+
+  instanceRef.current.handleChange = handleChange;
 
   const observe = () => {
     if (
@@ -47,10 +64,7 @@ export const useIntersectionObserver = (
     }
   };
 
-  const handleChange = (event: IntersectionObserverEntry) =>
-    onChange(event, unobserve);
-
-  instanceRef.current.handleChange = handleChange;
+  const memedThreshold = useMemo(() => threshold, [thresholdCacheKey(threshold)])
 
   const observer = useMemo(() => {
     if (disabled) {
@@ -65,7 +79,7 @@ export const useIntersectionObserver = (
     const obs = createObserver({
       root: rootOption,
       rootMargin,
-      threshold,
+      threshold: memedThreshold,
     });
 
     instanceRef.current.observer = obs;
@@ -74,7 +88,7 @@ export const useIntersectionObserver = (
     observe();
 
     return obs;
-  }, [root, rootMargin, threshold, disabled]);
+  }, [root, rootMargin, memedThreshold, disabled]);
 
   const setRef = useCallback<React.RefCallback<any>>(
     (node) => {
