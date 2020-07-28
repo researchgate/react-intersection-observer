@@ -1,16 +1,9 @@
 import { useRef, useCallback, useMemo } from 'react';
 import { createObserver, observeElement, unobserveElement } from './observer';
 import { ChangeHandler, Options, Unobserve, Instance } from './types';
+import { thresholdCacheKey } from './utils';
 
-const noop = () => {}
-
-const thresholdCacheKey = (threshold: Options["threshold"]) => {
-  if (!threshold || typeof threshold === 'number') {
-    return threshold
-  }
-
-  return threshold.join(',')
-}
+const noop = () => {};
 
 /**
  * useIntersectionObserver hook that has almost the same api as <Observer />
@@ -38,7 +31,10 @@ export const useIntersectionObserver = (
   const instanceRef = useRef<Instance>({
     // unobserve function needs an instance and instance.handleChange needs an unobserve to be caught by closure.
     // So it's essentially a circular reference that's resolved by assigning handleChange later
-    handleChange: (ev) => onChange(ev, noop),
+    handleChange(event) {
+      /* istanbul ignore next line */
+      onChange(event, noop);
+    },
   });
 
   const unobserve = useCallback(() => {
@@ -48,10 +44,12 @@ export const useIntersectionObserver = (
     }
   }, []);
 
-  const handleChange = (event: IntersectionObserverEntry) =>
+  instanceRef.current.handleChange = function handleChange(
+    event: IntersectionObserverEntry
+  ) {
+    /* istanbul ignore next line */
     onChange(event, unobserve);
-
-  instanceRef.current.handleChange = handleChange;
+  };
 
   const observe = () => {
     if (
@@ -64,7 +62,9 @@ export const useIntersectionObserver = (
     }
   };
 
-  const memedThreshold = useMemo(() => threshold, [thresholdCacheKey(threshold)])
+  const memoizedThreshold = useMemo(() => threshold, [
+    thresholdCacheKey(threshold),
+  ]);
 
   const observer = useMemo(() => {
     if (disabled) {
@@ -79,7 +79,7 @@ export const useIntersectionObserver = (
     const obs = createObserver({
       root: rootOption,
       rootMargin,
-      threshold: memedThreshold,
+      threshold: memoizedThreshold,
     });
 
     instanceRef.current.observer = obs;
@@ -88,7 +88,7 @@ export const useIntersectionObserver = (
     observe();
 
     return obs;
-  }, [root, rootMargin, memedThreshold, disabled]);
+  }, [root, rootMargin, memoizedThreshold, disabled]);
 
   const setRef = useCallback<React.RefCallback<any>>(
     (node) => {

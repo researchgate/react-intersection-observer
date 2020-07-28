@@ -2,7 +2,7 @@ import { parseRootMargin, shallowCompare } from './utils';
 import { Instance, TargetNode } from './types';
 
 export const observerElementsMap = new Map<
-  IntersectionObserver,
+  IntersectionObserver | undefined,
   Set<Instance>
 >();
 
@@ -56,7 +56,8 @@ export function callback(
 ) {
   for (let i = 0; i < entries.length; i++) {
     const element = findObserverElement(observer, entries[i]);
-    if (element?.handleChange) {
+    /* istanbul ignore next line */
+    if (element) {
       element.handleChange(entries[i]);
     }
   }
@@ -69,25 +70,15 @@ export function createObserver(
 }
 
 export function observeElement(element: Instance) {
-  if (!element.observer) {
-    // Throw an error
-    element.observer!.observe;
-    return;
-  }
-
   if (!observerElementsMap.has(element.observer)) {
     observerElementsMap.set(element.observer, new Set<Instance>());
   }
 
   observerElementsMap.get(element.observer)?.add(element);
-  element.observer.observe(element.target!);
+  element.observer!.observe(element.target!);
 }
 
 export function unobserveElement(element: Instance, target: TargetNode) {
-  if (!element.observer) {
-    return;
-  }
-
   if (observerElementsMap.has(element.observer)) {
     const targets = observerElementsMap.get(element.observer);
     if (targets?.delete(element)) {

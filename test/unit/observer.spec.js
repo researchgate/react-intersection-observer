@@ -118,6 +118,19 @@ describe('unobserveElement', () => {
         expect(observerElementsMap.has(observer)).toBeFalsy();
         expect(spy).toBeCalled();
     });
+
+    test('unobserving without observer returns undefined', () => {
+        expect(unobserveElement({ handleChange: noop })).toBeUndefined();
+    });
+
+    test('unobserving without elements does nothing', () => {
+        const observer = createObserver(defaultOptions);
+        observerElementsMap.set(observer, null);
+        const element = { observer, target: target1 };
+        const spy = jest.spyOn(observerElementsMap, 'delete');
+        unobserveElement(element, target1);
+        expect(spy).not.toBeCalled();
+    });
 });
 
 describe('findObserverElement', () => {

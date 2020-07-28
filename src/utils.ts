@@ -1,4 +1,5 @@
 import React from 'react';
+import { Options } from './types';
 
 const marginRE = /^-?\d*\.?\d+(px|%)$/;
 
@@ -42,4 +43,12 @@ export function isChildrenWithRef<T>(
   children: unknown
 ): children is React.RefAttributes<T> {
   return children && hasOwnProperty.call(children, 'ref');
+}
+
+export function thresholdCacheKey(threshold: Options['threshold']) {
+  if (!threshold || typeof threshold === 'number') {
+    return threshold;
+  }
+
+  return threshold.join(',');
 }
