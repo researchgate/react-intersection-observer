@@ -14,7 +14,7 @@
     "@babel/cli": "7.10.5",
     "@babel/core": "7.10.5",
     "@babel/preset-typescript": "7.10.4",
-    "@researchgate/babel-preset": "2.0.1",
+    "@researchgate/babel-preset": "2.0.2",
     "@researchgate/spire-config": "4.0.3",
     "@storybook/addon-actions": "5.3.19",
     "@storybook/addon-knobs": "5.3.19",
