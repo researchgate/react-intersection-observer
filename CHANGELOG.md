@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/researchgate/react-intersection-observer/compare/v1.2.0...v1.3.0) (2020-07-30)
+
+
+### Features
+
+* **hooks:** Hooks ([#131](https://github.com/researchgate/react-intersection-observer/issues/131)) ([ecdff74](https://github.com/researchgate/react-intersection-observer/commit/ecdff74633f078c5345808546552bf793e9f234c))
+
 # [1.2.0](https://github.com/researchgate/react-intersection-observer/compare/v1.1.3...v1.2.0) (2020-06-04)
 
 
