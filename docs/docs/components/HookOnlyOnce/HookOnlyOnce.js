@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useIntersectionObserver } from '../../../..';
+import { useIntersectionObserver } from '../../../../lib/es/src';
 
 const HookOnlyOnce = () => {
     const [visibility, setVisibility] = useState('invisible');
