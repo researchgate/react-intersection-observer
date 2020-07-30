@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { decorateAction } from '@storybook/addon-actions';
 import { select } from '@storybook/addon-knobs/react';
-import Observer from '../../../..';
+import Observer from '../../../../lib/es/src';
 
 const storyBookAction = decorateAction([
     (args) =>

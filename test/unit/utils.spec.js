@@ -1,4 +1,8 @@
-import { parseRootMargin, shallowCompare } from '../../src/utils';
+import {
+    parseRootMargin,
+    shallowCompare,
+    thresholdCacheKey,
+} from '../../src/utils';
 
 describe('parseRootMargin', () => {
     test('throws when using wrong units', () => {
@@ -65,5 +69,19 @@ describe('shallowCompare', () => {
         const prevProps = { ...nextProps, threshold: 1 };
 
         expect(comparerFn(nextProps, prevProps)).toBeTruthy();
+    });
+});
+
+describe('thresholdCacheKey', () => {
+    it('is undefined', () => {
+        expect(thresholdCacheKey(undefined)).toBeUndefined();
+    });
+
+    it('is a number', () => {
+        expect(thresholdCacheKey(1)).toBe(1);
+    });
+
+    it('is an array', () => {
+        expect(thresholdCacheKey([0, 0.5, 1])).toBe('0,0.5,1');
     });
 });
