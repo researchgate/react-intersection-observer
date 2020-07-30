@@ -10,6 +10,8 @@ import OnlyOnce from './components/OnlyOnce';
 import ImpressionTracking from './components/ImpressionTracking';
 import HigherOrderComponent from './components/HigherOrderComponent';
 import PlaygroundRootMargin from './components/Playground';
+import Hook from './components/Hook';
+import HookOnlyOnce from './components/HookOnlyOnce';
 import './components/style.css';
 
 storiesOf('Examples', module)
@@ -17,7 +19,9 @@ storiesOf('Examples', module)
     .add('Frame', WindowFrame)
     .add('Thresholds', WithThresholds)
     .add('Margin', WithRootMargin)
-    .add('Once', OnlyOnce);
+    .add('Once', OnlyOnce)
+    .add('Hook', Hook)
+    .add('HookOnlyOnce', HookOnlyOnce);
 
 storiesOf('Recipes', module)
     .add('Higher Order Component', HigherOrderComponent)
