@@ -66,14 +66,18 @@ export function callback(
 export function createObserver(
   options: IntersectionObserverInit
 ): IntersectionObserver {
-  return getPooled(options) || new IntersectionObserver(callback, options);
+  const pooled = getPooled(options);
+
+  if (pooled) {
+    return pooled;
+  }
+
+  const observer = new IntersectionObserver(callback, options);
+  observerElementsMap.set(observer, new Set<Instance>());
+  return observer;
 }
 
 export function observeElement(element: Instance) {
-  if (!observerElementsMap.has(element.observer)) {
-    observerElementsMap.set(element.observer, new Set<Instance>());
-  }
-
   observerElementsMap.get(element.observer)?.add(element);
   element.observer!.observe(element.target!);
 }
