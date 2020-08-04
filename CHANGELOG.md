@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/researchgate/react-intersection-observer/compare/v1.3.1...v1.3.2) (2020-08-04)
+
+
+### Bug Fixes
+
+* observer pool for hooks ([#153](https://github.com/researchgate/react-intersection-observer/issues/153)) ([807b8df](https://github.com/researchgate/react-intersection-observer/commit/807b8df3751eab232962387f28be599f52ec1566))
+
 ## [1.3.1](https://github.com/researchgate/react-intersection-observer/compare/v1.3.0...v1.3.1) (2020-08-03)
 
 ### Bug Fixes
