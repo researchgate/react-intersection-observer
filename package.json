@@ -68,7 +68,7 @@
   },
   "prettier": "@researchgate/prettier-config",
   "resolutions": {
-    "serialize-javascript": "3.1.0"
+    "serialize-javascript": "4.0.0"
   },
   "spire": {
     "extends": [
