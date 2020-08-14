@@ -67,6 +67,9 @@
     "url": "https://github.com/researchgate/react-intersection-observer.git"
   },
   "prettier": "@researchgate/prettier-config",
+  "resolutions": {
+    "serialize-javascript": "3.1.0"
+  },
   "spire": {
     "extends": [
       [
