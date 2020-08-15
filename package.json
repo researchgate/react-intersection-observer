@@ -22,7 +22,7 @@
     "@storybook/react": "5.3.19",
     "@types/react": "16.9.46",
     "@testing-library/react-hooks": "3.4.1",
-    "@types/jest": "26.0.9",
+    "@types/jest": "26.0.10",
     "@types/react-dom": "16.9.8",
     "@typescript-eslint/eslint-plugin": "3.9.0",
     "@typescript-eslint/parser": "3.9.0",
