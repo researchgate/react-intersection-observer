@@ -1,18 +1,35 @@
 language: node_js
 node_js:
-  - "12"
+  - "lts/*"
 cache: yarn
-deploy:
-  local_dir: .docs
-  provider: pages
-  skip_cleanup: true
-  github_token: $GH_TOKEN
-  on:
-    branch: master
-    condition: '"$TRAVIS_JOB_NUMBER" == *.1'
-script:
-  - "(yarn lint && yarn test --ci --coverage) || travis_terminate"
-  - 'if [[ "$TRAVIS_JOB_NUMBER" == *.1 ]]; then yarn build:storybook || travis_terminate 1; fi'
-  - yarn release
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+stages:
+  - test
+  - name: deploy
+    if: branch = master
+  - name: release
+    if: branch = master AND type != pull_request
+jobs:
+  include:
+    - stage: test
+      script:
+        - yarn lint
+        - yarn test --ci --coverage
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
+    - stage: deploy
+      script: yarn build:storybook
+      deploy:
+        local_dir: .docs
+        provider: pages
+        skip_cleanup: true
+        github_token: $GH_TOKEN
+        on:
+          branch: master
+    - stage: release
+      script: skip
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script: yarn release
+        on:
+          branch: master

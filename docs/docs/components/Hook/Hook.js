@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useIntersectionObserver } from '../../../../lib/es/src';
+import { useIntersectionObserver } from '../../../..';
 
 const Hook = () => {
     const [visibility, setVisibility] = useState('invisible');

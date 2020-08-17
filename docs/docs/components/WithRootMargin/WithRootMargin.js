@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { decorateAction } from '@storybook/addon-actions';
-import Observer from '../../../../lib/es/src';
+import Observer from '../../../..';
 
 const storyBookAction = decorateAction([
     (args) =>
