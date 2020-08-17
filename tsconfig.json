@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es2018",
+    "target": "ES5",
     "moduleResolution": "node",
+    "module": "ES2015",
     "strict": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
@@ -11,7 +12,7 @@
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "jsx": "react",
-    "rootDir": ".",
+    "rootDir": "src",
     "declarationDir": "./typings",
     "outDir": "./lib/es"
   },

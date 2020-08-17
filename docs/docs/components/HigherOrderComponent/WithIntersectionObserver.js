@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Observer from '../../../../lib/es/src';
+import Observer from '../../../..';
 
 export default (threshold) => (BaseComponent) => {
     const displayName =
