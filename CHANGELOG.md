@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/researchgate/react-intersection-observer/compare/v1.3.3...v1.3.4) (2020-08-17)
+
+
+### Bug Fixes
+
+* **release:** Correctly release esm version as ES5 ([5934c64](https://github.com/researchgate/react-intersection-observer/commit/5934c64503ac8d26f12e1338afa528b70c38fb1c))
+
 ## [1.3.3](https://github.com/researchgate/react-intersection-observer/compare/v1.3.2...v1.3.3) (2020-08-14)
 
 
