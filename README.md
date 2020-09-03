@@ -63,7 +63,13 @@ all the imperative parts for you.
 npm install --save @researchgate/react-intersection-observer
 ```
 
-Usage:
+> :warning: **Please make sure you have the minimum node version installed** (as defined [in the package.json](https://github.com/researchgate/react-intersection-observer/blob/master/package.json#L6-L7))
+> 
+> Otherwise you run into this build error:
+>
+> `The engine "node" is incompatible with this module. Expected version ">=10.18.1". Got "10.15.3"`
+
+## Usage
 
 ```jsx
 import React from 'react';
