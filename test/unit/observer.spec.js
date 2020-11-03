@@ -194,4 +194,20 @@ describe('findObserverElement', () => {
         expect(instance1).toEqual(entry1);
         expect(instance2).toEqual(entry2);
     });
+
+    test('two subsequent createObserver calls should not produce two observers', () => {
+        const observer1 = createObserver();
+        const observer2 = createObserver();
+        expect(observer1).toEqual(observer2);
+    });
+
+    test('observing element should add target to observerElementsMap even if there is no such observer key', () => {
+        const observer = createObserver();
+        const entry = { observer, target: target1 };
+        observeElement(entry);
+        unobserveElement(entry, entry.target);
+        observeElement(entry);
+        const instance = findObserverElement(observer, entry);
+        expect(instance).toEqual(entry);
+    });
 });

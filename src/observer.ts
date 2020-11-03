@@ -78,6 +78,9 @@ export function createObserver(
 }
 
 export function observeElement(element: Instance) {
+  if (element.observer && !observerElementsMap.has(element.observer)) {
+    observerElementsMap.set(element.observer, new Set<Instance>());
+  }
   observerElementsMap.get(element.observer)?.add(element);
   element.observer!.observe(element.target!);
 }
