@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/researchgate/react-intersection-observer/compare/v1.3.4...v1.3.5) (2020-11-04)
+
+
+### Bug Fixes
+
+* **observer:** fix of reobserve doesn't add observer to map ([3ce4536](https://github.com/researchgate/react-intersection-observer/commit/3ce453675cb12ab5c82b51303f203c7e491607b1)), closes [#153](https://github.com/researchgate/react-intersection-observer/issues/153) [/github.com/researchgate/react-intersection-observer/pull/153/files#diff-44cb04e2627c3ab84281b41d14880e5e822437f19144e8c14a6c95f7f7fa14bbL72](https://github.com//github.com/researchgate/react-intersection-observer/pull/153/files/issues/diff-44cb04e2627c3ab84281b41d14880e5e822437f19144e8c14a6c95f7f7fa14bbL72) [#153](https://github.com/researchgate/react-intersection-observer/issues/153)
+
 ## [1.3.4](https://github.com/researchgate/react-intersection-observer/compare/v1.3.3...v1.3.4) (2020-08-17)
 
 
