@@ -13483,10 +13483,10 @@ store2@^2.7.1:
   resolved "https://registry.yarnpkg.com/store2/-/store2-2.11.1.tgz#118645f1b5e38d20604852362183955e360a5893"
   integrity sha512-llZqXAXjG2E4FvWsZxFmBDfh6kqQuGFZm64TX23qW02Hf4dyElhDEbYx1IIVTEMKWrrDnDA9oqOjY8WHo2NgcA==
 
-storybook-readme@5.0.8:
-  version "5.0.8"
-  resolved "https://registry.yarnpkg.com/storybook-readme/-/storybook-readme-5.0.8.tgz#bc5bb9343191bb333cec2633555cec41f3ab6067"
-  integrity sha512-Ej3RotbnfFtk4yAFqJ/39RpaDO/1Yw81TzSHJIQDL7O4E/tKn51247zq3KvAC8b7JM5IY5GlNNjS4q8cBEeBAA==
+storybook-readme@5.0.9:
+  version "5.0.9"
+  resolved "https://registry.yarnpkg.com/storybook-readme/-/storybook-readme-5.0.9.tgz#a6670e43cf7d53383f6edffb0a534f52004f3945"
+  integrity sha512-rKMWyqXZ4HSMk2qTF0oog2tn94QxgkOMb+YQ6gs9ibcdJWmWEcsXhK/87HO4Lix6kTNNmTh3brnjOTu9w2bJEQ==
   dependencies:
     "@storybook/components" "^5.0.6"
     "@storybook/core-events" "^5.0.6"

@@ -34,7 +34,7 @@
     "react-test-renderer": "16.14.0",
     "spire": "2.1.4",
     "spire-plugin-semantic-release": "2.1.5",
-    "storybook-readme": "5.0.8",
+    "storybook-readme": "5.0.9",
     "typescript": "4.0.5"
   },
   "files": [
