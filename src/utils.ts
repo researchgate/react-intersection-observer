@@ -40,9 +40,9 @@ export function shallowCompare(
 export const { hasOwnProperty, toString } = Object.prototype;
 
 export function isChildrenWithRef<T>(
-  children: unknown
+  children: React.ReactNode
 ): children is React.RefAttributes<T> {
-  return children && hasOwnProperty.call(children, 'ref');
+  return Boolean(children) && hasOwnProperty.call(children, 'ref');
 }
 
 export function thresholdCacheKey(threshold: Options['threshold']) {
