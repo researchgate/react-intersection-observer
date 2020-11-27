@@ -1,3 +1,5 @@
 {
-  "extends": "@researchgate"
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["@researchgate:lib"],
+  "labels": ["dependencies"]
 }
