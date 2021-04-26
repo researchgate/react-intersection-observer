@@ -29,9 +29,9 @@
     "intersection-observer": "0.11.0",
     "npm-run-all": "4.1.5",
     "prop-types": "15.7.2",
-    "react": "16.14.0",
-    "react-dom": "16.14.0",
-    "react-test-renderer": "16.14.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-test-renderer": "17.0.2",
     "spire": "2.1.4",
     "spire-plugin-semantic-release": "2.1.5",
     "storybook-readme": "5.0.9",
@@ -57,8 +57,8 @@
   "module": "lib/es/index.js",
   "types": "typings/index.d.ts",
   "peerDependencies": {
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react": "^16.3.2 || ^17.0.0",
+    "react-dom": "^16.3.2 || ^17.0.0"
   },
   "repository": {
     "type": "git",
