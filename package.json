@@ -14,7 +14,7 @@
     "@babel/core": "7.12.3",
     "@babel/preset-typescript": "7.12.1",
     "@researchgate/babel-preset": "2.0.6",
-    "@researchgate/spire-config": "4.0.3",
+    "@researchgate/spire-config": "4.1.1",
     "@storybook/addon-actions": "5.3.21",
     "@storybook/addon-knobs": "5.3.21",
     "@storybook/addon-options": "5.3.21",
@@ -32,7 +32,7 @@
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-test-renderer": "16.14.0",
-    "spire": "2.1.4",
+    "spire": "2.2.1",
     "spire-plugin-semantic-release": "2.1.5",
     "storybook-readme": "5.0.9",
     "typescript": "4.0.5"
