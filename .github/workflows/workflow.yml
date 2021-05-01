@@ -1,4 +1,4 @@
-name: Jest tests
+name: Build, test, release
 
 on:
   # Trigger the workflow on push or pull request,
@@ -23,7 +23,7 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: 14
-    - name: Install modules
+    - name: Install modules and build project
       run: yarn
     - name: Run tests with coverage
       run: yarn test --ci --coverage
