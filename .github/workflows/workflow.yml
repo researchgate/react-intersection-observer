@@ -34,10 +34,10 @@ jobs:
     steps:
       - name: Generate storybook documentation
         run: yarn build:storybook
-      - uses: crazy-max/ghaction-github-pages@v2
+      - uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
-          target_branch: gh-pages
-          build_dir: .docs
+          branch: gh-pages # The branch the action should deploy to.
+          folder: .docs # The folder the action should deploy.
   release:
     needs: [ build_test, deploy ]
     if: ${{ github.ref == 'refs/heads/master' && github.event_name != 'pull_request' }}
