@@ -13,7 +13,7 @@
   "devDependencies": {
     "@babel/core": "7.12.3",
     "@babel/preset-typescript": "7.12.1",
-    "@researchgate/babel-preset": "2.0.6",
+    "@researchgate/babel-preset": "2.0.9",
     "@researchgate/spire-config": "4.0.3",
     "@storybook/addon-actions": "5.3.21",
     "@storybook/addon-knobs": "5.3.21",
