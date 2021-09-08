@@ -1,0 +1,47 @@
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  # Also trigger on page_build, as well as release created events
+  page_build:
+  release:
+    types: # This configuration does not affect the page_build event above
+      - created
+
+jobs:
+  build_test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 14
+    - name: Install modules and build project
+      run: yarn
+    - name: Run tests with coverage
+      run: yarn test --ci --coverage
+    - name: Submit codecov results
+      uses: codecov/codecov-action@v1
+  deploy:
+    needs: build_test
+    if: ${{ github.ref == 'refs/heads/master' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate storybook documentation
+        run: yarn build:storybook
+      - uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: .docs # The folder the action should deploy.
+  release:
+    needs: [ build_test, deploy ]
+    if: ${{ github.ref == 'refs/heads/master' && github.event_name != 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release new version
+        run: yarn release
