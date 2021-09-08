@@ -72,6 +72,8 @@ jobs:
 
   docs:
     name: Update docs
+    needs: [tests, lint]
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
 
     steps:
