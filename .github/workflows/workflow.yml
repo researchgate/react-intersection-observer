@@ -26,7 +26,7 @@ jobs:
     - name: Run tests with coverage
       run: yarn test --ci --coverage
     - name: Submit codecov results
-      uses: codecov/codecov-action@v1
+      uses: codecov/codecov-action@v2
   deploy:
     needs: build_test
     if: ${{ github.ref == 'refs/heads/master' }}
