@@ -6588,10 +6588,17 @@ eslint-plugin-node@^11.0.0:
     resolve "^1.10.1"
     semver "^6.1.0"
 
-eslint-plugin-prettier@^3.1.0, eslint-plugin-prettier@^3.3.1:
+eslint-plugin-prettier@^3.3.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.4.1.tgz#e9ddb200efb6f3d05ffe83b1665a716af4a387e5"
   integrity sha512-htg25EUYUeIhKHXjOinK4BgCcDwtLHjqaxCDsMy5nbnUMkKFvIhMVCp+5GFUXQ4Nr8lBsPqtGAqBenbpFqAA2g==
+  dependencies:
+    prettier-linter-helpers "^1.0.0"
+
+eslint-plugin-prettier@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-4.0.0.tgz#8b99d1e4b8b24a762472b4567992023619cb98e0"
+  integrity sha512-98MqmCJ7vJodoQK359bqQWaxOE0CS8paAz/GgjaZLyex4TTk3g9HugoO89EqWCrFiOqn9EVvcoo7gZzONCWVwQ==
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
@@ -14131,14 +14138,14 @@ spdx-license-ids@^3.0.0:
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.6.tgz#c80757383c28abf7296744998cbc106ae8b854ce"
   integrity sha512-+orQK83kyMva3WyPf59k1+Y525csj5JejicWut55zeTWANuN17qSiSLUXWtzHeNWORSvT7GLDJ/E/XiIWoXBTw==
 
-spire-config-default@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/spire-config-default/-/spire-config-default-4.1.0.tgz#7e3a385c17acf66d7d5fd8c85bb104448db7855c"
-  integrity sha512-4ozBuaIDkcfdYq+4L3MltSJx+hrFf2iWVN/pjlGatdoUqp83UrWUWJxNcR9SQ9Ye9bsQRHhdrPgFZu9eWFf6DA==
+spire-config-default@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/spire-config-default/-/spire-config-default-4.1.2.tgz#870b87499feaec19cc5ad50460d44373073fb417"
+  integrity sha512-LnHCE5d4ju4w/7PA852YygCws6HGyccUX8fb6KLTLgRJ5mohMdcoy+Tbqt1lwMJmlN/eir84CzWkEqF2rbHXig==
   dependencies:
     spire-plugin-clean "^4.0.1"
     spire-plugin-doctoc "^4.0.1"
-    spire-plugin-eslint "^4.1.0"
+    spire-plugin-eslint "^4.1.2"
     spire-plugin-jest "^4.0.1"
     spire-plugin-lint-staged "^4.1.0"
     spire-plugin-prettier "^4.1.0"
@@ -14157,14 +14164,14 @@ spire-plugin-doctoc@^4.0.1:
   dependencies:
     doctoc "^2.0.0"
 
-spire-plugin-eslint@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/spire-plugin-eslint/-/spire-plugin-eslint-4.1.0.tgz#e4e8f984235987d2ab2539f38bb0aa674393d9cf"
-  integrity sha512-MCMsXwWvZiXnLPb8fTMM+MT1DCiZFyRjm3KhH5bRaOUJu/TepfTFRGJMsha+LePApcPJvXtBO2cVfGb9duM3rA==
+spire-plugin-eslint@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/spire-plugin-eslint/-/spire-plugin-eslint-4.1.2.tgz#e301f9fbef6b7ce14d743a07906df5a49cd0c1bf"
+  integrity sha512-RR6c9dbugFRtmx3r/LF7zT/FItxNW3OMspnhY1EXucX+oKYrV9kRLzymQ3UxpXj7Y5BwmOvq3Sgi70VZn0N7gA==
   dependencies:
     eslint "^7.5.0"
     eslint-config-prettier "^8.0.0"
-    eslint-plugin-prettier "^3.1.0"
+    eslint-plugin-prettier "^4.0.0"
     execa "^5.0.0"
 
 spire-plugin-jest@^4.0.1:
@@ -14213,10 +14220,10 @@ spire-plugin-yarn@^3.0.2:
     use-yarn "^2.2.0"
     yarn-deduplicate "^3.0.0"
 
-spire@4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/spire/-/spire-4.1.1.tgz#ca67e9109cd8c9d4fba1ff2371a163ccba303d8c"
-  integrity sha512-vLaidiaCNVSKD1zudh6wgC89lZb9YTn1zRChdrz/CDVvqmTIOdqaCJoaFLUr9U/1I42HH5RDMmfGZGfLCHec4w==
+spire@4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/spire/-/spire-4.1.2.tgz#5d2ed01096ad4a7b443cfbe3296545673ea30234"
+  integrity sha512-bPCZCoHMOpoMZyyrJcc+TmjAYsZT5xWmb1oY/u38UvUpy8w6WiwFwifAALaNE/G9pQ3NNySiJRLOYIZ2yutK4A==
   dependencies:
     cosmiconfig "^7.0.0"
     detect-indent "^6.0.0"
@@ -14226,7 +14233,7 @@ spire@4.1.1:
     invariant "^2.2.4"
     pretty-format "^26.0.0"
     signale "^1.4.0"
-    spire-config-default "^4.1.0"
+    spire-config-default "^4.1.2"
     yargs "^17.0.0"
 
 split-on-first@^1.0.0:
