@@ -16,7 +16,7 @@
     "@researchgate/babel-preset": "2.0.14",
     "@researchgate/spire-config": "7.0.0",
     "@storybook/addon-actions": "6.4.0",
-    "@storybook/addon-knobs": "6.3.1",
+    "@storybook/addon-knobs": "6.4.0",
     "@storybook/addon-options": "5.3.21",
     "@storybook/react": "6.4.0",
     "@testing-library/react-hooks": "7.0.2",
