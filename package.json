@@ -32,8 +32,8 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-test-renderer": "17.0.2",
-    "spire": "4.1.2",
-    "spire-plugin-semantic-release": "4.1.0",
+    "spire": "5.0.2",
+    "spire-plugin-semantic-release": "5.0.1",
     "storybook-readme": "5.0.9",
     "typescript": "4.0.5"
   },
