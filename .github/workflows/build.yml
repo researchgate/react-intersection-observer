@@ -20,18 +20,14 @@ jobs:
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
+        id: setup-nodejs
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - name: Cache node_modules
-        uses: actions/cache@v2
-        id: cache-nodemodules
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ env.NODE_VERSION }}-nodemodules-${{ hashFiles('**/yarn.lock') }}
+          cache: "yarn"
+          cache-dependency-path: "**/yarn.lock"
 
       - name: Install dependencies
-        if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+        if: steps.setup-nodejs.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile --non-interactive
 
       - name: Unit tests
@@ -55,18 +51,14 @@ jobs:
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
+        id: setup-nodejs
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - name: Cache node_modules
-        uses: actions/cache@v2
-        id: cache-nodemodules
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ env.NODE_VERSION }}-nodemodules-${{ hashFiles('**/yarn.lock') }}
+          cache: "yarn"
+          cache-dependency-path: "**/yarn.lock"
 
       - name: Install dependencies
-        if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+        if: steps.setup-nodejs.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile --non-interactive
 
       - name: Generate storybook documentation
@@ -90,18 +82,14 @@ jobs:
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
+        id: setup-nodejs
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - name: Cache node_modules
-        uses: actions/cache@v2
-        id: cache-nodemodules
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ env.NODE_VERSION }}-nodemodules-${{ hashFiles('**/yarn.lock') }}
+          cache: "yarn"
+          cache-dependency-path: "**/yarn.lock"
 
       - name: Install dependencies
-        if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+        if: steps.setup-nodejs.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile --non-interactive
 
       - name: Release
