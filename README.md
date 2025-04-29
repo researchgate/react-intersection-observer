@@ -100,7 +100,7 @@ class ExampleComponent extends React.Component {
 ```
 
 Optionally add the **polyfill** and make sure it's required on your
-dependendencies for unsupporting browsers:
+dependencies for unsupporting browsers:
 
 ```shell
 npm install --save intersection-observer
