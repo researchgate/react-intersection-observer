@@ -10,7 +10,7 @@ export function getPooled(options: IntersectionObserverInit = {}) {
   const root = options.root || null;
   const rootMargin = parseRootMargin(options.rootMargin);
   const threshold = Array.isArray(options.threshold)
-    ? options.threshold
+    ? [...options.threshold] // Create a mutable copy of the array
     : [options.threshold != null ? options.threshold : 0];
   const observers = observerElementsMap.keys();
   let observer;
@@ -18,7 +18,7 @@ export function getPooled(options: IntersectionObserverInit = {}) {
     const unmatched =
       root !== observer.root ||
       rootMargin !== observer.rootMargin ||
-      shallowCompare(threshold, observer.thresholds);
+      shallowCompare(threshold, Array.from(observer.thresholds)); // Convert to mutable array
 
     if (!unmatched) {
       return observer;
@@ -34,9 +34,9 @@ export function findObserverElement(
   const elements = observerElementsMap.get(observer);
   if (elements) {
     const values = elements.values();
-    let element: Instance;
+    let element: Instance | undefined;
     while ((element = values.next().value)) {
-      if (element.target === entry.target) {
+      if (element?.target === entry.target) {
         return element;
       }
     }
@@ -58,7 +58,7 @@ export function callback(
     const element = findObserverElement(observer, entries[i]);
     /* istanbul ignore next line */
     if (element) {
-      element.handleChange(entries[i]);
+      element.handleChange(entries[i], () => unobserveElement(element, entries[i].target));
     }
   }
 }
@@ -81,8 +81,11 @@ export function observeElement(element: Instance) {
   if (element.observer && !observerElementsMap.has(element.observer)) {
     observerElementsMap.set(element.observer, new Set<Instance>());
   }
-  observerElementsMap.get(element.observer)?.add(element);
-  element.observer!.observe(element.target!);
+  const elementsSet = observerElementsMap.get(element.observer);
+  if (elementsSet && element.observer && element.target) {
+    elementsSet.add(element);
+    element.observer.observe(element.target);
+  }
 }
 
 export function unobserveElement(element: Instance, target: TargetNode) {

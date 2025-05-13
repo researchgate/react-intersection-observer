@@ -41,7 +41,7 @@ export interface Options {
 }
 
 export interface Instance {
-  handleChange: (event: IntersectionObserverEntry) => void;
+  handleChange: (event: IntersectionObserverEntry, unobserve: Unobserve) => void;
   observer?: IntersectionObserver;
   target?: TargetNode;
 }
